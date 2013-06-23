@@ -13,16 +13,42 @@ There are several ways to automatically install many of the components that will
 ## Artifacts needed for installation
 
 * MySql - Install this with "brew":
-> <code>brew install mysql</code>
+	> <code>brew install mysql</code>
 * wget - install with "brew"
-> <code>brew install wget</code>
-* HDP 1.3.0 tarballs
-> <code>wget http://public-repo-1.hortonworks.com/HDP/centos6/1.x/GA/1.3.0.0/tars/hadoop-1.2.0.1.3.0.0-107.tar.gz</code>
-> <code>wget http://public-repo-1.hortonworks.com/HDP/centos6/1.x/GA/1.3.0.0/tars/pig-0.11.1.1.3.0.0-107.tar.gz</code>
-> <code>wget http://public-repo-1.hortonworks.com/HDP/centos6/1.x/GA/1.3.0.0/tars/hive-0.11.0.1.3.0.0-107.tar.gz</code>
-> <code>wget http://public-repo-1.hortonworks.com/HDP/centos6/1.x/GA/1.3.0.0/tars/hcatalog-0.11.0.1.3.0.0-107.tar.gz</code>
-> <code>wget http://public-repo-1.hortonworks.com/HDP/centos6/1.x/GA/1.3.0.0/tars/oozie-3.3.2.1.3.0.0-107-distro.tar.gz</code>
-> <code>wget http://public-repo-1.hortonworks.com/HDP/centos6/1.x/GA/1.3.0.0/tars/sqoop-1.4.3.1.3.0.0-107.bin__hadoop-1.2.0.1.3.0.0-107.tar.gz</code>
-> <code>wget http://public-repo-1.hortonworks.com/HDP/centos6/1.x/GA/1.3.0.0/tars/apache-flume-1.3.1.1.3.0.0-107-bin.tar.gz</code>
+	> <code>brew install wget</code>
 
+## Scripts
+
+### do.sh
+
+> This is the main script that will complete the installation and configuration.  
+> Once this is complete, everything will be in the correct place and you will only
+> need to manually adjust the template configurations for you localhost environment.
+
+### mac_env.sh
+
+> Used to control the parameters used by the rest of the scripts.
+
+### get_artifacts.sh
+
+> A subscript used to fetch the HDP base artifacts and a few
+> other helper file sets used to complete the installation.
+
+### expand_link.sh
+
+> Subscript used to expand and link the artifacts retrieved.
+
+### etc_default.tar.gz
+
+> Contains the defaults (slightly tweaked for mac os) used by the hadoop scripts
+> to properly run the environment.
+
+### hdp_artifacts.txt
+
+> A list of HDP artifacts and links to use for each.
+
+### jdbc_cfg.txt
+
+> A file the contains the location of jdbc drivers and the symlink to create for them.
+> These are used by Hive.
 
