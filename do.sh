@@ -4,6 +4,7 @@
 #	webhcat
 #	hbase
 #	flume
+# 	zookeeper
 
 if [ $# -ne 1 ]; then
 	echo "Usage: ./go.sh TEMP_DIR"
@@ -19,13 +20,13 @@ else
 
 	# Create Hadoop HDFS and Storage Directories
 	if [ ! -d $HDFS_BASE_DIR ]; then
-		sudo mkdir -P $HDFS_BASE_DIR
+		sudo mkdir -p $HDFS_BASE_DIR
 		sudo chown `whoami` $HDFS_BASE_DIR
 		mkdir $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
 	fi
 
 	if [ ! -d $HADOOP_CONF_DIR ]; then
-		sudo mkdir -P $HADOOP_CONF_DIR
+		sudo mkdir -p $HADOOP_CONF_DIR
 		sudo chown `whoami` $HADOOP_CONF_DIR
 	else
 		sudo chown `whoami` $HADOOP_CONF_DIR
@@ -33,19 +34,19 @@ else
 
 	# Store pids
 	if [ ! -d /var/run/hadoop/$USER ]; then
-		sudo mkdir -P /var/run/hadoop/$USER
+		sudo mkdir -p /var/run/hadoop/$USER
 		sudo chown $USER /var/run/hadoop/$USER
 	fi
 	# Store Logs
 	if [ ! -d /var/log/hadoop/$USER ]; then
-		sudo mkdir -P /var/log/hadoop/$USER
-		sudo mkdir -P /var/log/hadoop/mapred
+		sudo mkdir -p /var/log/hadoop/$USER
+		sudo mkdir -p /var/log/hadoop/mapred
 		sudo chown $USER /var/log/hadoop/$USER
 		sudo chown $USER /var/log/hadoop/mapred
 	fi
 
 	# Expand and Link
-	. $APP_DIR/expand_link.sh
+	. $APP_DIR/expand_link.sh $1
 
 	# Setup MySql for Hive and HCatalog
 

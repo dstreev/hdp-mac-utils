@@ -40,7 +40,7 @@ There are several ways to automatically install many of the components that will
 
 ### etc_default.tar.gz
 
-> Contains the defaults (slightly tweaked for mac os) used by the hadoop scripts
+> Contains the defaults (pulled from CentOS install) used by the hadoop scripts
 > to properly run the environment.
 
 ### hdp_artifacts.txt
