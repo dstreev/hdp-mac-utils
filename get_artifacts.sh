@@ -11,7 +11,7 @@ cd $APP_DIR
 if [ $# -ne 1 ] ; then
 	echo "Please supply a target directory for the artifacts"
 else	
-	for i in `cat $APP_DIR/hdp_artifacts`; do
+	for i in `cat $APP_DIR/hdp_artifacts.txt | awk '{print $1}'`; do
 		cd $1
 		T_FILE=$i.tar.gz
 		if [ ! -f $T_FILE ]; then
@@ -27,7 +27,7 @@ else
 	fi
 
 	# Get Mac Defaults
-	if [ ! -f $DEFAULT_FILES ]; then
+	if [ ! -f $DEFAULT_FILES.tar.gz ]; then
 		wget "$DEFAULT_FILES_BASE$DEFAULT_FILES.tar.gz"
 	fi
 

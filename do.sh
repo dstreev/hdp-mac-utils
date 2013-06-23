@@ -1,5 +1,10 @@
 #!/bin/sh
 
+#TODO: Validate/add support for:
+#	webhcat
+#	hbase
+#	flume
+
 if [ $# -ne 1 ]; then
 	echo "Usage: ./go.sh TEMP_DIR"
 else
@@ -8,17 +13,24 @@ else
 	. $APP_DIR/mac_env.sh
 
 	# Get Artifacts
-
-	# Expand and Link
+	. $APP_DIR/get_artifacts.sh
 
 	# Deploy Defaults, Template and Link
 
-	# Create Hadoop Directories
-	if [ ! -d $BASE_CONF_DIR ]; then
-		sudo mkdir -P $BASE_CONF_DIR
-		sudo chown `whoami` $BASE_CONF_DIR
-		mkdir $BASE_CONF_DIR/name $BASE_CONF_DIR/data $BASE_CONF_DIR/snn $BASE_CONF_DIR/mapred
+	# Create Hadoop HDFS and Storage Directories
+	if [ ! -d $HDFS_BASE_DIR ]; then
+		sudo mkdir -P $HDFS_BASE_DIR
+		sudo chown `whoami` $HDFS_BASE_DIR
+		mkdir $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
 	fi
+
+	if [ ! -d $HADOOP_CONF_DIR ]; then
+		sudo mkdir -P $HADOOP_CONF_DIR
+		sudo chown `whoami` $HADOOP_CONF_DIR
+	else
+		sudo chown `whoami` $HADOOP_CONF_DIR
+	fi
+
 	# Store pids
 	if [ ! -d /var/run/hadoop/$USER ]; then
 		sudo mkdir -P /var/run/hadoop/$USER
@@ -31,6 +43,9 @@ else
 		sudo chown $USER /var/log/hadoop/$USER
 		sudo chown $USER /var/log/hadoop/mapred
 	fi
+
+	# Expand and Link
+	. $APP_DIR/expand_link.sh
 
 	# Setup MySql for Hive and HCatalog
 
