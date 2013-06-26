@@ -6,6 +6,17 @@ A collection of scripts with instructions for installing HDP 1.3.0 (from tarball
 
 Provide a working HDP installation on a mac for local use.
 
+### working
+> * HDFS
+> * MAPRED
+> * Hive
+> * Pig
+
+### Todo's
+> * HCat
+> * Flume
+> * Sqoop
+
 ## Pre-requisites
 
 There are several ways to automatically install many of the components that will be used in this document, but I've chosen to use "[brew](http://mxcl.github.io/homebrew/)" to help with the installation and configuration process.
@@ -13,9 +24,9 @@ There are several ways to automatically install many of the components that will
 ## Artifacts needed for installation
 
 * MySql - Install this with "brew":
-	> <code>brew install mysql</code>
+** <code>brew install mysql</code>
 * wget - install with "brew"
-	> <code>brew install wget</code>
+** <code>brew install wget</code>
 
 ## Scripts
 
