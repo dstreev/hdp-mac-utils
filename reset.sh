@@ -47,3 +47,6 @@ sudo rm /etc/zookeeper/conf
 # Remove /etc/default
 cd /etc/default
 sudo rm -rf hadoop hbase hcatalog
+
+cd /usr/bin
+sudo rm hadoop hive sqoop* zookeeper* pig oozie hbase

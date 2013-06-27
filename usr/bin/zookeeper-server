@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Autodetect JAVA_HOME if not defined
+if [ -e /usr/libexec/bigtop-detect-javahome ]; then
+  . /usr/libexec/bigtop-detect-javahome
+elif [ -e /usr/lib/bigtop-utils/bigtop-detect-javahome ]; then
+  . /usr/lib/bigtop-utils/bigtop-detect-javahome
+fi
+
+export ZOOPIDFILE=${ZOOPIDFILE:-/var/run/zookeeper/zookeeper-server.pid}
+export ZOOKEEPER_HOME=${ZOOKEEPER_CONF:-/usr/lib/zookeeper}
+export ZOOKEEPER_CONF=${ZOOKEEPER_CONF:-/etc/zookeeper/conf}
+export ZOOCFGDIR=${ZOOCFGDIR:-$ZOOKEEPER_CONF}
+export CLASSPATH=$CLASSPATH:$ZOOKEEPER_CONF:$ZOOKEEPER_HOME/*:$ZOOKEEPER_HOME/lib/*
+export ZOO_LOG_DIR=/var/log/zookeeper
+export ZOO_LOG4J_PROP=INFO,ROLLINGFILE
+export JVMFLAGS=-Dzookeeper.log.threshold=INFO
+env CLASSPATH=$CLASSPATH /usr/lib/zookeeper/bin/zkServer.sh "$@"

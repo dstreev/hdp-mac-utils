@@ -89,6 +89,9 @@ else
 		cd $CUR_DIR
 		. $APP_DIR/fix_cfgs.sh
 		
+		# Install wrapper scripts
+		sudo cp $APP_DIR/usr/bin/* /usr/bin
+		
 		# Link configs to standard location know by scripts
 		if [ ! -d /etc/hadoop ]; then
 			sudo mkdir /etc/hadoop
@@ -121,14 +124,30 @@ else
 	fi
 
 	# Remove old symlinks
-	sudo rm /etc/hadoop/conf
-	sudo rm /etc/hbase/conf
-	sudo rm /etc/hive/conf
-	sudo rm /etc/oozie/conf
-	sudo rm /etc/pig/conf
-	sudo rm /etc/sqoop/conf
-	sudo rm /etc/webhcat/conf
-	sudo rm /etc/zookeeper/conf
+	if [ -d /etc/hadoop/conf ]; then
+		sudo rm /etc/hadoop/conf
+	fi
+	if [ -d /etc/hbase/conf ]; then
+		sudo rm /etc/hbase/conf
+	fi
+	if [ -d /etc/hive/conf ]; then
+		sudo rm /etc/hive/conf
+	fi
+	if [ -d /etc/oozie/conf ]; then
+		sudo rm /etc/oozie/conf
+	fi
+	if [ -d /etc/pig/conf ]; then
+		sudo rm /etc/pig/conf
+	fi
+	if [ -d /etc/sqoop/conf ]; then
+		sudo rm /etc/sqoop/conf
+	fi
+	if [ -d /etc/webhcat/conf ]; then
+		sudo rm /etc/webhcat/conf
+	fi
+	if [ -d /etc/zookeeper/conf ]; then
+		sudo rm /etc/zookeeper/conf
+	fi
 
 	# Set/Reset symlinks
 	sudo ln -s $HADOOP_CONF_DIR/core_hadoop /etc/hadoop/conf

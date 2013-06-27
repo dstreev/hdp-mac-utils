@@ -30,7 +30,7 @@ MAPRED_SITE_FILE=$HADOOP_CONF_DIR/core_hadoop/mapred-site.xml
 
 # Hive
 HIVE_SITE_FILE=$HADOOP_CONF_DIR/hive/hive-site.xml
-. $APP_DIR/replace.sh $HIVE_SITE_FILE TODO-HIVE-JDBC-URL jdbc:mysql://localhost:3306/$HIVE_DB_NAME?createDatabaseIfNotExist=true |
+. $APP_DIR/replace.sh $HIVE_SITE_FILE TODO-HIVE-JDBC-URL "jdbc:mysql://localhost:3306/$HIVE_DB_NAME?createDatabaseIfNotExist=true" "|"
 . $APP_DIR/replace.sh $HIVE_SITE_FILE TODO-HIVE-JDBC-DRIVER com.mysql.jdbc.Driver
 . $APP_DIR/replace.sh $HIVE_SITE_FILE TODO-HIVE-METASTORE-USER-NAME $HIVE_DB_USER
 . $APP_DIR/replace.sh $HIVE_SITE_FILE TODO-HIVE-METASTORE-USER-PASSWD $HIVE_DB_PASSWORD
@@ -46,7 +46,7 @@ OOZIE_SITE_FILE=$HADOOP_CONF_DIR/oozie/oozie-site.xml
 # TODO - Need to reset the oozie.service.JPAService.create.db.schema to 'true'
 . $APP_DIR/replace.sh $OOZIE_SITE_FILE TODO-OOZIE-SERVER $HOSTNAME
 . $APP_DIR/replace.sh $OOZIE_SITE_FILE TODO-OOZIE-JDBC-DRIVER com.mysql.jdbc.Driver
-. $APP_DIR/replace.sh $OOZIE_SITE_FILE TODO-OOZIE-JDBC-URL jdbc:mysql://localhost:3306/$OOZIE_DB_NAME?createDatabaseIfNotExist=true |
+. $APP_DIR/replace.sh $OOZIE_SITE_FILE TODO-OOZIE-JDBC-URL "jdbc:mysql://localhost:3306/$OOZIE_DB_NAME?createDatabaseIfNotExist=true" "|"
 . $APP_DIR/replace.sh $OOZIE_SITE_FILE TODO-OOZIE-DATABASE-USER-NAME $OOZIE_DB_USER
 . $APP_DIR/replace.sh $OOZIE_SITE_FILE TODO-OOZIE-DATABASE-USER-PASSWD $OOZIE_DB_PASSWORD 
 

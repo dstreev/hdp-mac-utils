@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #TODO: Validate/add support for:
 #	hcat
@@ -30,6 +30,14 @@ else
 		sudo chown `whoami` $HDFS_BASE_DIR
 		mkdir $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
 		chmod 0750 $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
+		echo ""
+		echo ""
+		echo "NOTE: HDFS storage locations initialized for the first time."
+		echo "      You will need to format the namenode file system before starting"
+		echo "		with the following command:"
+		echo "		> hadoop namenode -format"
+		echo "		IT WOULD BE BEST TO RUN THIS IN A NEW WINDOW TO ENSURE "
+		echo "		ALL ENVIRONMENTS ARE SET"
 	fi
 
 	if [ ! -d $HADOOP_CONF_DIR ]; then
@@ -57,10 +65,34 @@ else
 
 	# Setup MySql for Hive and HCatalog
 	# Use a brew installation
-	if [ ! -f /usr/local/bin/brew ]; then
+	if [ -f /usr/local/bin/brew ]; then
 		. $APP_DIR/mysql_cfg.sh	
 	else
-		echo "Brew is installed, you'll need to install an manage MySql on your own."
+		echo "Brew is installed, you''ll need to install an manage MySql on your own."
 	fi
 	
+	echo "Installation Complete.  Review output for issues. "
+	
+	if [ "" == `env | grep HADOOP_CONF_DIR` ]; then
+		echo "========================"
+		echo "  NOTE: You need to add the following setting to your environment before starting hadoop"
+		echo "export HADOOP_CONF_DIR=/etc/hadoop/conf"
+	fi
+	echo "File locations: "
+	echo "Binaries: $LIB_BASE_DIR/$HDP_VER with symlinks back to $LIB_BASE_DIR"
+	echo "Data Files: $HDFS_BASE_DIR - If these existed before, they were not touched"
+	echo "Configuration File: $HADOOP_CONF_DIR with symlinks to:"
+	echo "	/etc/hadoop/conf"
+	echo "	/etc/hbase/conf"
+	echo "	/etc/hive/conf"
+	echo "	/etc/zookeeper/conf"
+	echo "	/etc/oozie/conf"
+	echo "	/etc/sqoop/conf"
+	echo "Shell Wrappers for hadoop, hive, sqoop, pig, oozie and hbase added to \/usr\/bin"
+	echo "========================"
+	echo ""
+	echo "For Oozie Initialization YOU MUST:"
+	echo "    Change /etc/oozie/conf/oozie-site.xml -> "
+	echo "		'oozie.service.JPAService.create.db.schema to 'true' to initialize the oozie database"
+	echo ""
 fi
