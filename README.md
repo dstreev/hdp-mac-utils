@@ -13,6 +13,7 @@ Provide a working HDP installation on a mac for local use.
 > * Pig
 
 ### Todo's
+> * HBase
 > * HCat
 > * Flume
 > * Sqoop
@@ -24,9 +25,9 @@ There are several ways to automatically install many of the components that will
 ## Artifacts needed for installation
 
 * MySql - Install this with "brew":
-** <code>brew install mysql</code>
+> * <code>brew install mysql</code>
 * wget - install with "brew"
-** <code>brew install wget</code>
+> * <code>brew install wget</code>
 
 ## Scripts
 

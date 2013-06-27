@@ -30,24 +30,32 @@ else
 	done
 	
 	# Link JDBC drivers
-	cat $APP_DIR/jdbc_cfg.txt | while read next; do
-		J_FILE=`echo $next | awk '{print $1}'`
-		J_LINK=`echo $next | awk '{print $2}'`
+	cd $SOURCE_DIR
+	sudo tar xzf $MYSQL_ARCHIVE.tar.gz
+	sudo mkdir -p /usr/share/jdbc
+	sudo cp $MYSQL_ARCHIVE/$MYSQL_ARCHIVE-bin.jar /usr/share/jdbc
+	sudo chmod -R 0555 /usr/share/jdbc
+	cd $CUR_DIR
+	
+	J_FILE="/usr/share/jdbc/$MYSQL_ARCHIVE-bin.jar"
+	J_LINK="$MYSQL_ARCHIVE-bin.jar"
 		
-		echo "Set jdbc link: $J_FILE -> J_LINK"
-		sudo ln -s $J_FILE $LIB_BASE_DIR/hive/lib/$J_LINK
-	done
+	echo "Set HIVE jdbc link: $J_FILE -> J_LINK"
+	sudo ln -s $J_FILE $LIB_BASE_DIR/hive/lib/$J_LINK
+	echo "Set OOZIE jdbc link: $J_FILE -> J_LINK"
+	sudo ln -s $J_FILE $LIB_BASE_DIR/oozie/libtools/$J_LINK
 
 	# Expand the Defaults
 	if [ ! -d $DEFAULT_DIR ]; then
 		echo "Creating: $DEFAULT_DIR"
 		sudo mkdir -p $DEFAULT_DIR	
 	fi	
-
+	
+	cd $CUR_DIR
+	sudo cp $APP_DIR/etc/default/* $DEFAULT_DIR
+	sudo chmod -R uog+x /etc/default
 	cd $DEFAULT_DIR
 	
-	echo "Expanding defaults"
-	sudo tar xzf $SOURCE_DIR/$DEFAULT_FILES.tar.gz
 	echo "default complete"
 	
 	# Expand the Templates and Link
@@ -63,6 +71,9 @@ else
 			
 		cd $COMPANION_FILE/configuration_files
 		cp -R * $HADOOP_CONF_DIR
+		
+		echo $HOSTNAME > $HADOOP_CONF_DIR/core_hadoop/masters
+		echo $HOSTNAME > $HADOOP_CONF_DIR/core_hadoop/slaves
 
 		echo "NOTICE: You MUST now edit all the appropriate configs in the $HADOOP_CONF_DIR directory for your environment."
 		echo "	You need to change settings in:"
@@ -73,6 +84,11 @@ else
 		echo ""
 		echo ""
 		echo "Setting up config links"
+		
+		# Adjust the configs that were just copied for this environment.
+		cd $CUR_DIR
+		. $APP_DIR/fix_cfgs.sh
+		
 		# Link configs to standard location know by scripts
 		if [ ! -d /etc/hadoop ]; then
 			sudo mkdir /etc/hadoop

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #TODO: Validate/add support for:
-#	webhcat
+#	hcat
 #	hbase
 #	flume
 # 	zookeeper
@@ -10,9 +10,15 @@ if [ $# -ne 1 ]; then
 	echo "Usage: ./go.sh TEMP_DIR"
 else
 	USER=`whoami`
+	SOURCE_DIR=$1
+	
 	APP_DIR=`dirname $0`
 	. $APP_DIR/mac_env.sh
 
+	if [ ! -d $SOURCE_DIR ]; then
+		mkdir -p $SOURCE_DIR
+	fi
+	
 	# Get Artifacts
 	. $APP_DIR/get_artifacts.sh
 
@@ -23,6 +29,7 @@ else
 		sudo mkdir -p $HDFS_BASE_DIR
 		sudo chown `whoami` $HDFS_BASE_DIR
 		mkdir $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
+		chmod 0750 $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
 	fi
 
 	if [ ! -d $HADOOP_CONF_DIR ]; then
@@ -49,5 +56,11 @@ else
 	. $APP_DIR/expand_link.sh $1
 
 	# Setup MySql for Hive and HCatalog
-
+	# Use a brew installation
+	if [ ! -f /usr/local/bin/brew ]; then
+		. $APP_DIR/mysql_cfg.sh	
+	else
+		echo "Brew is installed, you'll need to install an manage MySql on your own."
+	fi
+	
 fi

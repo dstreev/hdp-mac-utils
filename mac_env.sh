@@ -13,7 +13,19 @@ DEFAULT_DIR=/etc/default
 BASE_DIR=/var/hadoop
 HDFS_BASE_DIR=$BASE_DIR/hdfs/localhost
 
+MYSQL_ARCHIVE=mysql-connector-java-5.1.25
+
 HADOOP_CONF_DIR=$BASE_DIR/local/$HDP_VER
 
 MYSQL_JDBC_JAR=/var/share/jdbc/
+
+HOSTNAME=localhost
+
+HIVE_DB_NAME=hivemetastore
+HIVE_DB_USER=hive
+HIVE_DB_PASSWORD=hive
+
+OOZIE_DB_NAME=oozie
+OOZIE_DB_USER=oozie
+OOZIE_DB_PASSWORD=oozie
 

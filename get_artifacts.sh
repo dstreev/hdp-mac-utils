@@ -31,6 +31,10 @@ else
 		wget "$DEFAULT_FILES_BASE$DEFAULT_FILES.tar.gz"
 	fi
 
+	# Get the MySQL Jar for Oozie and Hive.
+	if [ ! -f $MYSQL_ARCHIVE.tar.gz ]; then
+		wget -O $MYSQL_ARCHIVE.tar.gz "http://dev.mysql.com/get/Downloads/Connector-J/$MYSQL_ARCHIVE.tar.gz/from/http://cdn.mysql.com/"
+	fi
 	cd $CUR_DIR
 fi
 
