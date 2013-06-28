@@ -20,21 +20,21 @@ The 'do.sh' script will kickoff the installation process.
 
 ### Environment Variables
 > Set the following environment variables:
-<code>
+<pre><code>
 export HADOOP_HOME=/usr/lib/hadoop
 export HADOOP_CONF_DIR=/etc/hadoop/conf
 export HIVE_CONF_DIR=/etc/hive/conf
 export PIG_CONF_DIR=/etc/pig/conf
-</code>
+</code></pre>
 
 ### Namenode
 > If this is the first-time you've installed HDP, you will need to initialize the Hadoop filesystem with:
-	> <code>hadoop namenode -format</code>
+	<pre><code>hadoop namenode -format</code></pre>
 > If your upgrade to a new HDP version, you may need to update the namenode before starting HDFS.
 
 ### Hive
 > comment out the following in the $HIVE_CONF/hite-site.xml file:
-> <code>
+  <pre><code>
   <!--	
   <property>
     <name>hive.security.authorization.enabled</name>
@@ -52,36 +52,36 @@ export PIG_CONF_DIR=/etc/pig/conf
     </description>
   </property>
   -->
-  </code>
+  </code></pre>
   
 ### Oozie
 > TODO: Get the extjs-2.2 jar and add it to the libs for oozie web.
 
 ## Starting Hadoop, etc..
 ### HDFS and MAPRED:
-<code>
+<pre><code>
 cd /usr/lib/hadoop/bin
 ./start-all.sh
-</code>
+</code></pre>
 ### Hive and Hiveserver2
 1. Start Hive Metastore service.
-	> <pre><code>nohup hive --service metastore & </code></pre>
+	<pre><code>nohup hive --service metastore & </code></pre>
 2. Smoke Test Hive.
-	> Open Hive command line shell. <pre><code>hive</code></pre>
-	> Run sample commands.
+	1. Open Hive command line shell. <pre><code>hive</code></pre>
+	2. Run sample commands.
 		<pre><code>
 		show databases;
 		create table test(col1 int, col2 string);
 		show tables;
 		</code></pre>
 3. Start HiveServer2.
-	> <pre><code>/usr/lib/hive/bin/hiveserver2 &</code></pre> 
+	<pre><code>/usr/lib/hive/bin/hiveserver2 &</code></pre> 
 4. Smoke Test HiveServer2.
-	> Open Beeline command line shell to interact with HiveServer2.
-	> <pre><code>/usr/lib/hive/bin/beeline</code></pre>
-	> Establish connection to server.
+	1. Open Beeline command line shell to interact with HiveServer2.
+	   <pre><code>/usr/lib/hive/bin/beeline</code></pre>
+	2. Establish connection to server.
 		<pre><code>!connect jdbc:hive2://localhost:10000 $USER password org.apache.hive.jdbc.HiveDriver</code></pre>
-    > Run sample commands.
+    3. Run sample commands.
 		<pre><code>
 		show databases;
 		create table test2(a int, b string);
