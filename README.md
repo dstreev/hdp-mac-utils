@@ -34,22 +34,24 @@ export PIG_CONF_DIR=/etc/pig/conf
 
 ### Hive
 > comment out <code>&lt;!-- --&gt;</code>the following in the $HIVE_CONF/hite-site.xml file:
-  <pre><code>	
-  <property>
-    <name>hive.security.authorization.enabled</name>
-    <value>true</value>
-    <description>enable or disable the hive client authorization</description>
-  </property>
+  <pre><code>
+  &lt;!--	
+  &lt;property&gt;
+    &lt;name&gt;hive.security.authorization.enabled&lt;/name&gt;
+    &lt;value&gt;true&lt;/value&gt;
+    &lt;description&gt;enable or disable the hive client authorization&lt;/description&gt;
+  &lt;/property&gt;
 
-  <property>
-    <name>hive.security.authorization.manager</name>
-    <value>org.apache.hcatalog.security.HdfsAuthorizationProvider</value>
-    <description>
+  &lt;property&gt;
+    &lt;name&gt;hive.security.authorization.manager&lt;/name&gt;
+    &lt;value&gt;org.apache.hcatalog.security.HdfsAuthorizationProvider&lt;/value&gt;
+    &lt;description&gt;
         the hive client authorization manager class name.
         The user defined authorization class should implement interface
         org.apache.hadoop.hive.ql.security.authorization.HiveAuthorizationProvider.
-    </description>
-  </property>
+    &lt;/description&gt;
+  &lt;/property&gt;
+  --&gt;
   </code></pre>
   
 ### Oozie
