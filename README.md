@@ -33,9 +33,8 @@ export PIG_CONF_DIR=/etc/pig/conf
 > If your upgrade to a new HDP version, you may need to update the namenode before starting HDFS.
 
 ### Hive
-> comment out the following in the $HIVE_CONF/hite-site.xml file:
-  <pre><code>
-  <!--	
+> comment out <code>&lt!-- --&gt</code>the following in the $HIVE_CONF/hite-site.xml file:
+  <pre><code>	
   <property>
     <name>hive.security.authorization.enabled</name>
     <value>true</value>
@@ -51,7 +50,6 @@ export PIG_CONF_DIR=/etc/pig/conf
         org.apache.hadoop.hive.ql.security.authorization.HiveAuthorizationProvider.
     </description>
   </property>
-  -->
   </code></pre>
   
 ### Oozie
@@ -59,21 +57,17 @@ export PIG_CONF_DIR=/etc/pig/conf
 
 ## Starting Hadoop, etc..
 ### HDFS and MAPRED:
-<pre><code>
-cd /usr/lib/hadoop/bin
-./start-all.sh
-</code></pre>
+<pre><code>cd /usr/lib/hadoop/bin
+./start-all.sh</code></pre>
 ### Hive and Hiveserver2
 1. Start Hive Metastore service.
 	<pre><code>nohup hive --service metastore & </code></pre>
 2. Smoke Test Hive.
 	1. Open Hive command line shell. <pre><code>hive</code></pre>
 	2. Run sample commands.
-		<pre><code>
-		show databases;
+		<pre><code>show databases;
 		create table test(col1 int, col2 string);
-		show tables;
-		</code></pre>
+		show tables;</code></pre>
 3. Start HiveServer2.
 	<pre><code>/usr/lib/hive/bin/hiveserver2 &</code></pre> 
 4. Smoke Test HiveServer2.
@@ -82,11 +76,9 @@ cd /usr/lib/hadoop/bin
 	2. Establish connection to server.
 		<pre><code>!connect jdbc:hive2://localhost:10000 $USER password org.apache.hive.jdbc.HiveDriver</code></pre>
     3. Run sample commands.
-		<pre><code>
-		show databases;
+		<pre><code>show databases;
 		create table test2(a int, b string);
-		show tables;
-		</code></pre>
+		show tables;</code></pre>
 
 ## Status of Components install here
 
