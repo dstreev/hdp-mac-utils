@@ -33,7 +33,7 @@ export PIG_CONF_DIR=/etc/pig/conf
 > If your upgrade to a new HDP version, you may need to update the namenode before starting HDFS.
 
 ### Hive
-> comment out <code>&lt!-- --&gt</code>the following in the $HIVE_CONF/hite-site.xml file:
+> comment out <code>&lt;!-- --&gt;</code>the following in the $HIVE_CONF/hite-site.xml file:
   <pre><code>	
   <property>
     <name>hive.security.authorization.enabled</name>
