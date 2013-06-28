@@ -34,14 +34,12 @@ export PIG_CONF_DIR=/etc/pig/conf
 
 ### Hive
 > comment out <code>&lt;!-- --&gt;</code>the following in the $HIVE_CONF/hite-site.xml file:
-  <pre><code>
-  &lt;!--	
+  <pre><code>&lt;!--	
   &lt;property&gt;
     &lt;name&gt;hive.security.authorization.enabled&lt;/name&gt;
     &lt;value&gt;true&lt;/value&gt;
     &lt;description&gt;enable or disable the hive client authorization&lt;/description&gt;
   &lt;/property&gt;
-
   &lt;property&gt;
     &lt;name&gt;hive.security.authorization.manager&lt;/name&gt;
     &lt;value&gt;org.apache.hcatalog.security.HdfsAuthorizationProvider&lt;/value&gt;
@@ -51,8 +49,7 @@ export PIG_CONF_DIR=/etc/pig/conf
         org.apache.hadoop.hive.ql.security.authorization.HiveAuthorizationProvider.
     &lt;/description&gt;
   &lt;/property&gt;
-  --&gt;
-  </code></pre>
+  --&gt;</code></pre>
   
 ### Oozie
 > TODO: Get the extjs-2.2 jar and add it to the libs for oozie web.
