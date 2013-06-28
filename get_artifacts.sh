@@ -9,7 +9,7 @@ cd $APP_DIR
 . ./mac_env.sh
 
 if [ $# -ne 1 ] ; then
-	echo "Please supply the directory where the tarball artifacts were downloaded to."
+	echo "Please supply the directory where the tarball artifacts were downloaded."
 else	
 	for i in `cat $APP_DIR/hdp_artifacts.txt | awk '{print $1}'`; do
 		cd $1

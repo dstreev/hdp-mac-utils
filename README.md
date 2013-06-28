@@ -18,14 +18,11 @@ The 'do.sh' script will kickoff the installation process.
 
 ## Post Installation - House Keeping
 
+### Remove Compression Codecs from core-site.xml
+
 ### Environment Variables
 > Set the following environment variables:
-<pre><code>
-export HADOOP_HOME=/usr/lib/hadoop
-export HADOOP_CONF_DIR=/etc/hadoop/conf
-export HIVE_CONF_DIR=/etc/hive/conf
-export PIG_CONF_DIR=/etc/pig/conf
-</code></pre>
+<pre><code>export HIVE_LOG_DIR=/var/log/hive</code></pre>
 
 ### Namenode
 > If this is the first-time you've installed HDP, you will need to initialize the Hadoop filesystem with:
@@ -33,45 +30,36 @@ export PIG_CONF_DIR=/etc/pig/conf
 > If your upgrade to a new HDP version, you may need to update the namenode before starting HDFS.
 
 ### Hive
-> comment out <code>&lt;!-- --&gt;</code>the following in the $HIVE_CONF/hite-site.xml file:
-  <pre><code>&lt;!--	
-  &lt;property&gt;
-    &lt;name&gt;hive.security.authorization.enabled&lt;/name&gt;
-    &lt;value&gt;true&lt;/value&gt;
-    &lt;description&gt;enable or disable the hive client authorization&lt;/description&gt;
-  &lt;/property&gt;
-  &lt;property&gt;
-    &lt;name&gt;hive.security.authorization.manager&lt;/name&gt;
-    &lt;value&gt;org.apache.hcatalog.security.HdfsAuthorizationProvider&lt;/value&gt;
-    &lt;description&gt;
-        the hive client authorization manager class name.
-        The user defined authorization class should implement interface
-        org.apache.hadoop.hive.ql.security.authorization.HiveAuthorizationProvider.
-    &lt;/description&gt;
-  &lt;/property&gt;
-  --&gt;</code></pre>
   
 ### Oozie
 > TODO: Get the extjs-2.2 jar and add it to the libs for oozie web.
 
-## Starting Hadoop, etc..
+## Starting Hadoop, etc.. Short-version
+### HDFS and MAPRED
+<pre><code>/usr/lib/hadoop/bin/start-all.sh</code></pre>
+> We've installed a few launch scripts in /usr/bin
+### Hive Metastore
+<pre><code>start-hive-metastore.sh</code></pre>
+> See below for instructions to smoke test hive.
+
+## Starting Hadoop, etc.. Long-version
 ### HDFS and MAPRED:
 <pre><code>cd /usr/lib/hadoop/bin
 ./start-all.sh</code></pre>
 ### Hive and Hiveserver2
 1. Start Hive Metastore service.
-	<pre><code>nohup hive --service metastore & </code></pre>
+	<pre><code>nohup hive --service metastore>$HIVE_LOG_DIR/hive.out 2>$HIVE_LOG_DIR/hive.log & </code></pre>
 2. Smoke Test Hive.
 	1. Open Hive command line shell. <pre><code>hive</code></pre>
 	2. Run sample commands.
 		<pre><code>show databases;
 		create table test(col1 int, col2 string);
-		show tables;</code></pre>
+		show tables;</code></pre> 
 3. Start HiveServer2.
-	<pre><code>/usr/lib/hive/bin/hiveserver2 &</code></pre> 
+	<pre><code>nohup /usr/lib/hive/bin/hiveserver2>$HIVE_LOG_DIR/hiveserver2.out 2>$HIVE_LOG_DIR/hiveserver2.log &</code></pre> 
 4. Smoke Test HiveServer2.
 	1. Open Beeline command line shell to interact with HiveServer2.
-	   <pre><code>/usr/lib/hive/bin/beeline</code></pre>
+	   <pre><code>beeline</code></pre>
 	2. Establish connection to server.
 		<pre><code>!connect jdbc:hive2://localhost:10000 $USER password org.apache.hive.jdbc.HiveDriver</code></pre>
     3. Run sample commands.

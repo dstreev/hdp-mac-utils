@@ -12,16 +12,20 @@ CORE_SITE_FILE=$HADOOP_CONF_DIR/core_hadoop/core-site.xml
 HADOOP_ENV_FILE=$HADOOP_CONF_DIR/core_hadoop/hadoop-env.sh
 . $APP_DIR/replace.sh $CORE_SITE_FILE TODO-NAMENODE-HOSTNAME $HOSTNAME
 . $APP_DIR/replace.sh $CORE_SITE_FILE TODO-FS-CHECKPOINT-DIR $HDFS_BASE_DIR/snn
-. $APP_DIR/replace.sh $HADOOP_ENV_FILE JAVA_HOME=/usr/java/default JAVA_HOME=`/usr/libexec/java_home` |
-
-JAVA_HOME=/usr/java/default
+. $APP_DIR/replace.sh $HADOOP_ENV_FILE JAVA_HOME=/usr/java/default JAVA_HOME=`/usr/libexec/java_home` "|"
+# Remove codecs for mac installation, if not done, causes issues with 'hive cli'
+#   Manifest as an issue loading TextInputFormat when running a hive query.
+# TODO: Figure out how to add the appropriate codecs to the mac.
+OLD_CODEC="org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,com.hadoop.compression.lzo.LzoCodec,com.hadoop.compression.lzo.LzopCodec,org.apache.hadoop.io.compress.BZip2Codec,org.apache.hadoop.io.compress.SnappyCodec"
+# TODO: Weird..  I needed to add the BZip2Codec back in, or else the Secondary Namenode wouldn't start.
+NEW_CODEC="org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.BZip2Codec"
+. $APP_DIR/replace.sh $CORE_SITE_FILE $OLD_CODEC $NEW_CODEC
 
 # HDFS
 HDFS_SITE_FILE=$HADOOP_CONF_DIR/core_hadoop/hdfs-site.xml
 . $APP_DIR/replace.sh $HDFS_SITE_FILE TODO-DFS-NAME-DIR $HDFS_BASE_DIR/name
 . $APP_DIR/replace.sh $HDFS_SITE_FILE TODO-DFS-DATA-DIR $HDFS_BASE_DIR/data
 . $APP_DIR/replace.sh $HDFS_SITE_FILE TODO-NAMENODE-HOSTNAME $HOSTNAME
-
 
 # MAPRED
 MAPRED_SITE_FILE=$HADOOP_CONF_DIR/core_hadoop/mapred-site.xml
@@ -35,6 +39,8 @@ HIVE_SITE_FILE=$HADOOP_CONF_DIR/hive/hive-site.xml
 . $APP_DIR/replace.sh $HIVE_SITE_FILE TODO-HIVE-METASTORE-USER-NAME $HIVE_DB_USER
 . $APP_DIR/replace.sh $HIVE_SITE_FILE TODO-HIVE-METASTORE-USER-PASSWD $HIVE_DB_PASSWORD
 . $APP_DIR/replace.sh $HIVE_SITE_FILE TODO-HIVE-METASTORE-SERVER-HOST $HOSTNAME
+# Removed for Mac, causes load issue with Hive CLI
+. $APP_DIR/replace.sh $HIVE_SITE_FILE "org.apache.hcatalog.security.HdfsAuthorizationProvider" ""
  
 # Pig (TODO)
 # Need to adjust JAVA_HOME
@@ -60,5 +66,4 @@ ZOO_ENV_FILE=$HADOOP_CONF_DIR/zookeeper/zookeeper-env.sh
 
 ZOO_CFG_FILE=$HADOOP_CONF_DIR/zookeeper/zoo.cfg
 # Need to adjust the server list 
-
 

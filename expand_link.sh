@@ -27,6 +27,13 @@ else
 		cd $LIB_BASE_DIR
 		sudo ln -s $HDP_VER/$T_FILE $T_LINK
 
+		# Reset the local conf's to link to /etc/$app/conf
+		# Because of the lack of consistency of the startup scripts across products
+		cd $T_LINK
+		sudo rm -rf conf
+		sudo ln -s /etc/$T_LINK/conf conf
+		cd $LIB_BASE_DIR
+		
 	done
 	
 	# Link JDBC drivers
@@ -89,7 +96,7 @@ else
 		cd $CUR_DIR
 		. $APP_DIR/fix_cfgs.sh
 		
-		# Install wrapper scripts
+		# Install helper and wrapper scripts
 		sudo cp $APP_DIR/usr/bin/* /usr/bin
 		
 		# Link configs to standard location know by scripts
