@@ -25,13 +25,33 @@ else
 		cd $HDP_VER
 		sudo tar xzf $SOURCE_DIR/$T_FILE.tar.gz
 		cd $LIB_BASE_DIR
-		sudo ln -s $HDP_VER/$T_FILE $T_LINK
+		
+		# The Oozie distribution is inconsistent when extracted
+		T_FILE_FIXED=`echo $T_FILE | sed s/-distro//`
+		
+		# Get the version information
+		APP_VER=`echo $T_FILE_FIXED | sed s/$T_LINK\-//`
+		echo "App: $T_LINK"
+		echo "	Fixed File: $T_FILE_FIXED"
+		echo "	Version: $APP_VER"
+		
+		sudo ln -s $HDP_VER/$T_FILE_FIXED $T_LINK
 
 		# Reset the local conf's to link to /etc/$app/conf
 		# Because of the lack of consistency of the startup scripts across products
 		cd $T_LINK
 		sudo rm -rf conf
 		sudo ln -s /etc/$T_LINK/conf conf
+
+		# Special hcatalog symlinks required
+		if [ "hcatalog" == "$T_LINK" ]; then
+			cd share/hcatalog
+			#TODO: Get version from $T_FILE
+			for j in hcatalog-core hcatalog-pig-adapter hcatalog-server-extensions; do
+				sudo ln -s $j-$APP_VER.jar $j.jar 						
+			done
+		fi
+
 		cd $LIB_BASE_DIR
 		
 	done
