@@ -43,6 +43,7 @@ The 'do.sh' script will kickoff the installation process.
 > If your upgrade to a new HDP version, you may need to update the namenode before starting HDFS.
 
 ### Hive
+> You may receive <code>Authorization failed:No privilege 'Select' found for inputs ...</code> errors when running a hive query.  To fix this, adjust the <code>hive.security.authorization.enabled</code> property in <code>/etc/hive/conf/hive-site.xml</code> to <code>false</code>.
   
 ### Oozie
 > TODO: Get the extjs-2.2 jar and add it to the libs for oozie web.
