@@ -33,8 +33,6 @@ The 'do.sh' script will kickoff the installation process.
 
 ## Post Installation - House Keeping
 
-### Remove Compression Codecs from core-site.xml
-
 ### Environment Variables
 > Set the following environment variables:
 <pre><code>export HIVE_LOG_DIR=/var/log/hive</code></pre>
@@ -52,7 +50,7 @@ The 'do.sh' script will kickoff the installation process.
 ## Starting Hadoop, etc.. Short-version
 ### HDFS and MAPRED
 <pre><code>/usr/lib/hadoop/bin/start-all.sh</code></pre>
-> We've installed a few launch scripts in /usr/bin
+
 ### Hive Metastore
 <pre><code>start-hive-metastore.sh</code></pre>
 > See below for instructions to smoke test hive.
@@ -100,38 +98,27 @@ The 'do.sh' script will kickoff the installation process.
 ## Scripts
 
 ### do.sh [temp_dir]
-
-> This is the main script that will complete the installation and configuration.  
-> Once this is complete, everything will be in the correct place and you will only
-> need to manually adjust the template configurations for you localhost environment.
+> This is the main script that will complete the installation and configuration.  Once this is complete, everything will be in the correct place and the environment will be configured to "localhost".
 
 ### mac_env.sh
-
 > Used to control the parameters used by the rest of the scripts.
 
 ### get_artifacts.sh [temp_dir]
-
 > A subscript used to fetch the HDP base artifacts and a few
 > other helper file sets used to complete the installation.
 
 ### expand_link.sh
-
 > Subscript used to expand and link the artifacts retrieved.
 
-### etc_default.tar.gz
+### fix_cfgs.sh
+> Many of the configs in the templates we're using need to be adjusted for your "localhost"
 
+### etc_default.tar.gz
 > Contains the defaults (pulled from CentOS install) used by the hadoop scripts
 > to properly run the environment.
 
 ### hdp_artifacts.txt
-
 > A list of HDP artifacts and links to use for each.
 
-### jdbc_cfg.txt
-
-> A file the contains the location of jdbc drivers and the symlink to create for them.
-> These are used by Hive.
-
 ### reset.sh [temp_dir]
-
-> Use this to remove the installed HDP libraries and configuration files.
+> Use this to remove the installed HDP libraries and configuration files. I used to over and over again to test the installation
