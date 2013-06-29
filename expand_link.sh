@@ -62,7 +62,6 @@ else
 		# Special hcatalog symlinks required
 		if [ "hcatalog" == "$T_LINK" ]; then
 			cd share/hcatalog
-			#TODO: Get version from $T_FILE
 			for j in hcatalog-core hcatalog-pig-adapter hcatalog-server-extensions; do
 				sudo ln -s $j-$APP_VER.jar $j.jar 						
 			done
