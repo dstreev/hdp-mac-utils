@@ -89,11 +89,6 @@ else
 	
 	echo "Installation Complete.  Review output for issues. "
 	
-	if [ "" == `env | grep HADOOP_CONF_DIR` ]; then
-		echo "========================"
-		echo "  NOTE: You need to add the following setting to your environment before starting hadoop"
-		echo "export HADOOP_CONF_DIR=/etc/hadoop/conf"
-	fi
 	echo "File locations: "
 	echo "Binaries: $LIB_BASE_DIR/$HDP_VER with symlinks back to $LIB_BASE_DIR"
 	echo "Data Files: $HDFS_BASE_DIR - If these existed before, they were not touched"
