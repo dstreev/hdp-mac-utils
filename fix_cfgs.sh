@@ -28,7 +28,18 @@ CORE_SITE_FILE=$HADOOP_CONF_DIR/core_hadoop/core-site.xml
 HADOOP_ENV_FILE=$HADOOP_CONF_DIR/core_hadoop/hadoop-env.sh
 . $APP_DIR/replace.sh $CORE_SITE_FILE TODO-NAMENODE-HOSTNAME $HOSTNAME
 . $APP_DIR/replace.sh $CORE_SITE_FILE TODO-FS-CHECKPOINT-DIR $HDFS_BASE_DIR/snn
-. $APP_DIR/replace.sh $HADOOP_ENV_FILE JAVA_HOME=/usr/java/default JAVA_HOME=`/usr/libexec/java_home` "|"
+. $APP_DIR/replace.sh $HADOOP_ENV_FILE "JAVA_HOME=/usr/java/default" "JAVA_HOME=\`/usr/libexec/java_home\`" "|"
+
+. $APP_DIR/replace.sh $HADOOP_ENV_FILE "export HADOOP_SECURE_DN_USER=hdfs" "export HADOOP_SECURE_DN_USER=\$USER" "|"
+
+# Adjust PID Dirs
+. $APP_DIR/replace.sh $HADOOP_ENV_FILE "export HADOOP_PID_DIR=/var/run/hadoop/\$USER" "export HADOOP_PID_DIR=\$HOME/var/run/hadoop" "|"
+. $APP_DIR/replace.sh $HADOOP_ENV_FILE "export HADOOP_SECURE_DN_PID_DIR=/var/run/hadoop/\$HADOOP_SECURE_DN_USER" "export HADOOP_SECURE_DN_PID_DIR=\$HOME/var/run/hadoop" "|"
+
+# Adjust LOG Dirs
+. $APP_DIR/replace.sh $HADOOP_ENV_FILE "export HADOOP_LOG_DIR=/var/log/hadoop/\$USER" "export HADOOP_LOG_DIR=\$HOME/var/log/hadoop" "|"
+. $APP_DIR/replace.sh $HADOOP_ENV_FILE "export HADOOP_SECURE_DN_LOG_DIR=/var/log/hadoop/\$HADOOP_SECURE_DN_USER" "export HADOOP_SECURE_DN_LOG_DIR=\$HOME/var/log/hadoop" "|"
+
 # Remove codecs for mac installation, if not done, causes issues with 'hive cli'
 #   Manifest as an issue loading TextInputFormat when running a hive query.
 # TODO: Figure out how to add the appropriate codecs to the mac.
@@ -42,11 +53,13 @@ HDFS_SITE_FILE=$HADOOP_CONF_DIR/core_hadoop/hdfs-site.xml
 . $APP_DIR/replace.sh $HDFS_SITE_FILE TODO-DFS-NAME-DIR $HDFS_BASE_DIR/name
 . $APP_DIR/replace.sh $HDFS_SITE_FILE TODO-DFS-DATA-DIR $HDFS_BASE_DIR/data
 . $APP_DIR/replace.sh $HDFS_SITE_FILE TODO-NAMENODE-HOSTNAME $HOSTNAME
+. $APP_DIR/replace.sh $HDFS_SITE_FILE TODO-SECONDARYNAMENODE-HOSTNAME $HOSTNAME
 
 # MAPRED
 MAPRED_SITE_FILE=$HADOOP_CONF_DIR/core_hadoop/mapred-site.xml
 . $APP_DIR/replace.sh $MAPRED_SITE_FILE TODO-MAPRED-LOCAL-DIR $HDFS_BASE_DIR/mapred
 . $APP_DIR/replace.sh $MAPRED_SITE_FILE TODO-JTNODE-HOSTNAME $HOSTNAME
+. $APP_DIR/replace.sh $MAPRED_SITE_FILE "org.apache.hadoop.io.compress.SnappyCodec" "org.apache.hadoop.io.compress.GzipCodec"
 
 # Hive
 HIVE_SITE_FILE=$HADOOP_CONF_DIR/hive/hive-site.xml
@@ -57,7 +70,9 @@ HIVE_SITE_FILE=$HADOOP_CONF_DIR/hive/hive-site.xml
 . $APP_DIR/replace.sh $HIVE_SITE_FILE TODO-HIVE-METASTORE-SERVER-HOST $HOSTNAME
 # Removed for Mac, causes load issue with Hive CLI
 . $APP_DIR/replace.sh $HIVE_SITE_FILE "org.apache.hcatalog.security.HdfsAuthorizationProvider" ""
- 
+HIVE_ENV_FILE=$HADOOP_CONF_DIR/hive/hive-env.sh
+. $APP_DIR/replace.sh $HIVE_ENV_FILE "export JAVA_HOME=/usr/java/default" "export JAVA_HOME=\`/usr/libexec/java_home\`" "|"
+
 # Pig (TODO)
 # Need to adjust JAVA_HOME
 

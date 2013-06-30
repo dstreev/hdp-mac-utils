@@ -90,6 +90,26 @@ The 'do.sh' script will kickoff the installation process.
 > * Pig
 
 ### Todo's
+> Set the default replication to 1, hdfs-site.xml -> dfs.replication
+> Reduce max mappers and reducers, 4-2. 
+<pre><code> &lt;property&gt;
+    &lt;name&gt;mapred.tasktracker.map.tasks.maximum&lt;/name&gt;
+    &lt;value&gt;4&lt;/value&gt;
+    &lt;description&gt;No description&lt;/description&gt;
+  &lt;/property&gt;
+
+  &lt;property&gt;
+    &lt;name&gt;mapred.tasktracker.reduce.tasks.maximum&lt;/name&gt;
+    &lt;value&gt;2&lt;/value&gt;
+    &lt;description&gt;No description&lt;/description&gt;
+  &lt;/property&gt;
+</code></pre>
+> Set the hive replication to 1
+> Set to false: Compression not quite worked out on Mac:
+<pre><code>&lt;property&gt;
+    &lt;name&gt;mapred.compress.map.output&lt;/name&gt;
+    &lt;value&gt;false&lt;/value&gt;
+  &lt;/property&gt;</code></pre>
 > * Oozie
 > * HBase
 > * HCat

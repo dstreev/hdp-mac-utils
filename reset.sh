@@ -48,7 +48,7 @@ sudo rm -rf $LIB_BASE_DIR/$HDP_VER
 
 # Backup the Configs (move)
 DATE=`date +%y%m%d%H%M`
-sudo mv $HADOOP_CONF_DIR $BASE_DIR/local/$DATE
+sudo mv $HADOOP_CONF_DIR $HADOOP_CONF_DIR/../$DATE
 
 # Remove the symlinks
 sudo rm /etc/hadoop/conf

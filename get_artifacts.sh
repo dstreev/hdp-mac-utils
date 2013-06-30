@@ -39,9 +39,9 @@ else
 	done
 	# Get Helper Files
 	cd $1
-	if [ ! -f $COMPANION_FILE.tar.gz ]; then
-		wget "$TOOLS_BASE$COMPANION_FILE.tar.gz"
-	fi
+	#if [ ! -f $COMPANION_FILE.tar.gz ]; then
+	#	wget "$TOOLS_BASE$COMPANION_FILE.tar.gz"
+	#fi
 
 	# Get Mac Defaults
 	#if [ ! -f $DEFAULT_FILES.tar.gz ]; then

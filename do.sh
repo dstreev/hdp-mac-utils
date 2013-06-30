@@ -42,10 +42,10 @@ else
 
 	# Create Hadoop HDFS and Storage Directories
 	if [ ! -d $HDFS_BASE_DIR ]; then
-		sudo mkdir -p $HDFS_BASE_DIR
-		sudo chown `whoami` $HDFS_BASE_DIR
+		mkdir -p $HDFS_BASE_DIR
+		#sudo chown `whoami` $HDFS_BASE_DIR
 		mkdir $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
-		chmod 0750 $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
+		#chmod 0750 $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
 		echo ""
 		echo ""
 		echo "NOTE: HDFS storage locations initialized for the first time."
@@ -65,15 +65,15 @@ else
 
 	# Store pids
 	if [ ! -d /var/run/hadoop/$USER ]; then
-		sudo mkdir -p /var/run/hadoop/$USER
-		sudo chown $USER /var/run/hadoop/$USER
+		mkdir -p $HOME/var_hadoop/run
+		#sudo chown $USER /var/run/hadoop/$USER
 	fi
 	# Store Logs
 	if [ ! -d /var/log/hadoop/$USER ]; then
-		sudo mkdir -p /var/log/hadoop/$USER
-		sudo mkdir -p /var/log/hadoop/mapred
-		sudo chown $USER /var/log/hadoop/$USER
-		sudo chown $USER /var/log/hadoop/mapred
+		mkdir -p $HOME/var_hadoop/log
+		#sudo mkdir -p /var/log/hadoop/mapred
+		#sudo chown $USER /var/log/hadoop/$USER
+		#sudo chown $USER /var/log/hadoop/mapred
 	fi
 
 	# Expand and Link

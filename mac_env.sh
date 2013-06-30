@@ -27,12 +27,12 @@ DEFAULT_FILES="etc_default"
 LIB_BASE_DIR=/usr/lib
 DEFAULT_DIR=/etc/default
 
-BASE_DIR=/var/hadoop
-HDFS_BASE_DIR=$BASE_DIR/hdfs/localhost
+BASE_DIR=$HOME/var_hadoop
+HDFS_BASE_DIR=$BASE_DIR/hdfs
 
 MYSQL_ARCHIVE=mysql-connector-java-5.1.25
 
-HADOOP_CONF_DIR=$BASE_DIR/local/$HDP_VER
+HADOOP_CONF_DIR=/var/hadoop/local/$HDP_VER
 
 MYSQL_JDBC_JAR=/var/share/jdbc/
 

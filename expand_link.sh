@@ -21,6 +21,7 @@ APP_DIR=`dirname $0`
 CUR_DIR=`pwd`
 
 cd $APP_DIR
+APP_DIR=`pwd`
 . ./mac_env.sh
 
 if [ $# -ne 1 ]; then
@@ -82,9 +83,9 @@ else
 	J_FILE="/usr/share/jdbc/$MYSQL_ARCHIVE-bin.jar"
 	J_LINK="$MYSQL_ARCHIVE-bin.jar"
 		
-	echo "Set HIVE jdbc link: $J_FILE -> J_LINK"
+	echo "Set HIVE jdbc link: $J_FILE -> $J_LINK"
 	sudo ln -s $J_FILE $LIB_BASE_DIR/hive/lib/$J_LINK
-	echo "Set OOZIE jdbc link: $J_FILE -> J_LINK"
+	echo "Set OOZIE jdbc link: $J_FILE -> $J_LINK"
 	sudo ln -s $J_FILE $LIB_BASE_DIR/oozie/libtools/$J_LINK
 
 	# Expand the Defaults
@@ -106,30 +107,31 @@ else
 		echo "Configs are already present, they have NOT been overwritten"
 	else
 		cd $SOURCE_DIR
-		if [ ! -f $COMPANION_FILE ]; then
-			echo "Expanding companion files"
-			tar xzf $COMPANION_FILE.tar.gz
-		fi	
-			
-		cd $COMPANION_FILE/configuration_files
+		#if [ ! -f $COMPANION_FILE ]; then
+		#	echo "Expanding companion files"
+		#	tar xzf $COMPANION_FILE.tar.gz
+		#fi	
+		
+		cd $APP_DIR/configs	
+		#cd $COMPANION_FILE/configuration_files
 		cp -R * $HADOOP_CONF_DIR
 		
-		echo $HOSTNAME > $HADOOP_CONF_DIR/core_hadoop/masters
-		echo $HOSTNAME > $HADOOP_CONF_DIR/core_hadoop/slaves
+		#echo $HOSTNAME > $HADOOP_CONF_DIR/core_hadoop/masters
+		#echo $HOSTNAME > $HADOOP_CONF_DIR/core_hadoop/slaves
 
-		echo "NOTICE: You MUST now edit all the appropriate configs in the $HADOOP_CONF_DIR directory for your environment."
-		echo "	You need to change settings in:"
-		echo "		core_hadoop, hive, oozie, pig, sqoop, webhcat, zookeeper"
-		echo ""
-		echo "  Review the configs in these directories and configure for -localhost-"
+		#echo "NOTICE: You MUST now edit all the appropriate configs in the $HADOOP_CONF_DIR directory for your environment."
+		#echo "	You need to change settings in:"
+		#echo "		core_hadoop, hive, oozie, pig, sqoop, webhcat, zookeeper"
+		#echo ""
+		#echo "  Review the configs in these directories and configure for -localhost-"
 		
-		echo ""
+		#echo ""
 		echo ""
 		echo "Setting up config links"
 		
 		# Adjust the configs that were just copied for this environment.
-		cd $CUR_DIR
-		. $APP_DIR/fix_cfgs.sh
+		#cd $CUR_DIR
+		#. $APP_DIR/fix_cfgs.sh
 		
 		# Install helper and wrapper scripts
 		sudo cp $APP_DIR/usr/bin/* /usr/bin
