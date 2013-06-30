@@ -80,7 +80,7 @@
   <property>
     <!-- cluster specific -->
     <name>mapred.local.dir</name>
-    <value>${user.home}/var_hadoop/hdfs/mapred</value>
+    <value>${user.home}/data/hadoop/hdfs/mapred</value>
     <description>No description</description>
     <final>true</final>
   </property>

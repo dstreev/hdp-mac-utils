@@ -65,12 +65,12 @@ else
 
 	# Store pids
 	if [ ! -d /var/run/hadoop/$USER ]; then
-		mkdir -p $HOME/var_hadoop/run
+		mkdir -p $HOME/var/run/hadoop
 		#sudo chown $USER /var/run/hadoop/$USER
 	fi
 	# Store Logs
 	if [ ! -d /var/log/hadoop/$USER ]; then
-		mkdir -p $HOME/var_hadoop/log
+		mkdir -p $HOME/var/log/hadoop
 		#sudo mkdir -p /var/log/hadoop/mapred
 		#sudo chown $USER /var/log/hadoop/$USER
 		#sudo chown $USER /var/log/hadoop/mapred

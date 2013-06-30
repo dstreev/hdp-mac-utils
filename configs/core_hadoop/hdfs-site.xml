@@ -10,7 +10,7 @@
   <property>
     <name>dfs.name.dir</name>
     <!-- cluster variant -->
-    <value>${user.home}/var_hadoop/hdfs/name</value>
+    <value>${user.home}/data/hadoop/hdfs/name</value>
     <description>
         Determines where on the local filesystem the DFS name node
         should store the name table.  If this is a comma-delimited list
@@ -50,7 +50,7 @@
 
   <property>
     <name>dfs.data.dir</name>
-    <value>${user.home}/var_hadoop/hdfs/data</value>
+    <value>${user.home}/data/hadoop/hdfs/data</value>
     <description>
         Determines where on the local filesystem an DFS data node
         should store its blocks.  If this is a comma-delimited

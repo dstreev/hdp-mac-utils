@@ -66,7 +66,7 @@
 
   <property>
     <name>fs.checkpoint.dir</name>
-    <value>${user.home}/var_hadoop/hdfs/snn</value>
+    <value>${user.home}/data/hadoop/hdfs/snn</value>
     <description>
         Determines where on the local filesystem the DFS secondary
         name node should store the temporary images to merge.

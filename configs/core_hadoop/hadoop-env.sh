@@ -41,10 +41,10 @@ export HADOOP_SECURE_DN_USER=$USER
 export HADOOP_SSH_OPTS="-o ConnectTimeout=5 -o SendEnv=HADOOP_CONF_DIR"
 
 # Where log files are stored.  $HADOOP_HOME/logs by default.
-export HADOOP_LOG_DIR=$HOME/var_hadoop/log
+export HADOOP_LOG_DIR=$HOME/var/log/hadoop
 
 # Where log files are stored in the secure data environment.
-export HADOOP_SECURE_DN_LOG_DIR=$HOME/var_hadoop/log
+export HADOOP_SECURE_DN_LOG_DIR=$HOME/var/log/hadoop
 
 # File naming remote slave hosts.  $HADOOP_HOME/conf/slaves by default.
 # export HADOOP_SLAVES=${HADOOP_HOME}/conf/slaves
@@ -58,8 +58,8 @@ export HADOOP_SECURE_DN_LOG_DIR=$HOME/var_hadoop/log
 # export HADOOP_SLAVE_SLEEP=0.1
 
 # The directory where pid files are stored. /tmp by default.
-export HADOOP_PID_DIR=$HOME/var_hadoop/run
-export HADOOP_SECURE_DN_PID_DIR=$HOME/var_hadoop/run
+export HADOOP_PID_DIR=$HOME/var/run/hadoop
+export HADOOP_SECURE_DN_PID_DIR=$HOME/var/run/hadoop
 
 # A string representing this instance of hadoop. $USER by default.
 export HADOOP_IDENT_STRING=$USER
