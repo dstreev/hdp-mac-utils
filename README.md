@@ -43,7 +43,6 @@ The 'do.sh' script will kickoff the installation process.
 > If your upgrade to a new HDP version, you may need to update the namenode before starting HDFS.
 
 ### Hive
-> You may receive <code>Authorization failed:No privilege 'Select' found for inputs ...</code> errors when running a hive query.  To fix this, adjust the <code>hive.security.authorization.enabled</code> property in <code>/etc/hive/conf/hive-site.xml</code> to <code>false</code>.
   
 ### Oozie
 > TODO: Get the extjs-2.2 jar and add it to the libs for oozie web.
@@ -90,26 +89,6 @@ The 'do.sh' script will kickoff the installation process.
 > * Pig
 
 ### Todo's
-> Set the default replication to 1, hdfs-site.xml -> dfs.replication
-> Reduce max mappers and reducers, 4-2. 
-<pre><code> &lt;property&gt;
-    &lt;name&gt;mapred.tasktracker.map.tasks.maximum&lt;/name&gt;
-    &lt;value&gt;4&lt;/value&gt;
-    &lt;description&gt;No description&lt;/description&gt;
-  &lt;/property&gt;
-
-  &lt;property&gt;
-    &lt;name&gt;mapred.tasktracker.reduce.tasks.maximum&lt;/name&gt;
-    &lt;value&gt;2&lt;/value&gt;
-    &lt;description&gt;No description&lt;/description&gt;
-  &lt;/property&gt;
-</code></pre>
-> Set the hive replication to 1
-> Set to false: Compression not quite worked out on Mac:
-<pre><code>&lt;property&gt;
-    &lt;name&gt;mapred.compress.map.output&lt;/name&gt;
-    &lt;value&gt;false&lt;/value&gt;
-  &lt;/property&gt;</code></pre>
 > * Oozie
 > * HBase
 > * HCat
@@ -130,13 +109,6 @@ The 'do.sh' script will kickoff the installation process.
 
 ### expand_link.sh
 > Subscript used to expand and link the artifacts retrieved.
-
-### fix_cfgs.sh
-> Many of the configs in the templates we're using need to be adjusted for your "localhost"
-
-### etc_default.tar.gz
-> Contains the defaults (pulled from CentOS install) used by the hadoop scripts
-> to properly run the environment.
 
 ### hdp_artifacts.txt
 > A list of HDP artifacts and links to use for each.

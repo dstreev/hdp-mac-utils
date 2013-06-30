@@ -45,7 +45,7 @@ else
 		mkdir -p $HDFS_BASE_DIR
 		#sudo chown `whoami` $HDFS_BASE_DIR
 		mkdir $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
-		#chmod 0750 $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
+		chmod 0750 $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
 		echo ""
 		echo ""
 		echo "NOTE: HDFS storage locations initialized for the first time."
