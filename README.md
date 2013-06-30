@@ -35,7 +35,8 @@ The 'do.sh' script will kickoff the installation process.
 
 ### Environment Variables
 > Set the following environment variables:
-<pre><code>export HIVE_LOG_DIR=/var/log/hive</code></pre>
+<pre><code>export HADOOP_HOME=/usr/lib/Hadoop
+export HIVE_LOG_DIR=/var/log/hive</code></pre>
 
 ### Namenode
 > If this is the first-time you've installed HDP, you will need to initialize the Hadoop filesystem with:
