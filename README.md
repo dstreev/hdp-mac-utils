@@ -80,6 +80,11 @@ export HIVE_LOG_DIR=/var/log/hive</code></pre>
 		<pre><code>show databases;
 		create table test2(a int, b string);
 		show tables;</code></pre>
+### HBase
+<pre><code>cd /usr/lib/hbase/bin
+./start-hbase.sh</code></pre>
+#### Smoke Test via HBase Shell
+<pre><code>hbase shell</code></pre>
 
 ## Status of Components install here
 
@@ -88,13 +93,13 @@ export HIVE_LOG_DIR=/var/log/hive</code></pre>
 > * MAPRED
 > * Hive
 > * Pig
+> * HBase
+> * Flume
+> * Sqoop
 
 ### Todo's
 > * Oozie
-> * HBase
 > * HCat
-> * Flume
-> * Sqoop
 
 ## Scripts
 
