@@ -44,7 +44,7 @@
   </property>
   <property>
     <name>hbase.tmp.dir</name>
-    <value>${user.home}/var_hadoop/hdfs/hbase</value>
+    <value>${user.home}/data/hbase</value>
     <description>Temporary directory on the local filesystem.
     Change this setting to point to a location more permanent
     than '/tmp' (The '/tmp' directory is often cleared on

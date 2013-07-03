@@ -56,7 +56,7 @@ export HBASE_REGIONSERVERS=${HBASE_CONF_DIR}/regionservers
 # export HBASE_SSH_OPTS="-o ConnectTimeout=1 -o SendEnv=HBASE_CONF_DIR"
 
 # Where log files are stored. $HBASE_HOME/logs by default.
-export HBASE_LOG_DIR=$HOME/var_hadoop/log
+export HBASE_LOG_DIR=$HOME/var/log/hbase
 
 # A string representing this instance of hbase. $USER by default.
 # export HBASE_IDENT_STRING=$USER
@@ -65,7 +65,7 @@ export HBASE_LOG_DIR=$HOME/var_hadoop/log
 # export HBASE_NICENESS=10
 
 # The directory where pid files are stored. /tmp by default.
-export HBASE_PID_DIR=$HOME/var_hadoop/run
+export HBASE_PID_DIR=$HOME/var/run/hbase
 
 # Seconds to sleep between slave commands. Unset by default. This
 # can be useful in large clusters, where, e.g., slave rsyncs can
@@ -73,7 +73,7 @@ export HBASE_PID_DIR=$HOME/var_hadoop/run
 # export HBASE_SLAVE_SLEEP=0.1
 
 # Tell HBase whether it should manage it's own instance of Zookeeper or not.
-export HBASE_MANAGES_ZK=false
+export HBASE_MANAGES_ZK=true
 
 # Newer versions of glibc use an arena memory allocator that causes virtual
 # memory usage to explode. This interacts badly with the many threads that
