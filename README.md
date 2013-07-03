@@ -60,9 +60,10 @@ export HIVE_LOG_DIR=/var/log/hive</code></pre>
 ### HDFS and MAPRED:
 <pre><code>cd /usr/lib/hadoop/bin
 ./start-all.sh</code></pre>
+
 ### Hive and Hiveserver2
 1. Start Hive Metastore service.
-	<pre><code>nohup hive --service metastore>$HIVE_LOG_DIR/hive.out 2>$HIVE_LOG_DIR/hive.log & </code></pre>
+>	<pre><code>nohup hive --service metastore&gt;$HIVE_LOG_DIR/hive.out 2&gt;$HIVE_LOG_DIR/hive.log & </code></pre>
 2. Smoke Test Hive.
 	1. Open Hive command line shell. <pre><code>hive</code></pre>
 	2. Run sample commands.
@@ -80,9 +81,11 @@ export HIVE_LOG_DIR=/var/log/hive</code></pre>
 		<pre><code>show databases;
 		create table test2(a int, b string);
 		show tables;</code></pre>
+		
 ### HBase
 <pre><code>cd /usr/lib/hbase/bin
 ./start-hbase.sh</code></pre>
+
 #### Smoke Test via HBase Shell
 <pre><code>hbase shell</code></pre>
 
