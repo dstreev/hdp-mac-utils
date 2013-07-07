@@ -8,28 +8,25 @@ if [ "$HADOOP_GROUP" == "" ]; then
 fi
 
 # Check for users hdfs and mapred
-HDFS_USER=`id hdfs | grep 'no such user'`
-if [ "$HDFS_USER" != "" ]; then
+if [ "`id hdfs 2>&1`" =~ "no such user" ]; then
 	echo "Missing hdfs user, adding"
 	useradd -G hadoop -M hdfs
 else
 	# Check group membership
-	HADOOP_GROUP=`id hdfs | grep 'hadoop'`
-	if [ "$HADOOP_GROUP" == "" ]; then
+	if [ "`id hdfs`" =~ "hadoop" ]; then
 		echo "Adding group membership 'hadoop'"
 		usermod -G hadoop hdfs
 	fi
 fi
 
 # Check for users hdfs and mapred
-MAPRED_USER=`id mapred | grep 'no such user'`
-if [ "$MAPRED_USER" != "" ]; then
+if [ "`id mapred 2>&1`" =~ "no such user" ]; then
 	echo "Missing mapred user, adding"
 	useradd -G hadoop -M mapred
 else
 	# Check group membership
 	HADOOP_GROUP=`id mapred | grep 'hadoop'`
-	if [ "$HADOOP_GROUP" == "" ]; then
+	if [ "`id mapred`" =~ "hadoop" ]; then
 		echo "Adding group membership 'hadoop'"
 		usermod -G hadoop mapred
 	fi
