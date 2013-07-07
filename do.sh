@@ -21,13 +21,18 @@
 #	hbase
 #	flume
 # 	zookeeper
+ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,flume,sqoop"
 
-if [ $# -ne 1 ]; then
-	echo "Usage: ./go.sh TEMP_DIR"
+if [ $# -lt 1 ]; then
+	echo "Usage: ./go.sh TEMP_DIR [elements]"
+	echo"    elements: one or more of hadoop,hbase,pig,hive,sqoop,flume,oozie"
 else
 	USER=`whoami`
 	SOURCE_DIR=$1
 	
+	ELEMENTS="${2:-$ALL_ELEMENTS}"
+	echo "Elements: $ELEMENTS"
+
 	APP_DIR=`dirname $0`
 	. $APP_DIR/mac_env.sh
 
@@ -36,7 +41,7 @@ else
 	fi
 	
 	# Get Artifacts
-	. $APP_DIR/get_artifacts.sh
+	. $APP_DIR/get_artifacts.sh $@
 
 	# Deploy Defaults, Template and Link
 
@@ -77,14 +82,17 @@ else
 	fi
 
 	# Expand and Link
-	. $APP_DIR/expand_link.sh $1
+	. $APP_DIR/expand_link.sh $@
 
 	# Setup MySql for Hive and HCatalog
 	# Use a brew installation
-	if [ -f /usr/local/bin/brew ]; then
-		. $APP_DIR/mysql_cfg.sh	
-	else
-		echo "Brew is installed, you''ll need to install an manage MySql on your own."
+	
+	if [[ "$ELEMENTS" =~ oozie|hive ]]; then
+		if [ -f /usr/local/bin/brew ]; then
+			. $APP_DIR/mysql_cfg.sh	
+		else
+			echo "Brew is installed, you''ll need to install an manage MySql on your own."
+		fi
 	fi
 	
 	echo "Installation Complete.  Review output for issues. "

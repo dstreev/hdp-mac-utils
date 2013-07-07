@@ -21,20 +21,34 @@
 # Set parameters
 APP_DIR=`dirname $0`
 CUR_DIR=`pwd`
+ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,flume,sqoop"
 
 cd $APP_DIR
 . ./mac_env.sh
 
-if [ $# -ne 1 ] ; then
+echo "===> Get Artifacts"
+
+if [ $# -lt 1 ] ; then
 	echo "Please supply the directory where the tarball artifacts were downloaded."
 else	
-	for i in `cat $APP_DIR/hdp_artifacts.txt | awk '{print $1}'`; do
+	ELEMENTS="${2:-$ALL_ELEMENTS}"
+
+# 	for i in `cat $APP_DIR/hdp_artifacts.txt | awk '{print $1}'`; do
+	cat $APP_DIR/hdp_artifacts.txt | while read next; do
+		T_FILE=`echo $next | awk '{print $1}'`
+		T_LINK=`echo $next | awk '{print $2}'`
+		
 		cd $1
-		T_FILE=$i.tar.gz
-		if [ ! -f $T_FILE ]; then
-			wget "$HTTP_BASE$T_FILE"
+		if [[ "$ELEMENTS" =~ $T_LINK ]]; then
+			echo "Getting $T_LINK"
+			T_FILE=$T_FILE.tar.gz
+			if [ ! -f $T_FILE ]; then
+				wget "$HTTP_BASE$T_FILE"
+			else
+				echo "File exists, skipping: $T_FILE"
+			fi
 		else
-			echo "File exists, skipping: $T_FILE"
+			echo "Skipping $T_LINK, not a requested element"
 		fi
 	done
 	# Get Helper Files

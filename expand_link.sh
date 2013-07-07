@@ -19,14 +19,18 @@
 # Set parameters
 APP_DIR=`dirname $0`
 CUR_DIR=`pwd`
+ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,flume,sqoop"
 
 cd $APP_DIR
 APP_DIR=`pwd`
 . ./mac_env.sh
 
-if [ $# -ne 1 ]; then
-	echo "Usage: expand_link.sh $STAGE_DIR"
+echo "===> Expand and Link"
+
+if [ $# -lt 1 ]; then
+	echo "Usage: expand_link.sh $STAGE_DIR [elements]"
 else
+	ELEMENTS="${2:-$ALL_ELEMENTS}"
 	SOURCE_DIR=$1
 	cat $APP_DIR/hdp_artifacts.txt | while read next; do
 		T_FILE=`echo $next | awk '{print $1}'`
@@ -36,58 +40,64 @@ else
 		if [ ! -d $HDP_VER ]; then
 			sudo mkdir $HDP_VER	
 		fi
-		
-		echo "Reseting: $T_LINK libraries and links"
-		sudo rm -rf $HDP_VER/$T_FILE $T_LINK
-		cd $HDP_VER
-		sudo tar xzf $SOURCE_DIR/$T_FILE.tar.gz
-		cd $LIB_BASE_DIR
-		
-		# The Oozie distribution is inconsistent when extracted
-		T_FILE_FIXED=`echo $T_FILE | sed s/-distro//`
-		
-		# Get the version information
-		APP_VER=`echo $T_FILE_FIXED | sed s/$T_LINK\-//`
-		echo "App: $T_LINK"
-		echo "	Fixed File: $T_FILE_FIXED"
-		echo "	Version: $APP_VER"
-		
-		sudo ln -s $HDP_VER/$T_FILE_FIXED $T_LINK
 
-		# Reset the local conf's to link to /etc/$app/conf
-		# Because of the lack of consistency of the startup scripts across products
-		cd $T_LINK
-		sudo rm -rf conf
-		sudo ln -s /etc/$T_LINK/conf conf
-
-		# Special hcatalog symlinks required
-		if [ "hcatalog" == "$T_LINK" ]; then
-			cd share/hcatalog
-			for j in hcatalog-core hcatalog-pig-adapter hcatalog-server-extensions; do
-				sudo ln -s $j-$APP_VER.jar $j.jar 						
-			done
-		fi
-
-		cd $LIB_BASE_DIR
+		if [[ "$ELEMENTS" =~ $T_LINK ]]; then
 		
+			echo "Reseting: $T_LINK libraries and links"
+			sudo rm -rf $HDP_VER/$T_FILE $T_LINK
+			cd $HDP_VER
+			sudo tar xzf $SOURCE_DIR/$T_FILE.tar.gz
+			cd $LIB_BASE_DIR
+		
+			# The Oozie distribution is inconsistent when extracted
+			T_FILE_FIXED=`echo $T_FILE | sed s/-distro//`
+		
+			# Get the version information
+			APP_VER=`echo $T_FILE_FIXED | sed s/$T_LINK\-//`
+			echo "App: $T_LINK"
+			echo "	Fixed File: $T_FILE_FIXED"
+			echo "	Version: $APP_VER"
+		
+			sudo ln -s $HDP_VER/$T_FILE_FIXED $T_LINK
+
+			# Reset the local conf's to link to /etc/$app/conf
+			# Because of the lack of consistency of the startup scripts across products
+			cd $T_LINK
+			sudo rm -rf conf
+			sudo ln -s /etc/$T_LINK/conf conf
+
+			# Special hcatalog symlinks required
+			if [ "hcatalog" == "$T_LINK" ]; then
+				cd share/hcatalog
+				for j in hcatalog-core hcatalog-pig-adapter hcatalog-server-extensions; do
+					sudo ln -s $j-$APP_VER.jar $j.jar 						
+				done
+			fi
+
+			cd $LIB_BASE_DIR
+		else
+			echo "Skipping $T_LINK, not a requested element"
+		fi		
 	done
 	
 	# Link JDBC drivers
-	cd $SOURCE_DIR
-	sudo tar xzf $MYSQL_ARCHIVE.tar.gz
-	sudo mkdir -p /usr/share/jdbc
-	sudo cp $MYSQL_ARCHIVE/$MYSQL_ARCHIVE-bin.jar /usr/share/jdbc
-	sudo chmod -R 0555 /usr/share/jdbc
-	cd $CUR_DIR
+	if [[ "$ELEMENTS" =~ oozie|hive ]]; then
+		cd $SOURCE_DIR
+		sudo tar xzf $MYSQL_ARCHIVE.tar.gz
+		sudo mkdir -p /usr/share/jdbc
+		sudo cp $MYSQL_ARCHIVE/$MYSQL_ARCHIVE-bin.jar /usr/share/jdbc
+		sudo chmod -R 0555 /usr/share/jdbc
+		cd $CUR_DIR
 	
-	J_FILE="/usr/share/jdbc/$MYSQL_ARCHIVE-bin.jar"
-	J_LINK="$MYSQL_ARCHIVE-bin.jar"
+		J_FILE="/usr/share/jdbc/$MYSQL_ARCHIVE-bin.jar"
+		J_LINK="$MYSQL_ARCHIVE-bin.jar"
 		
-	echo "Set HIVE jdbc link: $J_FILE -> $J_LINK"
-	sudo ln -s $J_FILE $LIB_BASE_DIR/hive/lib/$J_LINK
-	echo "Set OOZIE jdbc link: $J_FILE -> $J_LINK"
-	sudo ln -s $J_FILE $LIB_BASE_DIR/oozie/libtools/$J_LINK
-
+		echo "Set HIVE jdbc link: $J_FILE -> $J_LINK"
+		sudo ln -s $J_FILE $LIB_BASE_DIR/hive/lib/$J_LINK
+		echo "Set OOZIE jdbc link: $J_FILE -> $J_LINK"
+		sudo ln -s $J_FILE $LIB_BASE_DIR/oozie/libtools/$J_LINK
+	fi
+	
 	# Expand the Defaults
 	if [ ! -d $DEFAULT_DIR ]; then
 		echo "Creating: $DEFAULT_DIR"
