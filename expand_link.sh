@@ -30,6 +30,12 @@ echo "===> Expand and Link"
 if [ $# -lt 1 ]; then
 	echo "Usage: expand_link.sh $STAGE_DIR [elements]"
 else
+
+	cd $LIB_BASE_DIR
+	if [ ! -d $HDP_VER ]; then
+		sudo mkdir $HDP_VER	
+	fi
+
 	ELEMENTS="${2:-$ALL_ELEMENTS}"
 	SOURCE_DIR=$1
 	cat $APP_DIR/hdp_artifacts.txt | while read next; do
@@ -37,10 +43,7 @@ else
 		T_LINK=`echo $next | awk '{print $2}'`
 		
 		cd $LIB_BASE_DIR
-		if [ ! -d $HDP_VER ]; then
-			sudo mkdir $HDP_VER	
-		fi
-
+		
 		if [[ "$ELEMENTS" =~ $T_LINK ]]; then
 		
 			echo "Reseting: $T_LINK libraries and links"
