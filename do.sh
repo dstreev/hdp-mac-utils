@@ -27,6 +27,7 @@ if [ $# -lt 1 ]; then
 	echo "Usage: ./go.sh TEMP_DIR [elements]"
 	echo"    elements: one or more of hadoop,hbase,pig,hive,sqoop,flume,oozie"
 else
+
 	USER=`whoami`
 	SOURCE_DIR=$1
 	
