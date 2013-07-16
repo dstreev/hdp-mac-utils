@@ -47,7 +47,7 @@
 
   <property>
     <name>mapred.job.tracker.handler.count</name>
-    <value>50</value>
+    <value>1</value>
     <description>
         The number of server threads for the JobTracker. This should be roughly
         4% of the number of tasktracker nodes.
@@ -92,13 +92,13 @@
 
   <property>
     <name>mapred.reduce.parallel.copies</name>
-    <value>30</value>
+    <value>3</value>
     <description>No description</description>
   </property>
 
   <property>
     <name>mapred.tasktracker.map.tasks.maximum</name>
-    <value>4</value>
+    <value>2</value>
     <description>No description</description>
   </property>
 
@@ -347,7 +347,7 @@
 
   <property>
     <name>mapred.job.tracker.persist.jobstatus.dir</name>
-    <value>file:////var/log/hadoop/mapred/jobstatus</value>
+    <value>/mapred/jobstatus</value>
     <description>
         The directory where the job status information is persisted in a 
         file system to be available after it drops of the memory queue and
