@@ -1,3 +1,5 @@
+# NOTE: This repo is branched by HDP distribution.  The master branch represents (mostly) the latest version of HDP.
+
 # HDP 1.3.0 Mac Utils
 A collection of scripts with instructions for installing HDP 1.3.0 (from tarballs) on a Mac.
 
