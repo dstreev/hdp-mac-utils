@@ -60,8 +60,9 @@ export HIVE_LOG_DIR=/var/log/hive</code></pre>
 
 ## Starting Hadoop, etc.. Long-version
 ### HDFS and MAPRED:
-<pre><code>cd /usr/lib/hadoop/bin
-./start-all.sh</code></pre>
+<pre><code>cd /usr/lib/hadoop/sbin
+./start-dfs.sh
+./start-yarn.sh</code></pre>
 
 ### Hive and Hiveserver2
 1. Start Hive Metastore service.
@@ -95,14 +96,15 @@ export HIVE_LOG_DIR=/var/log/hive</code></pre>
 
 ### Working
 > * HDFS
+> * YARN
 > * MAPRED
+
+### Todo's
 > * Hive
 > * Pig
 > * HBase
 > * Flume
 > * Sqoop
-
-### Todo's
 > * Oozie
 > * HCat
 
