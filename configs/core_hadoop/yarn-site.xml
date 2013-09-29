@@ -55,7 +55,7 @@
   </property>
     <property>
     <name>yarn.nodemanager.log-dirs</name>
-    <value>TODO-YARN-LOCAL-LOG-DIR</value>
+    <value>${user.home}/var/log/hadoop2/${user.name}</value>
   </property>
     <property>
     <name>yarn.nodemanager.log.retain-second</name>
@@ -103,7 +103,7 @@
   </property>
     <property>
     <name>yarn.resourcemanager.webapp.address</name>
-    <value>TODO-RMNODE-HOSTNAME:8088</value>
+    <value>localhost:8088</value>
   </property>
     <property>
     <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
@@ -111,7 +111,7 @@
   </property>
     <property>
     <name>yarn.resourcemanager.address</name>
-    <value>TODO-RMNODE-HOSTNAME:8050</value>
+    <value>localhost:8050</value>
   </property>
     <property>
     <name>yarn.nodemanager.admin-env</name>
@@ -127,6 +127,6 @@
   </property>
     <property>
     <name>yarn.resourcemanager.scheduler.address</name>
-    <value>TODO-RMNODE-HOSTNAME:8030</value>
+    <value>localhost:8030</value>
   </property>
   </configuration>
