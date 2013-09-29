@@ -1,4 +1,4 @@
-export JAVA_HOME=/usr/java/default
+export JAVA_HOME=`/usr/libexec/java_home`
 export ZOO_LOG_DIR=/var/log/zookeeper
 export ZOOPIDFILE=/var/run/zookeeper/zookeeper_server.pid
 export SERVER_JVMFLAGS= 

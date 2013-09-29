@@ -36,9 +36,7 @@
 
 # The heap size of the jvm stared by hive shell script can be controlled via:
 HBASE_CONF_DIR=${HBASE_CONF_DIR:-/etc/hbase/conf}
-export HADOOP_HEAPSIZE=1024
-# set hadoop HADOOP_CLIENT_OPTS so that hadoop does not override it
-export HADOOP_CLIENT_OPTS="-Xmx${HADOOP_HEAPSIZE}m $HADOOP_CLIENT_OPTS"
+export HADOOP_HEAPSIZE=${HADOOP_HEAPSIZE:-1024}
 
 # Larger heap size may be required when running queries over large number of files or partitions.
 # By default hive shell scripts use a heap size of 256 (MB).  Larger heap size would also be
@@ -46,10 +44,10 @@ export HADOOP_CLIENT_OPTS="-Xmx${HADOOP_HEAPSIZE}m $HADOOP_CLIENT_OPTS"
 
 
 # Set HADOOP_HOME to point to a specific hadoop install directory
-HADOOP_HOME=${HADOOP_HOME:-/etc/hadoop/conf}
+HADOOP_HOME=${HADOOP_HOME:-/usr}
 
 # Hive Configuration Directory can be controlled by:
 export HIVE_CONF_DIR=/etc/hive/conf
-export JAVA_HOME=`/usr/libexec/java_home`
+export JAVA_HOME=/usr/java/default
 # Folder containing extra ibraries required for hive compilation/execution can be controlled by:
-export HIVE_AUX_JARS_PATH=/usr/lib/hcatalog/share/hcatalog/hcatalog-core.jar
+export HIVE_AUX_JARS_PATH=${HIVE_AUX_JARS_PATH:-/usr/lib/hcatalog/share/hcatalog/hcatalog-core.jar}

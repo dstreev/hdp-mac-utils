@@ -20,6 +20,7 @@
 # Set Hadoop-specific environment variables here.
 
 #Set path to where bin/hadoop is available
+#Set path to where bin/hadoop is available
 export HADOOP_HOME=${HADOOP_HOME:-/usr/lib/hadoop}
 
 #set the path to where bin/hbase is available

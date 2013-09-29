@@ -83,6 +83,8 @@ else
 		fi		
 	done
 	
+	sudo chown -R root:wheel $LIB_BASE_DIR
+	
 	# Link JDBC drivers
 	if [[ "$ELEMENTS" =~ oozie|hive ]]; then
 		cd $SOURCE_DIR

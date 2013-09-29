@@ -13,6 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export HBASE_PID_DIR="$HOME/var/run/hbase"
-export HBASE_LOG_DIR="$HOME/var/log/hbase"
-export HBASE_IDENT_STRING=hbase
+# included in all the hadoop scripts with source command
+# should not be executable directly
+# also should not be passed any arguments, since we need original $*
+
+# Set Hadoop-specific environment variables here.
+
+#Set path to where bin/hadoop is available
+#export HADOOP_COMMON_HOME=
+
+#Set path to where hadoop-*-core.jar is available
+#export HADOOP_MAPRED_HOME=
+
+#set the path to where bin/hbase is available
+#export HBASE_HOME=
+
+#Set the path to where bin/hive is available
+#export HIVE_HOME=
+
+#Set the path for where zookeper config dir is
+#export ZOOCFGDIR=

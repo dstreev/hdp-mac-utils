@@ -37,10 +37,10 @@ export OOZIE_LOG=/var/log/oozie
 
 # Oozie pid directory
 #
-export CATALINA_PID=/var/run/oozie
+export CATALINA_PID=/var/run/oozie/oozie.pid
 
 #Location of the data for oozie
-export OOZIE_DATA=/var/db/oozie
+export OOZIE_DATA=/hadoop/oozie/data/
 
 # Oozie Log4J configuration file to load from Oozie configuration directory
 #
@@ -61,6 +61,4 @@ export OOZIE_DATA=/var/db/oozie
 # The base URL for callback URLs to Oozie
 #
 # export OOZIE_BASE_URL="http://${OOZIE_HTTP_HOSTNAME}:${OOZIE_HTTP_PORT}/oozie"
-
-# set the libarary path to hadoop 64 bit native code dir
-export JAVA_LIBRARY_PATH="/usr/lib/hadoop/lib/native/Linux-amd64-64"
+export JAVA_LIBRARY_PATH=/usr/lib/hadoop/lib/native/Linux-amd64-64

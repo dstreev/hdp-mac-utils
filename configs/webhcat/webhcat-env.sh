@@ -32,7 +32,7 @@ ERROR_LOG=/var/log/webhcat/webhcat-console-error.log
 CONSOLE_LOG=/var/log/webhcat/webhcat-console.log
 
 # Set HADOOP_HOME to point to a specific hadoop install directory
-export HADOOP_HOME=${HADOOP_HOME:-/usr/lib/hadoop}
+export HADOOP_HOME=${HADOOP_HOME:-/usr}
 
 # set hadoop HADOOP_CLIENT_OPTS so that hadoop does not override it
 export HADOOP_CLIENT_OPTS="-Xmx256m $HADOOP_CLIENT_OPTS"

@@ -51,16 +51,8 @@ else
 			echo "Skipping $T_LINK, not a requested element"
 		fi
 	done
-	# Get Helper Files
-	cd $1
-	#if [ ! -f $COMPANION_FILE.tar.gz ]; then
-	#	wget "$TOOLS_BASE$COMPANION_FILE.tar.gz"
-	#fi
 
-	# Get Mac Defaults
-	#if [ ! -f $DEFAULT_FILES.tar.gz ]; then
-	#	wget "$DEFAULT_FILES_BASE$DEFAULT_FILES.tar.gz"
-	#fi
+	cd $1
 
 	# Get the MySQL Jar for Oozie and Hive.
 	if [ ! -f $MYSQL_ARCHIVE.tar.gz ]; then

@@ -14,4 +14,4 @@
 # limitations under the License.
 
 JAVA_HOME=`/usr/libexec/java_home`
-HADOOP_HOME=${HADOOP_HOME:-/etc/hadoop/conf}
+HADOOP_HOME=${HADOOP_HOME:-/usr}

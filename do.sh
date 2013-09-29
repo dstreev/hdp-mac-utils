@@ -21,7 +21,7 @@
 #	hbase
 #	flume
 # 	zookeeper
-ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,flume,sqoop"
+ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,zookeeper,flume,sqoop"
 
 if [ $# -lt 1 ]; then
 	echo "Usage: ./go.sh TEMP_DIR [elements]"
@@ -50,8 +50,8 @@ else
 	if [ ! -d $HDFS_BASE_DIR ]; then
 		mkdir -p $HDFS_BASE_DIR
 		#sudo chown `whoami` $HDFS_BASE_DIR
-		mkdir $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
-		chmod 0750 $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/snn $HDFS_BASE_DIR/mapred
+		mkdir $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/checkpoint $HDFS_BASE_DIR/mapred
+		chmod 0750 $HDFS_BASE_DIR/name $HDFS_BASE_DIR/data $HDFS_BASE_DIR/checkpoint $HDFS_BASE_DIR/mapred
 		echo ""
 		echo ""
 		echo "NOTE: HDFS storage locations initialized for the first time."
@@ -71,12 +71,12 @@ else
 
 	# Store pids
 	if [ ! -d /var/run/hadoop/$USER ]; then
-		mkdir -p $HOME/var/run/hadoop
+		mkdir -p $HOME/var/run/hadoop2
 		#sudo chown $USER /var/run/hadoop/$USER
 	fi
 	# Store Logs
 	if [ ! -d /var/log/hadoop/$USER ]; then
-		mkdir -p $HOME/var/log/hadoop
+		mkdir -p $HOME/var/log/hadoop2
 		#sudo mkdir -p /var/log/hadoop/mapred
 		#sudo chown $USER /var/log/hadoop/$USER
 		#sudo chown $USER /var/log/hadoop/mapred

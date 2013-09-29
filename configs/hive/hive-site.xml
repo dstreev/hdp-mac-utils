@@ -16,138 +16,138 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-
-<configuration>
- <property>
-    <name>javax.jdo.option.ConnectionURL</name>
-    <value>jdbc:mysql://localhost:3306/hivemetastore?createDatabaseIfNotExist=true</value>
-    <description>JDBC connect string for a JDBC metastore</description>
-  </property>
-  
-  <property>
-    <name>hive.metastore.execute.setugi</name>
+  <configuration>
+    <property>
+    <name>hive.optimize.bucketmapjoin</name>
     <value>true</value>
   </property>
-
-  <property>
-    <name>javax.jdo.option.ConnectionDriverName</name>
-    <value>com.mysql.jdbc.Driver</value>
-    <description>Driver class name for a JDBC metastore</description>
-  </property>
-
-  <property>
-    <name>javax.jdo.option.ConnectionUserName</name>
-    <value>hive</value>
-    <description>username to use against metastore database</description>
-  </property>
-
-  <property>
-    <name>javax.jdo.option.ConnectionPassword</name>
-    <value>hive</value>
-    <description>password to use against metastore database</description>
-  </property>
-
-  <property>
-    <name>hive.metastore.warehouse.dir</name>
-    <value>/apps/hive/warehouse</value>
-    <description>location of default database for the warehouse</description>
-  </property>
-
-  <property>
-    <name>hive.metastore.sasl.enabled</name>
-    <value>false</value>
-    <description>If true, the metastore thrift interface will be secured with SASL.
-     Clients must authenticate with Kerberos.</description>
-  </property>
-
-  <property>
-    <name>hive.metastore.kerberos.keytab.file</name>
-    <value>/etc/security/keytabs/hive.service.keytab</value>
-    <description>The path to the Kerberos Keytab file containing the metastore
-     thrift server's service principal.</description>
-  </property>
-
-  <property>
-    <name>hive.metastore.kerberos.principal</name>
-    <value>hive/_HOST@EXAMPLE.COM</value>
-    <description>The service principal for the metastore thrift server. The special
-    string _HOST will be replaced automatically with the correct host name.</description>
-  </property>
-
-  <property>
-    <name>hive.server2.authentication</name>
-    <value>NONE</value>
-  </property>
-
-  <property>
-    <name>hive.server2.authentication.kerberos.principal</name>
-    <value>hive/_HOST@EXAMPLE.COM</value>
-  </property>
-
-  <property>
-    <name>hive.server2.authentication.kerberos.keytab</name>
-    <value>/etc/security/keytabs/hive.service.keytab</value>
-  </property>
-
-  <property>
-    <name>hive.metastore.cache.pinobjtypes</name>
-    <value>Table,Database,Type,FieldSchema,Order</value>
-    <description>List of comma separated metastore object types that should be pinned in the cache</description>
-  </property>
-
-  <property>
-    <name>hive.metastore.uris</name>
-    <value>thrift://localhost:9083</value>
-    <description>URI for client to contact metastore server</description>
-  </property>
-
-  <property>
-    <name>hadoop.clientside.fs.operations</name>
+    <property>
+    <name>hive.enforce.sorting</name>
     <value>true</value>
-    <description>FS operations are owned by client</description>
   </property>
-
-  <property>
-    <name>hive.metastore.client.socket.timeout</name>
-    <value>60</value>
-    <description>MetaStore Client socket timeout in seconds</description>
-  </property>
-
-  <property>
-    <name>hadoop.proxyuser.HTTP.groups</name>
-    <value>hadoop</value>
-    <description>Proxy group for Hadoop.</description>
-  </property>
-
-  <property>
-    <name>hadoop.proxyuser.HTTP.hosts</name>
-    <value>*</value>
-    <description>Proxy host for Hadoop.</description>
-  </property>
-
-  <property>
-    <name>hive.security.authorization.enabled</name>
-    <value>false</value>
-    <description>enable or disable the hive client authorization</description>
-  </property>
-
-  <property>
-    <name>hive.security.authorization.manager</name>
-    <value></value>
-    <description>
-        the hive client authorization manager class name.
-        The user defined authorization class should implement interface
-        org.apache.hadoop.hive.ql.security.authorization.HiveAuthorizationProvider.
-    </description>
-  </property>
-
-  <property>
+    <property>
     <name>hive.server2.enable.doAs</name>
     <value>true</value>
   </property>
-
-  <property>
+    <property>
     <name>fs.hdfs.impl.disable.cache</name>
     <value>true</value>
   </property>
-</configuration>
+    <property>
+    <name>hadoop.clientside.fs.operations</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.auto.convert.join.noconditionaltask.size</name>
+    <value>1000000000</value>
+  </property>
+  <property>
+    <name>javax.jdo.option.ConnectionUserName</name>
+    <value>hive</value>
+  </property>
+  <property>       
+   <name>javax.jdo.option.ConnectionPassword</name>       
+   <value>hive</value>  
+   <description>Enter your MySQL credentials. </description>
+  </property>
+  <property>
+    <name>hive.optimize.mapjoin.mapreduce</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.security.authorization.enabled</name>
+    <value>false</value>
+  </property>
+    <property>
+    <name>fs.file.impl.disable.cache</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.optimize.bucketmapjoin.sortedmerge</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.vectorized.execution.enabled</name>
+    <value>false</value>
+  </property>
+    <property>
+    <name>hive.mapred.reduce.tasks.speculative.execution</name>
+    <value>false</value>
+  </property>
+    <property>
+    <name>javax.jdo.option.ConnectionURL</name>
+    <value>jdbc:mysql://localhost:3306/hivemetastore2?createDatabaseIfNotExist=true</value>
+  </property>
+    <property>
+    <name>hive.enforce.bucketing</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.auto.convert.join.noconditionaltask</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.optimize.reducededuplication.min.reducer</name>
+    <value>1</value>
+  </property>
+    <property>
+    <name>hive.metastore.uris</name>
+    <value>thrift://TODO-HIVE-METASTORE-SERVER-HOST:9083</value>
+  </property>
+    <property>
+    <name>hive.metastore.execute.setugi</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.optimize.reducededuplication</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.mapjoin.bucket.cache.size</name>
+    <value>10000</value>
+  </property>
+    <property>
+    <name>hive.metastore.client.socket.timeout</name>
+    <value>60</value>
+  </property>
+    <property>
+    <name>hive.auto.convert.join</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.map.aggr</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.metastore.local</name>
+    <value>false</value>
+  </property>
+    <property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>/apps/hive/warehouse</value>
+  </property>
+    <property>
+    <name>hive.auto.convert.sortmerge.join.noconditionaltask</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.auto.convert.sortmerge.join</name>
+    <value>true</value>
+  </property>
+    <property>
+    <name>hive.semantic.analyzer.factory.impl</name>
+    <value>org.apache.hivealog.cli.HCatSemanticAnalyzerFactory</value>
+  </property>
+    <property>
+    <name>hive.metastore.cache.pinobjtypes</name>
+    <value>Table,Database,Type,FieldSchema,Order</value>
+  </property>
+    <property>
+    <name>javax.jdo.option.ConnectionDriverName</name>
+    <value>com.mysql.jdbc.Driver</value>
+  </property>
+    <property>
+    <name>hive.security.authorization.manager</name>
+    <value>org.apache.hadoop.hive.ql.security.authorization.DefaultHiveAuthorizationProvider</value>
+  </property>
+  </configuration>

@@ -19,7 +19,7 @@
 # Set environment variables here.
 
 # The java implementation to use. Java 1.6 required.
-export JAVA_HOME=`/usr/libexec/java_home`
+export JAVA_HOME=/usr/java/default
 
 # HBase Configuration directory
 export HBASE_CONF_DIR=${HBASE_CONF_DIR:-/etc/hbase/conf}
@@ -56,7 +56,7 @@ export HBASE_REGIONSERVERS=${HBASE_CONF_DIR}/regionservers
 # export HBASE_SSH_OPTS="-o ConnectTimeout=1 -o SendEnv=HBASE_CONF_DIR"
 
 # Where log files are stored. $HBASE_HOME/logs by default.
-export HBASE_LOG_DIR=$HOME/var/log/hbase
+export HBASE_LOG_DIR=/var/log/hbase
 
 # A string representing this instance of hbase. $USER by default.
 # export HBASE_IDENT_STRING=$USER
@@ -65,7 +65,7 @@ export HBASE_LOG_DIR=$HOME/var/log/hbase
 # export HBASE_NICENESS=10
 
 # The directory where pid files are stored. /tmp by default.
-export HBASE_PID_DIR=$HOME/var/run/hbase
+export HBASE_PID_DIR=/var/run/hbase
 
 # Seconds to sleep between slave commands. Unset by default. This
 # can be useful in large clusters, where, e.g., slave rsyncs can
@@ -73,9 +73,4 @@ export HBASE_PID_DIR=$HOME/var/run/hbase
 # export HBASE_SLAVE_SLEEP=0.1
 
 # Tell HBase whether it should manage it's own instance of Zookeeper or not.
-export HBASE_MANAGES_ZK=true
-
-# Newer versions of glibc use an arena memory allocator that causes virtual
-# memory usage to explode. This interacts badly with the many threads that
-# we use in Hadoop. Tune the variable down to prevent vmem explosion.
-export MALLOC_ARENA_MAX=${MALLOC_ARENA_MAX:-4}
+export HBASE_MANAGES_ZK=false
