@@ -71,7 +71,7 @@
   </property>
     <property>
     <name>yarn.application.classpath</name>
-    <value>/etc/hadoop/conf,/usr/lib/hadoop/*,/usr/lib/hadoop/lib/*,/usr/lib/hadoop-hdfs/*,/usr/lib/hadoop-hdfs/lib/*,/usr/lib/hadoop-yarn/*,/usr/lib/hadoop-yarn/lib/*,/usr/lib/hadoop-mapreduce/*,/usr/lib/hadoop-mapreduce/lib/*</value>
+  <value>/etc/hadoop/conf,/usr/lib/hadoop/*,/usr/lib/hadoop/lib/*,/usr/lib/hadoop/share/hadoop/common/*,/usr/lib/hadoop/share/hadoop/common/lib/*,/usr/lib/hadoop/share/hadoop/hdfs/*,/usr/lib/hadoop/share/hadoop/hdfs/lib/*,/usr/lib/hadoop/share/hadoop/yarn/*,/usr/lib/hadoop/share/hadoop/yarn/lib/*,/usr/lib/hadoop/share/hadoop/mapreduce/*,/usr/lib/hadoop/share/hadoop/mapreduce/lib/*</value>
   </property>
     <property>
     <name>yarn.scheduler.minimum-allocation-mb</name>
