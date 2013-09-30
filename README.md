@@ -1,10 +1,6 @@
 # NOTE: This repo is branched by HDP distribution.  The master branch represents (mostly) the latest version of HDP.
 
-<<<<<<< HEAD
 # HDP 2.1.0-BETA Mac Utils
-=======
-# HDP Mac Utils
->>>>>>> 399470b89bcdee388b09b9e53b500267009f9f7c
 A collection of scripts with instructions for installing HDP 2.1.0-BETA (from tarballs) on a Mac.
 
 ## License
