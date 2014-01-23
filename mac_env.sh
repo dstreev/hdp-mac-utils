@@ -16,7 +16,7 @@
 #   limitations under the License.
 ################################################
 
-HDP_VER=hdp_2.0.6.0
+HDP_VER=hdp_2.0.9.0
 HTTP_BASE="http://public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.0.6.0/tars/"
 
 TOOLS_BASE="http://public-repo-1.hortonworks.com/HDP/tools/2.0.6.0/"
