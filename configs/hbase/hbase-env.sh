@@ -19,7 +19,7 @@
 # Set environment variables here.
 
 # The java implementation to use. Java 1.6 required.
-export JAVA_HOME=/usr/java/default
+export JAVA_HOME=`/usr/libexec/java_home`
 
 # HBase Configuration directory
 export HBASE_CONF_DIR=${HBASE_CONF_DIR:-/etc/hbase/conf}

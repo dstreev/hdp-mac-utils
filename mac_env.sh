@@ -16,11 +16,11 @@
 #   limitations under the License.
 ################################################
 
-HDP_VER=hdp_2.1.0-BETA
-HTTP_BASE="http://public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.0.5.0/tars/"
+HDP_VER=hdp_2.0.6.0
+HTTP_BASE="http://public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.0.6.0/tars/"
 
-TOOLS_BASE="http://public-repo-1.hortonworks.com/HDP/tools/2.0.5.0/"
-COMPANION_FILE="hdp_manual_install_rpm_helper_files-2.0.5.67.tar.gz"
+TOOLS_BASE="http://public-repo-1.hortonworks.com/HDP/tools/2.0.6.0/"
+COMPANION_FILE="hdp_manual_install_rpm_helper_files-2.0.6.76.tar.gz"
 
 # DEFAULT_FILES_BASE="https://raw.github.com/dstreev/HDP_1.3.0_Mac_Utils/master/"
 # DEFAULT_FILES="etc_default"

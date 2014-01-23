@@ -21,11 +21,11 @@
 #	hbase
 #	flume
 # 	zookeeper
-ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,zookeeper,flume,sqoop"
+ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,zookeeper,flume,sqoop,mahout"
 
 if [ $# -lt 1 ]; then
 	echo "Usage: ./go.sh TEMP_DIR [elements]"
-	echo"    elements: one or more of hadoop,hbase,pig,hive,sqoop,flume,oozie"
+	echo"    elements: one or more of hadoop,hbase,pig,hive,sqoop,flume,oozie,mahout,zookeeper"
 else
 
 	USER=`whoami`
