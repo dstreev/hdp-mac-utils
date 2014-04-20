@@ -21,7 +21,8 @@
 # Set parameters
 APP_DIR=`dirname $0`
 CUR_DIR=`pwd`
-ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,zookeeper,flume,sqoop,mahout"
+ALL_ELEMENTS="hadoop,hbase,hive,pig,oozie,zookeeper,accumulo,storm,falcon,falcon-server,knox,phoenix,tez,tez-full,flume,sqoop,mahout"
+#ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,zookeeper,flume,sqoop,mahout"
 
 cd $APP_DIR
 . ./mac_env.sh

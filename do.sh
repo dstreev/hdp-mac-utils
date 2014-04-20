@@ -15,17 +15,21 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 ################################################
+# Set parameters
+APP_DIR=`dirname $0`
+CUR_DIR=`pwd`
+#ALL_ELEMENTS="hadoop,hbase,hive,pig,oozie,zookeeper,accumulo,storm,falcon,falcon-server,knox,phoenix,tez,tez-full,flume,sqoop,mahout"
+#ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,flume,sqoop,mahout"
 
-#TODO: Validate/add support for:
-#	hcat
-#	hbase
-#	flume
-# 	zookeeper
-ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,zookeeper,flume,sqoop,mahout"
+cd $APP_DIR
+APP_DIR=`pwd`
+. ./mac_env.sh
+
+#ALL_ELEMENTS="hadoop,hbase,hive,pig,oozie,zookeeper,accumulo,storm,falcon,falcon-server,knox,phoenix,tez,tez-full,flume,sqoop,mahout"
 
 if [ $# -lt 1 ]; then
-	echo "Usage: ./go.sh TEMP_DIR [elements]"
-	echo"    elements: one or more of hadoop,hbase,pig,hive,sqoop,flume,oozie,mahout,zookeeper"
+	echo "Usage: ./do.sh TEMP_DIR [elements]"
+	echo"    elements: one or more of $ALL_ELEMENTS"
 else
 
 	USER=`whoami`
@@ -34,8 +38,8 @@ else
 	ELEMENTS="${2:-$ALL_ELEMENTS}"
 	echo "Elements: $ELEMENTS"
 
-	APP_DIR=`dirname $0`
-	. $APP_DIR/mac_env.sh
+# 	APP_DIR=`dirname $0`
+# 	. $APP_DIR/mac_env.sh
 
 	if [ ! -d $SOURCE_DIR ]; then
 		mkdir -p $SOURCE_DIR

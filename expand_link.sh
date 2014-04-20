@@ -19,7 +19,8 @@
 # Set parameters
 APP_DIR=`dirname $0`
 CUR_DIR=`pwd`
-ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,flume,sqoop,mahout"
+#ALL_ELEMENTS="hadoop,hbase,hive,pig,oozie,zookeeper,accumulo,storm,falcon,falcon-server,knox,phoenix,tez,tez-full,flume,sqoop,mahout"
+#ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,flume,sqoop,mahout"
 
 cd $APP_DIR
 APP_DIR=`pwd`
@@ -70,12 +71,12 @@ else
 			sudo ln -s /etc/$T_LINK/conf conf
 
 			# Special hcatalog symlinks required
-			if [ "hcatalog" == "$T_LINK" ]; then
-				cd share/hcatalog
-				for j in hcatalog-core hcatalog-pig-adapter hcatalog-server-extensions; do
-					sudo ln -s $j-$APP_VER.jar $j.jar 						
-				done
-			fi
+# 			if [ "hcatalog" == "$T_LINK" ]; then
+# 				cd share/hcatalog
+# 				for j in hcatalog-core hcatalog-pig-adapter hcatalog-server-extensions; do
+# 					sudo ln -s $j-$APP_VER.jar $j.jar 						
+# 				done
+# 			fi
 
 			cd $LIB_BASE_DIR
 		else
