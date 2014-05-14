@@ -48,7 +48,7 @@
   </property>
     <property>
     <name>oozie.service.WorkflowAppService.system.libpath</name>
-    <value>/user/${user.name}/share/lib</value>
+    <value>/user/oozie/share/lib</value>
   </property>
     <property>
     <name>oozie.service.ActionService.executor.ext.classes</name>
@@ -70,11 +70,11 @@
   </property>
   <property>
     <name>oozie.service.SchemaService.wf.ext.schemas</name>
-    <value>shell-action-0.2.xsd,email-action-0.1.xsd,hive-action-0.4.xsd,sqoop-action-0.4.xsd,ssh-action-0.1.xsd,distcp-action-0.2.xsd</value>
+    <value>shell-action-0.1.xsd,email-action-0.1.xsd,hive-action-0.2.xsd,sqoop-action-0.2.xsd,ssh-action-0.1.xsd,distcp-action-0.1.xsd</value>
   </property>
   <property>
     <name>oozie.service.JPAService.jdbc.driver</name>
-    <value>com.mysql.jdbc.Driver</value>
+    <value>org.apache.derby.jdbc.EmbeddedDriver</value>
   </property>
     <property>
     <name>oozie.service.coord.normal.default.timeout</name>
@@ -90,7 +90,7 @@
   </property>
     <property>
     <name>oozie.service.JPAService.jdbc.url</name>
-    <value>jdbc:mysql://localhost:3306/oozie?createDatabaseIfNotExist=true</value>
+    <value>jdbc:derby:${user.home}/data/hadoop/oozie/${oozie.db.schema.name}-db;create=true</value>
   </property>
     <property>
     <name>oozie.authentication.type</name>
@@ -106,7 +106,7 @@
   </property>
     <property>
     <name>oozie.service.JPAService.create.db.schema</name>
-    <value>true</value>
+    <value>false</value>
   </property>
     <property>
     <name>oozie.service.HadoopAccessorService.nameNode.whitelist</name>

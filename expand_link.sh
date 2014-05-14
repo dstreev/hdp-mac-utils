@@ -66,9 +66,9 @@ else
 
 			# Reset the local conf's to link to /etc/$app/conf
 			# Because of the lack of consistency of the startup scripts across products
-			cd $T_LINK
-			sudo rm -rf conf
-			sudo ln -s /etc/$T_LINK/conf conf
+# 			cd $T_LINK
+			sudo rm -rf $T_LINK/conf
+			sudo ln -s /etc/$T_LINK/conf $T_LINK/conf
 
 			# Special hcatalog symlinks required
 # 			if [ "hcatalog" == "$T_LINK" ]; then
@@ -122,14 +122,14 @@ else
 	if [ -d $HADOOP_CONF_DIR/core_hadoop ]; then
 		echo "Configs are already present, they have NOT been overwritten"
 	else
-		cd $SOURCE_DIR
-		#if [ ! -f $COMPANION_FILE ]; then
-		#	echo "Expanding companion files"
-		#	tar xzf $COMPANION_FILE.tar.gz
-		#fi	
+# 		cd $SOURCE_DIR
+# 		if [ -f $COMPANION_FILE_BASE.tar.gz ]; then
+# 			echo "Expanding companion files"
+# 			tar xzf $COMPANION_FILE_BASE.tar.gz -C /tmp
+# 			mv /tmp/$COMPANION_FILE_BASE/configuration_files/* $HADOOP_CONF_DIR
+# 		fi	
 		
 		cd $APP_DIR/configs	
-		#cd $COMPANION_FILE/configuration_files
 		cp -R * $HADOOP_CONF_DIR
 		
 		#echo $HOSTNAME > $HADOOP_CONF_DIR/core_hadoop/masters

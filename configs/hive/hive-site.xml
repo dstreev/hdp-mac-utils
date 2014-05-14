@@ -76,7 +76,7 @@ limitations under the License.
   </property>
     <property>
     <name>javax.jdo.option.ConnectionURL</name>
-    <value>jdbc:mysql://localhost:3306/hivemetastore2?createDatabaseIfNotExist=true</value>
+    <value>jdbc:mysql://localhost:3306/hive?createDatabaseIfNotExist=true</value>
   </property>
     <property>
     <name>hive.enforce.bucketing</name>
@@ -92,7 +92,7 @@ limitations under the License.
   </property>
     <property>
     <name>hive.metastore.uris</name>
-    <value>thrift://TODO-HIVE-METASTORE-SERVER-HOST:9083</value>
+    <value>thrift://localhost:9083</value>
   </property>
     <property>
     <name>hive.metastore.execute.setugi</name>

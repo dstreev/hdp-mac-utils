@@ -33,14 +33,14 @@ export JAVA_HOME=`/usr/libexec/java_home`
 
 # Oozie logs directory
 #
-export OOZIE_LOG=/var/log/oozie
+export OOZIE_LOG=$HOME/var/log/oozie
 
 # Oozie pid directory
 #
-export CATALINA_PID=/var/run/oozie/oozie.pid
+export CATALINA_PID=$HOME/var/run/oozie/oozie.pid
 
 #Location of the data for oozie
-export OOZIE_DATA=/hadoop/oozie/data/
+export OOZIE_DATA=$HOME/hadoop/oozie/data/
 
 # Oozie Log4J configuration file to load from Oozie configuration directory
 #

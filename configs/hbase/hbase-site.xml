@@ -10,7 +10,7 @@
   </property>
     <property>
     <name>hbase.rootdir</name>
-    <value>hdfs://TODO-NAMENODE-HOST-NAME:8020/apps/hbase/data</value>
+    <value>hdfs://localhost:8020/apps/hbase/data</value>
   </property>
     <property>
     <name>hfile.block.cache.size</name>
@@ -22,7 +22,7 @@
   </property>
     <property>
     <name>hbase.zookeeper.quorum</name>
-    <value>TODO-ZOOKEEPER-HOST_NAME</value>
+    <value>localhost</value>
   </property>
     <property>
     <name>zookeeper.session.timeout</name>

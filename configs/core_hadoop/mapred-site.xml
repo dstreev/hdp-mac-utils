@@ -14,7 +14,7 @@
   </property>
     <property>
     <name>mapreduce.jobhistory.address</name>
-    <value>localhost:10020</value>
+    <value>TODO-JOBHISTORYNODE-HOSTNAME:10020</value>
   </property>
     <property>
     <name>mapreduce.cluster.reducememory.mb</name>
@@ -58,7 +58,7 @@
   </property>
     <property>
     <name>mapreduce.jobhistory.webapp.address</name>
-    <value>localhost:19888</value>
+    <value>TODO-JOBHISTORYNODE-HOSTNAME:19888</value>
   </property>
     <property>
     <name>mapreduce.map.speculative</name>

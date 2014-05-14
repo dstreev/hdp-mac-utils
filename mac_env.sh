@@ -21,7 +21,7 @@ HDP_VER=hdp_2.1.1.0
 HTTP_BASE="http://public-repo-1.hortonworks.com/HDP/centos6/2.x/GA/2.1.1.0/tars/"
 
 TOOLS_BASE="http://public-repo-1.hortonworks.com/HDP/tools/2.1.1.0/"
-COMPANION_FILE="hdp_manual_install_rpm_helper_files-2.1.1.385.tar.gz"
+COMPANION_FILE_BASE="hdp_manual_install_rpm_helper_files-2.1.1.385"
 
 # DEFAULT_FILES_BASE="https://raw.github.com/dstreev/HDP_1.3.0_Mac_Utils/master/"
 # DEFAULT_FILES="etc_default"

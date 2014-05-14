@@ -28,12 +28,10 @@
     <name>dfs.datanode.data.dir</name>
     <value>${user.home}/data/hadoop/hdfs2/data</value>
   </property>
-    <!--property>
-    See http://hadoop.apache.org/docs/r2.1.0-beta/hadoop-project-dist/hadoop-hdfs/ShortCircuitLocalReads.html
-    Mac OS X doesn't support libhadoop.so.. ;^(
+    <property>
     <name>dfs.client.read.shortcircuit</name>
     <value>true</value>
-  </property-->
+  </property>
     <property>
     <name>dfs.datanode.max.transfer.threads</name>
     <value>1024</value>
@@ -112,7 +110,7 @@
   </property>
     <property>
     <name>dfs.replication</name>
-    <value>1</value>
+    <value>3</value>
   </property>
     <property>
     <name>dfs.block.local-path-access.user</name>
@@ -150,8 +148,8 @@
     <name>dfs.namenode.safemode.threshold-pct</name>
     <value>1.0f</value>
   </property>
-    <!--property>
+    <property>
     <name>dfs.domain.socket.path</name>
-    <value>${user.home}/var/lib/hadoop-hdfs/dn_socket</value>
-  </property-->
+    <value>/var/lib/hadoop-hdfs/dn_socket</value>
+  </property>
   </configuration>

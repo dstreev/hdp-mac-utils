@@ -23,13 +23,13 @@
 # The file containing the running pid
 PID_FILE=/var/run/webhcat/webhcat.pid
 
-WEBHCAT_LOG_DIR=/var/log/webhcat
+WEBHCAT_LOG_DIR=$HOME/var/log/webhcat
 
 # The console error log
-ERROR_LOG=/var/log/webhcat/webhcat-console-error.log
+ERROR_LOG=$HOME/var/log/webhcat/webhcat-console-error.log
 
 # The console log
-CONSOLE_LOG=/var/log/webhcat/webhcat-console.log
+CONSOLE_LOG=$HOME/var/log/webhcat/webhcat-console.log
 
 # Set HADOOP_HOME to point to a specific hadoop install directory
 export HADOOP_HOME=${HADOOP_HOME:-/usr}

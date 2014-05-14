@@ -37,6 +37,15 @@ function check_disks {
 
 }
 
+function check_containerexecutor {
+  perm=`stat -c %a:%U:%G /usr/lib/hadoop-yarn/bin/container-executor 2>/dev/null`
+  if [ $? -eq 0 ] && [ "$perm" == "6050:root:hadoop" ] ; then
+    echo "containerexecutor ok"
+  else
+    echo 'check containerexecutor' ; exit 1
+  fi
+}
+
 function check_link {
   snmp=/usr/bin/snmpwalk
   if [ -e $snmp ] ; then
@@ -66,7 +75,7 @@ function check_link {
 
 # Run all checks
 # Disabled 'check_link' for now... 
-for check in disks ; do
+for check in disks containerexecutor; do
   msg=`check_${check}` ;
   if [ $? -eq 0 ] ; then
     ok_msg="$ok_msg$msg,"

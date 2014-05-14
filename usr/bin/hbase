@@ -1,6 +1,5 @@
 #!/bin/sh
 
-. /etc/default/hadoop
 . /etc/default/hbase
 
 # Autodetect JAVA_HOME if not defined

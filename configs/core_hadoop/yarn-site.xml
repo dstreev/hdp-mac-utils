@@ -4,11 +4,10 @@
     <name>yarn.nodemanager.address</name>
     <value>0.0.0.0:45454</value>
   </property>
-    <!--property>
-    Use the defaults set in yarn-default.xml
+    <property>
     <name>yarn.nodemanager.local-dirs</name>
     <value>TODO-YARN-LOCAL-DIR</value>
-  </property-->
+  </property>
     <property>
     <name>yarn.nodemanager.container-monitor.interval-ms</name>
     <value>3000</value>
@@ -27,11 +26,11 @@
   </property>
     <property>
     <name>yarn.log.server.url</name>
-    <value>localhost:19888/jobhistory/logs</value>
+    <value>TODO-RMNODE-HOSTNAME:19888/jobhistory/logs</value>
   </property>
     <property>
     <name>yarn.resourcemanager.admin.address</name>
-    <value>localhost:8141</value>
+    <value>TODO-RMNODE-HOSTNAME:8141</value>
   </property>
     <property>
     <name>yarn.scheduler.maximum-allocation-mb</name>
@@ -55,7 +54,7 @@
   </property>
     <property>
     <name>yarn.nodemanager.log-dirs</name>
-    <value>${user.home}/var/log/hadoop2/${user.name}</value>
+    <value>TODO-YARN-LOCAL-LOG-DIR</value>
   </property>
     <property>
     <name>yarn.nodemanager.log.retain-second</name>
@@ -67,11 +66,11 @@
   </property>
     <property>
     <name>yarn.resourcemanager.resource-tracker.address</name>
-    <value>localhost:8025</value>
+    <value>TODO-RMNODE-HOSTNAME:8025</value>
   </property>
     <property>
     <name>yarn.application.classpath</name>
-  <value>/etc/hadoop/conf,/usr/lib/hadoop/*,/usr/lib/hadoop/lib/*,/usr/lib/hadoop/share/hadoop/common/*,/usr/lib/hadoop/share/hadoop/common/lib/*,/usr/lib/hadoop/share/hadoop/hdfs/*,/usr/lib/hadoop/share/hadoop/hdfs/lib/*,/usr/lib/hadoop/share/hadoop/yarn/*,/usr/lib/hadoop/share/hadoop/yarn/lib/*,/usr/lib/hadoop/share/hadoop/mapreduce/*,/usr/lib/hadoop/share/hadoop/mapreduce/lib/*</value>
+    <value>/etc/hadoop/conf,/usr/lib/hadoop/*,/usr/lib/hadoop/lib/*,/usr/lib/hadoop-hdfs/*,/usr/lib/hadoop-hdfs/lib/*,/usr/lib/hadoop-yarn/*,/usr/lib/hadoop-yarn/lib/*,/usr/lib/hadoop-mapreduce/*,/usr/lib/hadoop-mapreduce/lib/*</value>
   </property>
     <property>
     <name>yarn.scheduler.minimum-allocation-mb</name>
@@ -79,7 +78,7 @@
   </property>
     <property>
     <name>yarn.nodemanager.aux-services</name>
-    <value>mapreduce.shuffle</value>
+    <value>mapreduce_shuffle</value>
   </property>
     <property>
     <name>yarn.nodemanager.log-aggregation.compression-type</name>
@@ -103,7 +102,7 @@
   </property>
     <property>
     <name>yarn.resourcemanager.webapp.address</name>
-    <value>localhost:8088</value>
+    <value>TODO-RMNODE-HOSTNAME:8088</value>
   </property>
     <property>
     <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
@@ -111,7 +110,7 @@
   </property>
     <property>
     <name>yarn.resourcemanager.address</name>
-    <value>localhost:8050</value>
+    <value>TODO-RMNODE-HOSTNAME:8050</value>
   </property>
     <property>
     <name>yarn.nodemanager.admin-env</name>
@@ -127,6 +126,6 @@
   </property>
     <property>
     <name>yarn.resourcemanager.scheduler.address</name>
-    <value>localhost:8030</value>
+    <value>TODO-RMNODE-HOSTNAME:8030</value>
   </property>
   </configuration>

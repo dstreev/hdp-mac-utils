@@ -31,7 +31,14 @@ echo "===> Get Artifacts"
 
 if [ $# -lt 1 ] ; then
 	echo "Please supply the directory where the tarball artifacts were downloaded."
-else	
+else
+
+	if [ ! -f $1/$COMPANION_FILE ] ; then
+    	pushd $1
+    	wget "$TOOLS_BASE$COMPANION_FILE_BASE.tar.gz"
+    	popd
+	fi 
+	
 	ELEMENTS="${2:-$ALL_ELEMENTS}"
 
 # 	for i in `cat $APP_DIR/hdp_artifacts.txt | awk '{print $1}'`; do

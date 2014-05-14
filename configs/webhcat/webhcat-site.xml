@@ -23,7 +23,7 @@ limitations under the License.
   <configuration>
     <property>
     <name>templeton.hive.properties</name>
-    <value>hive.metastore.local=false,hive.metastore.uris=thrift://TODO-METASTORE-HOSTNAME:9083,hive.metastore.sasl.enabled=yes,hive.metastore.execute.setugi=true,hive.metastore.warehouse.dir=/apps/hive/warehouse</value>
+    <value>hive.metastore.local=false,hive.metastore.uris=thrift://localhost:9083,hive.metastore.sasl.enabled=yes,hive.metastore.execute.setugi=true,hive.metastore.warehouse.dir=/apps/hive/warehouse</value>
   </property>
     <property>
     <name>templeton.hadoop</name>
@@ -51,7 +51,7 @@ limitations under the License.
   </property>
     <property>
     <name>templeton.zookeeper.hosts</name>
-    <value>TODO-ZOOKEEPER-HOST:2181</value>
+    <value>localhost:2181</value>
   </property>
     <property>
     <name>templeton.port</name>
