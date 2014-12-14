@@ -66,29 +66,29 @@ else
 	fi
 
 	# Remove old symlinks
-	if [ -d /etc/hadoop/conf ]; then
-		sudo rm /etc/hadoop/conf
+	if [ -h /etc/hadoop/conf ]; then
+		sudo rm -rf /etc/hadoop/conf
 	fi
-	if [ -d /etc/hbase/conf ]; then
-		sudo rm /etc/hbase/conf
+	if [ -h /etc/hbase/conf ]; then
+		sudo rm -rf /etc/hbase/conf
 	fi
-	if [ -d /etc/hive/conf ]; then
-		sudo rm /etc/hive/conf
+	if [ -h /etc/hive/conf ]; then
+		sudo rm -rf /etc/hive/conf
 	fi
-	if [ -d /etc/oozie/conf ]; then
-		sudo rm /etc/oozie/conf
+	if [ -h /etc/oozie/conf ]; then
+		sudo rm -rf /etc/oozie/conf
 	fi
-	if [ -d /etc/pig/conf ]; then
-		sudo rm /etc/pig/conf
+	if [ -h /etc/pig/conf ]; then
+		sudo rm -rf /etc/pig/conf
 	fi
-	if [ -d /etc/sqoop/conf ]; then
-		sudo rm /etc/sqoop/conf
+	if [ -h /etc/sqoop/conf ]; then
+		sudo rm -rf /etc/sqoop/conf
 	fi
-	if [ -d /etc/webhcat/conf ]; then
-		sudo rm /etc/webhcat/conf
+	if [ -h /etc/webhcat/conf ]; then
+		sudo rm -rf /etc/webhcat/conf
 	fi
-	if [ -d /etc/zookeeper/conf ]; then
-		sudo rm /etc/zookeeper/conf
+	if [ -h /etc/zookeeper/conf ]; then
+		sudo rm -rf /etc/zookeeper/conf
 	fi
 
 	# Set/Reset symlinks

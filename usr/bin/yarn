@@ -9,4 +9,4 @@ fi
 
 export HADOOP_LIBEXEC_DIR=///usr/lib/hadoop/libexec
 
-exec /usr/lib/hadoop-yarn/bin/yarn "$@"
+exec /usr/lib/hadoop/bin/yarn "$@"

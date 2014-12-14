@@ -57,16 +57,16 @@ export HADOOP_CLIENT_OPTS="-Xmx128m ${HADOOP_CLIENT_OPTS}"
 #HADOOP_JAVA_PLATFORM_OPTS="-XX:-UsePerfData ${HADOOP_JAVA_PLATFORM_OPTS}"
 
 # On secure datanodes, user to run the datanode as after dropping privileges
-export HADOOP_SECURE_DN_USER=hdfs
+#export HADOOP_SECURE_DN_USER=hdfs
 
 # Extra ssh options.  Empty by default.
 export HADOOP_SSH_OPTS="-o ConnectTimeout=5 -o SendEnv=HADOOP_CONF_DIR"
 
 # Where log files are stored.  $HADOOP_HOME/logs by default.
-export HADOOP_LOG_DIR=$HOME/var/log/hadoop/$USER
+export HADOOP_LOG_DIR=$HOME/var/log/hadoop
 
 # History server logs
-export HADOOP_MAPRED_LOG_DIR=$HOME/var/log/hadoop-mapreduce/$USER
+export HADOOP_MAPRED_LOG_DIR=$HOME/var/log/hadoop-mapreduce
 
 # Where log files are stored in the secure data environment.
 export HADOOP_SECURE_DN_LOG_DIR=$HOME/var/log/hadoop/$HADOOP_SECURE_DN_USER
@@ -83,11 +83,11 @@ export HADOOP_SECURE_DN_LOG_DIR=$HOME/var/log/hadoop/$HADOOP_SECURE_DN_USER
 # export HADOOP_SLAVE_SLEEP=0.1
 
 # The directory where pid files are stored. /tmp by default.
-export HADOOP_PID_DIR=$HOME/var/run/hadoop/$USER
+export HADOOP_PID_DIR=$HOME/var/run/hadoop
 export HADOOP_SECURE_DN_PID_DIR=$HOME/var/run/hadoop/$HADOOP_SECURE_DN_USER
 
 # History server pid
-export HADOOP_MAPRED_PID_DIR=$HOME/var/run/hadoop-mapreduce/$USER
+export HADOOP_MAPRED_PID_DIR=$HOME/var/run/hadoop-mapreduce
 
 # A string representing this instance of hadoop. $USER by default.
 export HADOOP_IDENT_STRING=$USER

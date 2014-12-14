@@ -38,9 +38,6 @@ else
 	ELEMENTS="${2:-$ALL_ELEMENTS}"
 	echo "Elements: $ELEMENTS"
 
-# 	APP_DIR=`dirname $0`
-# 	. $APP_DIR/mac_env.sh
-
 	if [ ! -d $SOURCE_DIR ]; then
 		mkdir -p $SOURCE_DIR
 	fi

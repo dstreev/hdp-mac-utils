@@ -102,7 +102,7 @@
   </property>
     <property>
     <name>hbase.tmp.dir</name>
-    <value>/var/log/hbase</value>
+    <value>${user.home}/var/log/hbase</value>
   </property>
     <property>
     <name>hbase.hstore.compactionThreshold</name>

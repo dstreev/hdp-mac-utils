@@ -17,11 +17,11 @@
 ################################################
 ALL_ELEMENTS="hadoop,hbase,hive,pig,oozie,zookeeper,accumulo,storm,falcon,falcon-server,knox,phoenix,tez,tez-full,flume,sqoop,mahout"
 
-HDP_VER=hdp_2.1.1.0
-HTTP_BASE="http://public-repo-1.hortonworks.com/HDP/centos6/2.x/GA/2.1.1.0/tars/"
+HDP_VER=hdp_2.1.7.0
+HTTP_BASE="http://public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.1.7.0/tars/"
 
-TOOLS_BASE="http://public-repo-1.hortonworks.com/HDP/tools/2.1.1.0/"
-COMPANION_FILE_BASE="hdp_manual_install_rpm_helper_files-2.1.1.385"
+TOOLS_BASE="http://public-repo-1.hortonworks.com/HDP/tools/2.1.7.0/"
+COMPANION_FILE_BASE="hdp_manual_install_rpm_helper_files-2.1.3.563"
 
 # DEFAULT_FILES_BASE="https://raw.github.com/dstreev/HDP_1.3.0_Mac_Utils/master/"
 # DEFAULT_FILES="etc_default"
@@ -32,7 +32,7 @@ DEFAULT_DIR=/etc/default
 BASE_DIR=$HOME/data/hadoop
 HDFS_BASE_DIR=$BASE_DIR/hdfs2
 
-MYSQL_ARCHIVE=mysql-connector-java-5.1.25
+MYSQL_ARCHIVE=mysql-connector-java-5.1.31
 
 HADOOP_CONF_DIR=/var/hadoop/local/$HDP_VER
 

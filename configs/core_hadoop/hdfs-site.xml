@@ -22,7 +22,7 @@
   </property>
     <property>
     <name>dfs.blockreport.initialDelay</name>
-    <value>120</value>
+    <value>10</value>
   </property>
     <property>
     <name>dfs.datanode.data.dir</name>
@@ -30,7 +30,8 @@
   </property>
     <property>
     <name>dfs.client.read.shortcircuit</name>
-    <value>true</value>
+    <!-- Need Native Libs to Support this -->
+    <value>false</value>
   </property>
     <property>
     <name>dfs.datanode.max.transfer.threads</name>
@@ -150,6 +151,6 @@
   </property>
     <property>
     <name>dfs.domain.socket.path</name>
-    <value>/var/lib/hadoop-hdfs/dn_socket</value>
+    <value>${user.home}/var/lib/hadoop-hdfs/dn_socket</value>
   </property>
   </configuration>

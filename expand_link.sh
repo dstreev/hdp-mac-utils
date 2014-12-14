@@ -117,6 +117,9 @@ else
 	
 	echo "default complete"
 	
+	# Install helper and wrapper scripts
+    sudo cp $APP_DIR/usr/bin/* /usr/bin
+
 	# Expand the Templates and Link
 	# DON'T OVERWRITE IF THEY ARE THERE ALREADY
 	if [ -d $HADOOP_CONF_DIR/core_hadoop ]; then
@@ -148,9 +151,6 @@ else
 		# Adjust the configs that were just copied for this environment.
 		#cd $CUR_DIR
 		#. $APP_DIR/fix_cfgs.sh
-		
-		# Install helper and wrapper scripts
-		sudo cp $APP_DIR/usr/bin/* /usr/bin
 		
 		# Link configs to standard location know by scripts
 		if [ ! -d /etc/hadoop ]; then
@@ -185,28 +185,28 @@ else
 
 	# Remove old symlinks
 	if [ -d /etc/hadoop/conf ]; then
-		sudo rm /etc/hadoop/conf
+		sudo rm -rf /etc/hadoop/conf
 	fi
 	if [ -d /etc/hbase/conf ]; then
-		sudo rm /etc/hbase/conf
+		sudo rm -rf /etc/hbase/conf
 	fi
 	if [ -d /etc/hive/conf ]; then
-		sudo rm /etc/hive/conf
+		sudo rm -rf /etc/hive/conf
 	fi
 	if [ -d /etc/oozie/conf ]; then
-		sudo rm /etc/oozie/conf
+		sudo rm -rf /etc/oozie/conf
 	fi
 	if [ -d /etc/pig/conf ]; then
-		sudo rm /etc/pig/conf
+		sudo rm -rf /etc/pig/conf
 	fi
 	if [ -d /etc/sqoop/conf ]; then
-		sudo rm /etc/sqoop/conf
+		sudo rm -rf /etc/sqoop/conf
 	fi
 	if [ -d /etc/webhcat/conf ]; then
-		sudo rm /etc/webhcat/conf
+		sudo rm -rf /etc/webhcat/conf
 	fi
 	if [ -d /etc/zookeeper/conf ]; then
-		sudo rm /etc/zookeeper/conf
+		sudo rm -rf /etc/zookeeper/conf
 	fi
 
 	# Set/Reset symlinks
