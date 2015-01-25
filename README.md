@@ -1,7 +1,9 @@
 # NOTE: This repo is branched by HDP distribution.  The master branch represents (mostly) the latest version of HDP.
 
-# HDP 2.1.7.0
-A collection of scripts with instructions for installing HDP 2.1.7.0 (from tarballs) on a Mac.
+# HDP 2.2.0.0 (in-progress)
+A collection of scripts with instructions for installing HDP 2.2.0.0 (from tarballs) on a Mac.
+
+I'm currently in the process of validating the changes needed to get 2.2 working.  Initially, you should be able to use the libraries install with this to interact with another 2.2 cluster, assuming you've install the target environment configuration files.
 
 ## License
 >   Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +39,7 @@ The 'do.sh' script will kickoff the installation process.
 
 ### Environment Variables
 > Set the following environment variables:
-<pre><code>export HADOOP_HOME=/usr/lib/Hadoop
+<pre><code>export HADOOP_HOME=/usr/hdp/current/Hadoop
 export HIVE_LOG_DIR=/var/log/hive</code></pre>
 
 ### Namenode
@@ -52,7 +54,7 @@ export HIVE_LOG_DIR=/var/log/hive</code></pre>
 
 ## Starting Hadoop, etc.. Short-version
 ### HDFS and MAPRED
-<pre><code>/usr/lib/hadoop/bin/start-all.sh</code></pre>
+<pre><code>/usr/hdp/current/hadoop/sbin/start-all.sh</code></pre>
 
 ### Hive Metastore
 <pre><code>start-hive-metastore.sh</code></pre>
@@ -60,7 +62,7 @@ export HIVE_LOG_DIR=/var/log/hive</code></pre>
 
 ## Starting Hadoop, etc.. Long-version
 ### HDFS and MAPRED:
-<pre><code>cd /usr/lib/hadoop/sbin
+<pre><code>cd /usr/hdp/current/hadoop/sbin
 ./start-dfs.sh
 ./start-yarn.sh</code></pre>
 
@@ -74,7 +76,7 @@ export HIVE_LOG_DIR=/var/log/hive</code></pre>
 		create table test(col1 int, col2 string);
 		show tables;</code></pre> 
 3. Start HiveServer2.
-	<pre><code>nohup /usr/lib/hive/bin/hiveserver2>$HIVE_LOG_DIR/hiveserver2.out 2>$HIVE_LOG_DIR/hiveserver2.log &</code></pre> 
+	<pre><code>nohup /usr/hdp/current/hive/bin/hiveserver2>$HIVE_LOG_DIR/hiveserver2.out 2>$HIVE_LOG_DIR/hiveserver2.log &</code></pre>
 4. Smoke Test HiveServer2.
 	1. Open Beeline command line shell to interact with HiveServer2.
 	   <pre><code>beeline</code></pre>
@@ -86,7 +88,7 @@ export HIVE_LOG_DIR=/var/log/hive</code></pre>
 		show tables;</code></pre>
 		
 ### HBase
-<pre><code>cd /usr/lib/hbase/bin
+<pre><code>cd /usr/hdp/current/hbase/bin
 ./start-hbase.sh</code></pre>
 
 #### Smoke Test via HBase Shell
@@ -95,11 +97,12 @@ export HIVE_LOG_DIR=/var/log/hive</code></pre>
 ## Status of Components install here
 
 ### Working
+> Starting over with 2.2.  In-progress.
+
+### Todo's
 > * HDFS
 > * YARN
 > * MAPRED
-
-### Todo's
 > * Hive
 > * Pig
 > * HBase

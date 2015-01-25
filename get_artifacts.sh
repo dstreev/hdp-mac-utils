@@ -33,7 +33,7 @@ if [ $# -lt 1 ] ; then
 	echo "Please supply the directory where the tarball artifacts were downloaded."
 else
 
-	if [ ! -f $1/$COMPANION_FILE ] ; then
+	if [ ! -f $1/${COMPANION_FILE_BASE}.tar.gz ] ; then
     	pushd $1
     	wget "${TOOLS_BASE}${COMPANION_FILE_BASE}.tar.gz"
     	popd
