@@ -16,7 +16,7 @@
 # for historical purposes.  This should be the first option specified 
 # in the config file!!!
 
-log_file=/var/log/nagios/nagios.log
+log_file=$HOME/var/log/nagios/nagios.log
 
 
 
@@ -91,7 +91,7 @@ precached_object_file=/var/lib/nagios/objects.precache
 
 
 # RESOURCE FILE
-# This is an optional resource file that contains $USERx$ macro
+# This is an optional resource file that contains $HOMEx$ macro
 # definitions. Multiple resource files can be specified by using
 # multiple resource_file definitions.  The CGIs will not attempt to
 # read the contents of resource files, so information that is
@@ -270,7 +270,7 @@ log_rotation_method=d
 # This is the directory where archived (rotated) log files should be 
 # placed (assuming you've chosen to do log rotation).
 
-log_archive_path=/var/log/nagios/archives
+log_archive_path=$HOME/var/log/nagios/archives
 
 
 

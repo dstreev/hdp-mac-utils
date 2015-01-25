@@ -21,13 +21,13 @@
 
 #Set path to where bin/hadoop is available
 #Set path to where bin/hadoop is available
-export HADOOP_HOME=${HADOOP_HOME:-/usr/lib/hadoop}
+export HADOOP_HOME=${HADOOP_HOME:-/usr/hdp/current/hadoop}
 
 #set the path to where bin/hbase is available
-export HBASE_HOME=${HBASE_HOME:-/usr/lib/hbase}
+export HBASE_HOME=${HBASE_HOME:-/usr/hdp/current/hbase}
 
 #Set the path to where bin/hive is available
-export HIVE_HOME=${HIVE_HOME:-/usr/lib/hive}
+export HIVE_HOME=${HIVE_HOME:-/usr/hdp/current/hive}
 
 #Set the path for where zookeper config dir is
 export ZOOCFGDIR=${ZOOCFGDIR:-/etc/zookeeper/conf}

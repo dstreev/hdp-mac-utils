@@ -1,0 +1,19 @@
+#!/bin/bash
+. /usr/hdp/2.2.0.0-2041/etc/default/hadoop
+
+# Autodetect JAVA_HOME if not defined
+if [ -e /usr/libexec/bigtop-detect-javahome ]; then
+  . /usr/libexec/bigtop-detect-javahome
+elif [ -e /usr/lib/bigtop-utils/bigtop-detect-javahome ]; then
+  . /usr/lib/bigtop-utils/bigtop-detect-javahome
+fi
+
+export PIG_HOME=${PIG_HOME:-/usr/hdp/current/pig}
+export HADOOP_HOME=${HADOOP_HOME:-/usr/hdp/current/hadoop}
+export HADOOP_CONF=${HADOOP_HOME}/conf
+export ZOOKEEPER_HOME=${ZOOKEEPER_HOME:-/usr/hdp/current/zookeeper}
+export HIVE_HOME=${HIVE_HOME:-/usr/hdp/current/hive}
+export HCAT_HOME=${HCAT_HOME:-/usr/hdp/current/hive-hcatalog}
+export HBASE_HOME=${HBASE_HOME:-/usr/hdp/current/hbase}
+
+exec /usr/hdp/current/pig/bin/pig.distro "$@"

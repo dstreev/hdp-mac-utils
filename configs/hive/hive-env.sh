@@ -50,4 +50,4 @@ HADOOP_HOME=${HADOOP_HOME:-/usr}
 export HIVE_CONF_DIR=/etc/hive/conf
 export JAVA_HOME=`/usr/libexec/java_home`
 # Folder containing extra ibraries required for hive compilation/execution can be controlled by:
-export HIVE_AUX_JARS_PATH=${HIVE_AUX_JARS_PATH:-/usr/lib/hcatalog/share/hcatalog/hcatalog-core.jar}
+export HIVE_AUX_JARS_PATH=${HIVE_AUX_JARS_PATH:-/usr/hdp/current/hive-hcatalog/share/hcatalog/hive-hcatalog-core.jar}

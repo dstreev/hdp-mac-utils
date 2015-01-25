@@ -1,0 +1,16 @@
+#!/bin/sh
+
+. /usr/hdp/2.2.0.0-2041/etc/default/hadoop
+. /usr/hdp/2.2.0.0-2041/etc/default/accumulo
+
+# Autodetect JAVA_HOME if not defined
+if [ -e /usr/libexec/bigtop-detect-javahome ]; then
+  . /usr/libexec/bigtop-detect-javahome
+elif [ -e /usr/lib/bigtop-utils/bigtop-detect-javahome ]; then
+  . /usr/lib/bigtop-utils/bigtop-detect-javahome
+fi
+
+export HDP_VERSION=${HDP_VERSION:-2.2.0.0-2041}
+export ACCUMULO_OTHER_OPTS="-Dhdp.version=${HDP_VERSION} ${ACCUMULO_OTHER_OPTS}"
+
+exec /usr/hdp/current/accumulo/bin/accumulo.distro "$@"

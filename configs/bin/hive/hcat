@@ -1,0 +1,18 @@
+#!/bin/sh
+. /usr/hdp/2.2.0.0-2041/etc/default/hadoop
+
+# Autodetect JAVA_HOME if not defined
+if [ -e /usr/libexec/bigtop-detect-javahome ]; then
+  . /usr/libexec/bigtop-detect-javahome
+elif [ -e /usr/lib/bigtop-utils/bigtop-detect-javahome ]; then
+  . /usr/lib/bigtop-utils/bigtop-detect-javahome
+fi
+
+# FIXME: HCATALOG-636 (and also HIVE-2757)
+export HADOOP_HOME=/usr/hdp/current/hadoop
+export HIVE_HOME=/usr/hdp/current/hive
+export HIVE_CONF_DIR=/etc/hive/conf
+export HCAT_HOME=/usr/hdp/current/hive-hcatalog
+
+export HCATALOG_HOME="$HCAT_HOME"
+exec "$HCAT_HOME"/bin/hcat.distro "$@"

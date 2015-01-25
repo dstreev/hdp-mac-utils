@@ -31,14 +31,25 @@ echo "===> Expand and Link"
 if [ $# -lt 1 ]; then
 	echo "Usage: expand_link.sh $STAGE_DIR [elements]"
 else
-
+    if [ ! -d $LIB_BASE_DIR ]; then
+        sudo mkdir -p $LIB_BASE_DIR
+    fi
 	cd $LIB_BASE_DIR
 	if [ ! -d $HDP_VER ]; then
 		sudo mkdir $HDP_VER	
 	fi
 
+	# Cleanup old links
+	sudo rm -rf current
+
+	if [ ! -d current ]; then
+	    sudo mkdir current
+	fi
+
 	ELEMENTS="${2:-$ALL_ELEMENTS}"
 	SOURCE_DIR=$1
+
+
 	cat $APP_DIR/hdp_artifacts.txt | while read next; do
 		T_FILE=`echo $next | awk '{print $1}'`
 		T_LINK=`echo $next | awk '{print $2}'`
@@ -50,7 +61,15 @@ else
 			echo "Reseting: $T_LINK libraries and links"
 			sudo rm -rf $HDP_VER/$T_FILE $T_LINK
 			cd $HDP_VER
-			sudo tar xzf $SOURCE_DIR/$T_FILE.tar.gz
+
+			# Tez Package in 2.2 doesn't include root dirs like the rest of the distro.
+			if [ "${T_LINK}" == "tez" ]; then
+			    sudo mkdir $T_FILE
+				sudo tar xzf $SOURCE_DIR/$T_FILE.tar.gz -C $T_FILE
+			else
+				sudo tar xzf $SOURCE_DIR/$T_FILE.tar.gz
+			fi
+
 			cd $LIB_BASE_DIR
 		
 			# The Oozie distribution is inconsistent when extracted
@@ -62,7 +81,14 @@ else
 			echo "	Fixed File: $T_FILE_FIXED"
 			echo "	Version: $APP_VER"
 		
-			sudo ln -s $HDP_VER/$T_FILE_FIXED $T_LINK
+			sudo ln -s $LIB_BASE_DIR/$HDP_VER/$T_FILE_FIXED $LIB_BASE_DIR/current/$T_LINK
+
+			if [ "${T_LINK}" == "hive" ]; then
+				sudo ln -s ../$HDP_VER/$T_FILE_FIXED/hcatalog current/hive-hcatalog
+			fi
+
+			# Add the adjusted bin scripts to distro.
+			sudo cp -v $APP_DIR/configs/bin/$T_LINK/* $LIB_BASE_DIR/current/$T_LINK/bin/
 
 			# Reset the local conf's to link to /etc/$app/conf
 			# Because of the lack of consistency of the startup scripts across products
@@ -85,14 +111,73 @@ else
 	done
 	
 	sudo chown -R root:wheel $LIB_BASE_DIR
-	
+
+	# Link in path binaries
+	# hadoop,yarn,mapred,hdfs
+	sudo rm -f /usr/bin/hadoop
+	sudo rm -f /usr/bin/hdfs
+	sudo rm -f /usr/bin/mapred
+	sudo rm -f /usr/bin/yarn
+	sudo rm -f /usr/bin/accumulo
+	sudo rm -f /usr/bin/falcon
+	sudo rm -f /usr/bin/flume-ng
+	sudo rm -f /usr/bin/hbase
+	sudo rm -f /usr/bin/hive
+	sudo rm -f /usr/bin/beeline
+	sudo rm -f /usr/bin/hiveserver2
+	sudo rm -f /usr/bin/pig
+    sudo rm -f /usr/bin/sqoop
+    sudo rm -f /usr/bin/sqoop-codegen
+    sudo rm -f /usr/bin/sqoop-create-hive-table
+    sudo rm -f /usr/bin/sqoop-eval
+    sudo rm -f /usr/bin/sqoop-export
+    sudo rm -f /usr/bin/sqoop-help
+    sudo rm -f /usr/bin/sqoop-import
+    sudo rm -f /usr/bin/sqoop-import-all-tables
+    sudo rm -f /usr/bin/sqoop-job
+    sudo rm -f /usr/bin/sqoop-list-databases
+    sudo rm -f /usr/bin/sqoop-list-tables
+    sudo rm -f /usr/bin/sqoop-merge
+    sudo rm -f /usr/bin/sqoop-metastore
+    sudo rm -f /usr/bin/sqoop-version
+
+
+	sudo ln -s $LIB_BASE_DIR/current/hadoop/bin/hadoop /usr/bin/hadoop
+	sudo ln -s $LIB_BASE_DIR/current/hadoop/bin/hdfs /usr/bin/hdfs
+	sudo ln -s $LIB_BASE_DIR/current/hadoop/bin/mapred /usr/bin/mapred
+	sudo ln -s $LIB_BASE_DIR/current/hadoop/bin/yarn /usr/bin/yarn
+
+	sudo ln -s $LIB_BASE_DIR/current/accumulo/bin/accumulo /usr/bin/accumulo
+	sudo ln -s $LIB_BASE_DIR/current/falcon/bin/falcon /usr/bin/falcon
+	sudo ln -s $LIB_BASE_DIR/current/flume/bin/flume-ng /usr/bin/flume-ng
+	sudo ln -s $LIB_BASE_DIR/current/hbase/bin/hbase /usr/bin/hbase
+	sudo ln -s $LIB_BASE_DIR/current/hive/bin/hive /usr/bin/hive
+	sudo ln -s $LIB_BASE_DIR/current/hive/bin/beeline /usr/bin/beeline
+	sudo ln -s $LIB_BASE_DIR/current/hive/bin/hiveserver2 /usr/bin/hiveserver2
+	sudo ln -s $LIB_BASE_DIR/current/pig/bin/pig /usr/bin/pig
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop /usr/bin/sqoop
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-codegen /usr/bin/sqoop-codegen
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-create-hive-table /usr/bin/sqoop-create-hive-table
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-eval /usr/bin/sqoop-eval
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-export /usr/bin/sqoop-export
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-help /usr/bin/sqoop-help
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-import /usr/bin/sqoop-import
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-import-all-tables /usr/bin/sqoop-import-all-tables
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-job /usr/bin/sqoop-job
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-list-databases /usr/bin/sqoop-list-databases
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-list-tables /usr/bin/sqoop-list-tables
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-merge /usr/bin/sqoop-merge
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-metastore /usr/bin/sqoop-metastore
+    sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-version /usr/bin/sqoop-version
+
+
 	# Link JDBC drivers
 	if [[ "$ELEMENTS" =~ oozie|hive ]]; then
 		cd $SOURCE_DIR
 		sudo tar xzf $MYSQL_ARCHIVE.tar.gz
-		sudo mkdir -p /usr/share/jdbc
-		sudo cp $MYSQL_ARCHIVE/$MYSQL_ARCHIVE-bin.jar /usr/share/jdbc
-		sudo chmod -R 0555 /usr/share/jdbc
+		sudo mkdir -p /usr/share/java
+		sudo cp $MYSQL_ARCHIVE/$MYSQL_ARCHIVE-bin.jar /usr/share/java
+		sudo chmod -R 0555 /usr/share/java
 		cd $CUR_DIR
 	
 		J_FILE="/usr/share/jdbc/$MYSQL_ARCHIVE-bin.jar"
@@ -110,15 +195,6 @@ else
 		sudo mkdir -p $DEFAULT_DIR	
 	fi	
 	
-	cd $CUR_DIR
-	sudo cp $APP_DIR/etc/default/* $DEFAULT_DIR
-	sudo chmod -R uog+x /etc/default
-	cd $DEFAULT_DIR
-	
-	echo "default complete"
-	
-	# Install helper and wrapper scripts
-    sudo cp $APP_DIR/usr/bin/* /usr/bin
 
 	# Expand the Templates and Link
 	# DON'T OVERWRITE IF THEY ARE THERE ALREADY

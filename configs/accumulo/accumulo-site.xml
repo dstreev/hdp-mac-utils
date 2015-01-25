@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+  <!-- Put your site-specific accumulo configurations here. The available configuration values along with their defaults are documented in docs/config.html Unless
+    you are simply testing at your workstation, you will most definitely need to change the three entries below. -->
+
+  <property>
+    <name>instance.volumes</name>
+    <value>hdfs://localhost:8020/apps/accumulo</value>
+    <description>Comma separate list of HDFS URIs Accumulo will use for storage</description>
+  </property>
+
+  <property>
+    <name>instance.zookeeper.host</name>
+    <value>localhost:2181</value>
+    <description>comma separated list of zookeeper servers</description>
+  </property>
+
+  <property>
+    <name>tserver.memory.maps.max</name>
+    <value>512M</value>
+    <description>Size of in-memory map. If native maps are built/used, this is off-heap memory</description>
+  </property>
+
+  <property>
+    <name>tserver.memory.maps.native.enabled</name>
+    <value>true</value>
+    <description>Expects native map library to be built and available. Use $ACCUMULO_HOME/bin/build_native_library.sh to build.</description>
+  </property>
+
+  <property>
+    <name>tserver.cache.data.size</name>
+    <value>128M</value>
+    <description>Size of on-heap cache for RFile data blocks</description>
+  </property>
+
+  <property>
+    <name>tserver.cache.index.size</name>
+    <value>128M</value>
+    <description>Size of on-heap cache for RFile index blocks</description>
+  </property>
+
+  <!-- To use the distributed tracing, make an Accumulo user using the Accumulo shell for writing traces
+       to the trace table and set the username and password here -->
+  <property>
+    <name>trace.user</name>
+    <value>TODO_SET_TRACE_USER</value>
+  </property>
+
+  <property>
+    <name>trace.token.property.password</name>
+    <value>TODO_TRACE_USER_PASSWORD</value>
+  </property>
+
+  <property>
+    <name>tserver.sort.buffer.size</name>
+    <value>200M</value>
+    <description>Size of buffer used to sort mutations during log-recovery</description>
+  </property>
+
+  <property>
+    <name>tserver.walog.max.size</name>
+    <value>1G</value>
+    <description>Maximum size of write-ahead log files</description>
+  </property>
+
+  <!-- Can use `hadoop credential` to alleviate plaintext passwords in this file:
+       instance.secret, trace.token.property.password, rpc.javax.net.ssl.trustStorePassword
+       rpc.javax.net.ssl.keyStorePassword, monitor.ssl.keyStorePassword and
+       monitor.ssl.trustStorePassword. Fully optional. -->
+  <!--
+  <property>
+    <name>general.security.credential.provider.paths</name>
+    <value>jceks://file/etc/accumulo/conf/accumulo.jks</value>
+    <description>Can be used instead of plaintext passwords in this file</description>
+  </property>
+  -->
+
+  <!-- Properties to add for secure deployments -->
+  <!--
+  <property>
+    <name>rpc.javax.net.ssl.trustStore</name>
+    <value>/etc/accumulo/conf/truststore.jks</value>
+    <description>Java KeyStore with SSL certificate authority for Accumulo RPC</description>
+  </property>
+
+  <property>
+    <name>rpc.javax.net.ssl.trustStorePassword</name>
+    <value>TODO_TRUSTSTORE_PASSWORD</value>
+    <description>Password for SSL certificate authority keystore</description>
+  </property>
+
+  <property>
+    <name>rpc.javax.net.ssl.keyStore</name>
+    <value>/etc/accumulo/conf/server.jks</value>
+    <description>Java KeyStore with SSL server certificate for Accumulo RPC</description>
+  </property>
+
+  <property>
+    <name>rpc.javax.net.ssl.keyStorePassword</name>
+    <value>TODO_SERVER_KEYSTORE_PASSWORD</value>
+    <description>Password for SSL server keystore</description>
+  </property>
+
+  <property>
+    <name>general.kerberos.keytab</name>
+    <value>/etc/security/keytabs/accumulo.service.keytab</value>
+    <description>Path to Kerberos keytab for Accumulo</description>
+  </property>
+
+  <property>
+    <name>general.kerberos.principal</name>
+    <value>accumulo/_HOST@EXAMPLE.COM</value>
+    <description>Kerberos principal name in keytab</description>
+  </property>
+
+  <property>
+    <name>monitor.ssl.keyStore</name>
+    <value>/etc/accumulo/conf/monitor-keystore.jks</value>
+    <description>Java KeyStore with Accumulo monitor SSL server certificate</description>
+  </property>
+
+  <property>
+    <name>monitor.ssl.keyStorePassword</name>
+    <value>TODO_MONITOR_KEYSTORE_PASSWORD</value>
+    <description>Password for Monitor keystore</description>
+  </property>
+
+  <property>
+    <name>monitor.ssl.trustStore</name>
+    <value>/etc/accumulo/conf/monitor-truststore.jks</value>
+    <description>Java KeyStore with Accumulo monitor SSL certificate authority (truststore)</description>
+  </property>
+
+  <property>
+    <name>monitor.ssl.trustStorePassword</name>
+    <value>TODO_MONITOR_TRUSTSTORE_PASSWORD</value>
+    <description>Password for Monitor truststore</description>
+  </property>
+  -->
+
+  <property>
+    <name>general.classpaths</name>
+    <value>
+      $ACCUMULO_HOME/lib/accumulo-server.jar,
+      $ACCUMULO_HOME/lib/accumulo-core.jar,
+      $ACCUMULO_HOME/lib/accumulo-start.jar,
+      $ACCUMULO_HOME/lib/accumulo-fate.jar,
+      $ACCUMULO_HOME/lib/accumulo-proxy.jar,
+      $ACCUMULO_HOME/lib/[^.].*.jar,
+      $ZOOKEEPER_HOME/zookeeper[^.].*.jar,
+      $HADOOP_CONF_DIR,
+      /usr/hdp/current/hadoop-client/[^.].*.jar,
+      /usr/hdp/current/hadoop-client/lib/(?!slf4j)[^.].*.jar,
+      /usr/hdp/current/hadoop-hdfs-client/[^.].*.jar,
+      /usr/hdp/current/hadoop-mapreduce-client/[^.].*.jar,
+      /usr/hdp/current/hadoop-yarn-client/[^.].*.jar,
+      /usr/hdp/current/hadoop-yarn-client/lib/jersey.*.jar,
+      $HADOOP_PREFIX/[^.].*.jar,
+      $HADOOP_PREFIX/lib/(?!slf4j)[^.].*.jar,
+      /usr/hdp/current/hive-client/lib/hive-accumulo-handler.jar,
+    </value>
+    <description>Classpaths that accumulo checks for updates and class files.</description>
+  </property>
+</configuration>

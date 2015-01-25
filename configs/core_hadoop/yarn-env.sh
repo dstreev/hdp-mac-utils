@@ -16,10 +16,10 @@
 # * limitations under the License.
 # */
 
-export HADOOP_YARN_HOME=/usr/lib/hadoop
-export YARN_LOG_DIR=$HOME/var/log/hadoop-yarn
-export YARN_PID_DIR=$HOME/var/run/hadoop-yarn
-export HADOOP_LIBEXEC_DIR=/usr/lib/hadoop/libexec
+export HADOOP_YARN_HOME=/usr/hdp/current/hadoop
+export YARN_LOG_DIR=$HOME/var/log/hadoop/$HOME
+export YARN_PID_DIR=/var/run/hadoop/$HOME
+export HADOOP_LIBEXEC_DIR=/usr/hdp/current/hadoop/libexec
 export JAVA_HOME=`/usr/libexec/java_home`
 
 # User for YARN daemons
@@ -79,6 +79,15 @@ export YARN_RESOURCEMANAGER_HEAPSIZE=1024
 # or JAVA_HEAP_MAX with YARN_HEAPMAX as the preferred option of the two.
 export YARN_NODEMANAGER_HEAPSIZE=1024
 
+# Specify the max Heapsize for the HistoryManager using a numerical value
+# in the scale of MB. For example, to specify an jvm option of -Xmx1000m, set
+# the value to 1024.
+# This value will be overridden by an Xmx setting specified in either YARN_OPTS
+# and/or YARN_HISTORYSERVER_OPTS.
+# If not specified, the default value will be picked from either YARN_HEAPMAX
+# or JAVA_HEAP_MAX with YARN_HEAPMAX as the preferred option of the two.
+export YARN_HISTORYSERVER_HEAPSIZE=1024
+
 # Specify the JVM options to be used when starting the NodeManager.
 # These options will be appended to the options specified as YARN_OPTS
 # and therefore may override any similar flags set in YARN_OPTS
@@ -88,7 +97,7 @@ export YARN_NODEMANAGER_HEAPSIZE=1024
 IFS=
 
 
-# default log directory & file
+# default log directory and file
 if [ "$YARN_LOG_DIR" = "" ]; then
   YARN_LOG_DIR="$HADOOP_YARN_HOME/logs"
 fi

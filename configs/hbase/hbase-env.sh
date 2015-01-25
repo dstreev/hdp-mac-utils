@@ -1,3 +1,4 @@
+
 #
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements. See the NOTICE file
@@ -18,14 +19,14 @@
 
 # Set environment variables here.
 
-# The java implementation to use. Java 1.6 required.
+# The java implementation to use. Java 1.7 required.
 export JAVA_HOME=`/usr/libexec/java_home`
 
 # HBase Configuration directory
 export HBASE_CONF_DIR=${HBASE_CONF_DIR:-/etc/hbase/conf}
 
 # Extra Java CLASSPATH elements. Optional.
-export HBASE_CLASSPATH=${HBASE_CLASSPATH}:/etc/hadoop/conf
+export HBASE_CLASSPATH=${HBASE_CLASSPATH}
 
 # The maximum amount of heap to use, in MB. Default is 1000.
 # export HBASE_HEAPSIZE=1000
@@ -34,8 +35,8 @@ export HBASE_CLASSPATH=${HBASE_CLASSPATH}:/etc/hadoop/conf
 # Below are what we set by default. May only work with SUN JVM.
 # For more on why as well as other possible settings,
 # see http://wiki.apache.org/hadoop/PerformanceTuning
-export HBASE_OPTS="-ea -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode"
-
+export HBASE_OPTS="-XX:+UseConcMarkSweepGC -XX:ErrorFile=$HOME/var/log/hbase/hs_err_pid%p.log"
+export SERVER_GC_OPTS="-verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:$HOME/var/log/hbase/gc.log-`date +'%Y%m%d%H%M'`"
 # Uncomment below to enable java garbage collection logging.
 # export HBASE_OPTS="$HBASE_OPTS -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:$HBASE_HOME/logs/gc-hbase.log"
 
@@ -44,8 +45,8 @@ export HBASE_OPTS="-ea -XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode"
 # More details at: http://java.sun.com/javase/6/docs/technotes/guides/management/agent.html
 #
 # export HBASE_JMX_BASE="-Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
-export HBASE_MASTER_OPTS="-Xmx1024m"
-export HBASE_REGIONSERVER_OPTS="-Xmx1024m"
+export HBASE_MASTER_OPTS="-Xmx2048m"
+export HBASE_REGIONSERVER_OPTS="-Xmn200m -Xms4096m -Xmx4096m"
 # export HBASE_THRIFT_OPTS="$HBASE_JMX_BASE -Dcom.sun.management.jmxremote.port=10103"
 # export HBASE_ZOOKEEPER_OPTS="$HBASE_JMX_BASE -Dcom.sun.management.jmxremote.port=10104"
 
@@ -58,14 +59,14 @@ export HBASE_REGIONSERVERS=${HBASE_CONF_DIR}/regionservers
 # Where log files are stored. $HBASE_HOME/logs by default.
 export HBASE_LOG_DIR=$HOME/var/log/hbase
 
-# A string representing this instance of hbase. $USER by default.
-# export HBASE_IDENT_STRING=$USER
+# A string representing this instance of hbase. $HOME by default.
+# export HBASE_IDENT_STRING=$HOME
 
 # The scheduling priority for daemon processes. See 'man nice'.
 # export HBASE_NICENESS=10
 
 # The directory where pid files are stored. /tmp by default.
-export HBASE_PID_DIR=$HOME/var/run/hbase
+export HBASE_PID_DIR=/var/run/hbase
 
 # Seconds to sleep between slave commands. Unset by default. This
 # can be useful in large clusters, where, e.g., slave rsyncs can
@@ -74,3 +75,8 @@ export HBASE_PID_DIR=$HOME/var/run/hbase
 
 # Tell HBase whether it should manage it's own instance of Zookeeper or not.
 export HBASE_MANAGES_ZK=false
+
+# Use these settings only for Kerberized clusters.
+#export HBASE_OPTS="$HBASE_OPTS -Djava.security.auth.login.config=${HBASE_CONF_DIR}/hbase_client_jaas.conf"
+#export HBASE_MASTER_OPTS="$HBASE_MASTER_OPTS -Djava.security.auth.login.config=${HBASE_CONF_DIR}/hbase_master_jaas.conf"
+#export HBASE_REGIONSERVER_OPTS="$HBASE_REGIONSERVER_OPTS -Djava.security.auth.login.config=${HBASE_CONF_DIR}/hbase_regionserver_jaas.conf"

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Autodetect JAVA_HOME if not defined
+if [ -e /usr/libexec/bigtop-detect-javahome ]; then
+  . /usr/libexec/bigtop-detect-javahome
+elif [ -e /usr/lib/bigtop-utils/bigtop-detect-javahome ]; then
+  . /usr/lib/bigtop-utils/bigtop-detect-javahome
+fi
+
+export HADOOP_HOME=${HADOOP_HOME:-/usr/hdp/current/hadoop}
+export ZOOKEEPER_HOME=${ZOOKEEPER_HOME:-/usr/hdp/current/zookeeper}
+export HBASE_HOME=${HBASE_HOME:-/usr/hdp/current/hbase}
+export ACCUMULO_HOME=${ACCUMULO_HOME:-/usr/hdp/current/accumulo}
+export SQOOP_HOME=${SQOOP_HOME:-/usr/hdp/current/sqoop}
+exec /usr/hdp/current/sqoop/bin/sqoop-eval.distro "$@"

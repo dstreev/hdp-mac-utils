@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Autodetect JAVA_HOME if not defined
+if [ -e /usr/libexec/bigtop-detect-javahome ]; then
+  . /usr/libexec/bigtop-detect-javahome
+elif [ -e /usr/lib/bigtop-utils/bigtop-detect-javahome ]; then
+  . /usr/lib/bigtop-utils/bigtop-detect-javahome
+fi
+
+if [ -n "$FLUME_PID_FILE" ]; then
+  echo $$ > $FLUME_PID_FILE
+fi
+
+# See FLUME-920
+exec bash /usr/hdp/current/flume/bin/flume-ng.distro "$@"

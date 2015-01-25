@@ -21,11 +21,12 @@
 export JAVA_HOME=`/usr/libexec/java_home`
 
 # Set Oozie specific environment variables here.
+export OOZIE_CLIENT_OPTS="${OOZIE_CLIENT_OPTS} -Doozie.connection.retry.count=5"
 
 # Settings for the Embedded Tomcat that runs Oozie
 # Java System properties for Oozie should be specified in this variable
 #
-# export CATALINA_OPTS=
+export CATALINA_OPTS="${CATALINA_OPTS} -Xmx2048m -XX:MaxPermSize=256m"
 
 # Oozie configuration file to load from Oozie configuration directory
 #
@@ -61,4 +62,4 @@ export OOZIE_DATA=$HOME/hadoop/oozie/data/
 # The base URL for callback URLs to Oozie
 #
 # export OOZIE_BASE_URL="http://${OOZIE_HTTP_HOSTNAME}:${OOZIE_HTTP_PORT}/oozie"
-export JAVA_LIBRARY_PATH=/usr/lib/hadoop/lib/native/Linux-amd64-64
+#export JAVA_LIBRARY_PATH=/usr/lib/hadoop/lib/native/Linux-amd64-64

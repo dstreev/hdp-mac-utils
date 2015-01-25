@@ -1,86 +1,196 @@
-<!--Thu Aug 15 20:47:13 2013-->
-  <configuration>
+<configuration>
+
+	<!-- 
+			If running Secondary NameNode service, then set this to define where checkpoint 
+			data is stored on disk -->
+		<property>
+			<name>dfs.namenode.checkpoint.dir</name>
+			<value>${user.home}/hadoop/hdfs/namesecondary</value>
+		</property> 
+
+	<!-- 
+			This represents the default path prefix used by the Hadoop FS client. 
+			
+			For deployments with a single NameNode, this will be the URI for that NameNode. For
+			example: namdenode:8020
+						
+			If NameNode HA is configured, this will be the logical URI. For example, for 
+			'mycluster' nameservice ID, the value will be 'hdfs://mycluster'.
+	-->
     <property>
-    <name>fs.checkpoint.size</name>
-    <value>0.5</value>
-  </property>
+      <name>fs.defaultFS</name>
+      <value>hdfs://localhost:8020</value>
+    </property> 
+
     <property>
-    <name>dfs.namenode.checkpoint.dir</name>
-    <value>${user.home}/data/hadoop/hdfs/checkpoint</value>
-  </property>
+      <name>fs.trash.interval</name>
+      <value>360</value>
+    </property>
+
     <property>
+      <name>hadoop.http.authentication.simple.anonymous.allowed</name>
+      <value>true</value>
+    </property>
+
+    <property>
+      <name>io.compression.codecs</name>
+      <value>org.apache.hadoop.io.compress.SnappyCodec,org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec</value>
+    </property> 
+
+    <property>
+      <name>io.file.buffer.size</name>
+      <value>131072</value>
+    </property> 
+
+    <property>
+      <name>io.serializations</name>
+      <value>org.apache.hadoop.io.serializer.WritableSerialization</value>
+    </property> 
+
+    <property>
+      <name>ipc.client.connect.max.retries</name>
+      <value>50</value>
+    </property> 
+
+    <property>
+      <name>ipc.client.connection.maxidletime</name>
+      <value>30000</value>
+    </property> 
+
+    <property>
+      <name>ipc.client.idlethreshold</name>
+      <value>8000</value>
+    </property> 
+
+		<!--
+				These are the settings for hadoop.security.auth_to_local for a 
+				non-Kereberized cluster. 
+				
+				If deploying Kerberos, then see the configuration value utilized in the Kerberos 
+				configuration section below.
+		-->
+		<property>
+		 <name>hadoop.security.auth_to_local</name>
+		 <value>
+		     RULE:[2:$1@$0]([rn]m@.*)s/.*/yarn/
+		     RULE:[2:$1@$0](jhs@.*)s/.*/mapred/
+		     RULE:[2:$1@$0]([nd]n@.*)s/.*/hdfs/
+		     RULE:[2:$1@$0](hm@.*)s/.*/hbase/
+		     RULE:[2:$1@$0](rs@.*)s/.*/hbase/
+		     DEFAULT
+		 </value>
+		</property>
+
+		<property>
+      <name>hadoop.proxyuser.HTTP.groups</name>
+      <value>*</value>
+    </property> 
+
+    <property>
+      <name>hadoop.proxyuser.HTTP.hosts</name>
+      <value>*</value>
+    </property> 
+
+    <property>
+      <name>hadoop.proxyuser.falcon.groups</name>
+      <value>*</value>
+    </property> 
+
+    <property>
+      <name>hadoop.proxyuser.falcon.hosts</name>
+      <value>*</value>
+    </property> 
+
+    <property>
+      <name>hadoop.proxyuser.hcat.groups</name>
+      <value>*</value>
+    </property> 
+
+    <property>
+      <name>hadoop.proxyuser.hcat.hosts</name>
+      <value>*</value>
+    </property> 
+
+    <property>
+      <name>hadoop.proxyuser.hive.groups</name>
+      <value>*</value>
+    </property> 
+
+    <property>
+      <name>hadoop.proxyuser.hive.hosts</name>
+      <value>*</value>
+    </property> 
+
+    <property>
+      <name>hadoop.proxyuser.oozie.groups</name>
+      <value>*</value>
+    </property> 
+
+    <property>
+      <name>hadoop.proxyuser.oozie.hosts</name>
+      <value>*</value>
+    </property> 
+    
+    <property>
+      <name>mapreduce.jobtracker.webinterface.trusted</name>
+      <value>false</value>
+    </property>
+    
+    <property>
+      <name>proxyuser_group</name>
+      <value>users</value>
+    </property>
+
+
+	<!-- If configuring Kerberos, then this should be 'kerberos' -->
+  <property>
     <name>hadoop.security.authentication</name>
     <value>simple</value>
-  </property>
-    <property>
-    <name>hadoop.proxyuser.oozie.groups</name>
-    <value>users</value>
-  </property>
-    <property>
-    <name>fs.checkpoint.edits.dir</name>
-    <value>${user.home}/data/hadoop/hdfs/checkpoint</value>
-  </property>
-    <property>
-    <name>hadoop.proxyuser.hive.groups</name>
-    <value>users</value>
-  </property>
-    <property>
-    <name>ipc.client.connect.max.retries</name>
-    <value>50</value>
-  </property>
-    <property>
-    <name>dfs.namenode.checkpoint.period</name>
-    <value>21600</value>
-  </property>
-    <property>
-    <name>ipc.client.connection.maxidletime</name>
-    <value>30000</value>
-  </property>
-    <property>
-    <name>hadoop.security.auth_to_local</name>
-    <value>
-        RULE:[2:$1@$0]([rn]m@.*)s/.*/yarn/
-        RULE:[2:$1@$0](jhs@.*)s/.*/mapred/
-        RULE:[2:$1@$0]([nd]n@.*)s/.*/hdfs/
-        RULE:[2:$1@$0](hm@.*)s/.*/hbase/
-        RULE:[2:$1@$0](rs@.*)s/.*/hbase/
-        DEFAULT
-    </value>
-  </property>
-    <property>
-    <name>ipc.client.idlethreshold</name>
-    <value>8000</value>
-  </property>
-    <property>
-    <name>io.compression.codecs</name>
-    <value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec</value>
-  </property>
-    <property>
-    <name>io.serializations</name>
-    <value>org.apache.hadoop.io.serializer.WritableSerialization</value>
-  </property>
-    <property>
-    <name>hadoop.proxyuser.hcat.groups</name>
-    <value>users</value>
-  </property>
-    <property>
-    <name>fs.trash.interval</name>
-    <value>360</value>
-  </property>
+  </property> 
+
+	<!-- If configuring Kerberos, then this should be 'true' -->
     <property>
     <name>hadoop.security.authorization</name>
     <value>false</value>
-  </property>
+  </property> 
+  
     <property>
-    <name>fs.defaultFS</name>
-    <value>hdfs://localhost:8020</value>
-  </property>
+      <name>ipc.server.tcpnodelay</name>
+      <value>true</value>
+    </property>
+    
+    <!-- NameNode High Availability Configurations 
+    
+    - The host and ports for Zookeeper nodes that enable NameNode HA -
     <property>
-    <name>mapreduce.jobtracker.webinterface.trusted</name>
-    <value>false</value>
-  </property>
+      <name>ha.zookeeper.quorum</name>
+      <value>TODO-ZK1-HOSTNAME:2181,TODO-ZK2-HOSTNAME:2181,TODO-ZK3-HOSTNAME:2181</value>
+    </property> 
+    
+    -->   
+    
+    <!-- Kerberos Enable Configurations 
+    
     <property>
-    <name>io.file.buffer.size</name>
-    <value>131072</value>
-  </property>
-  </configuration>
+      <name>hadoop.rpc.protection</name>
+      <value>privacy</value>
+    </property> 
+    
+    <property>
+      <name>hadoop.security.auth_to_local</name>
+      <value>RULE:[2:$1@$0](rm@.*TODO-KERBEROS-DOMAIN)s/.*/yarn/
+						RULE:[2:$1@$0](nm@.*TODO-KERBEROS-DOMAIN)s/.*/yarn/
+						RULE:[2:$1@$0](nn@.*TODO-KERBEROS-DOMAIN)s/.*/hdfs/
+						RULE:[2:$1@$0](dn@.*TODO-KERBEROS-DOMAIN)s/.*/hdfs/
+						RULE:[2:$1@$0](hbase@.*TODO-KERBEROS-DOMAIN)s/.*/hbase/
+						RULE:[2:$1@$0](hbase@.*TODO-KERBEROS-DOMAIN)s/.*/hbase/
+						RULE:[2:$1@$0](oozie@.*TODO-KERBEROS-DOMAIN)s/.*/oozie/
+						RULE:[2:$1@$0](jhs@.*TODO-KERBEROS-DOMAIN)s/.*/mapred/
+						RULE:[2:$1@$0](jn/_HOST@.*TODO-KERBEROS-DOMAIN)s/.*/hdfs/
+						RULE:[2:$1@$0](falcon@.*TODO-KERBEROS-DOMAIN)s/.*/falcon/
+						DEFAULT</value>
+    </property> 
+    
+    -->
+
+</configuration>

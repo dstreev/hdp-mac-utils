@@ -18,18 +18,14 @@
 # Set parameters
 APP_DIR=`dirname $0`
 CUR_DIR=`pwd`
-#ALL_ELEMENTS="hadoop,hbase,hive,pig,oozie,zookeeper,accumulo,storm,falcon,falcon-server,knox,phoenix,tez,tez-full,flume,sqoop,mahout"
-#ALL_ELEMENTS="hadoop,hbase,hive,pig,hcatalog,oozie,flume,sqoop,mahout"
 
 cd $APP_DIR
 APP_DIR=`pwd`
 . ./mac_env.sh
 
-#ALL_ELEMENTS="hadoop,hbase,hive,pig,oozie,zookeeper,accumulo,storm,falcon,falcon-server,knox,phoenix,tez,tez-full,flume,sqoop,mahout"
-
 if [ $# -lt 1 ]; then
 	echo "Usage: ./do.sh TEMP_DIR [elements]"
-	echo"    elements: one or more of $ALL_ELEMENTS"
+	echo"    elements: one or more of ${ALL_ELEMENTS}"
 else
 
 	USER=`whoami`
@@ -100,9 +96,9 @@ else
 	echo "Installation Complete.  Review output for issues. "
 	
 	echo "File locations: "
-	echo "Binaries: $LIB_BASE_DIR/$HDP_VER with symlinks back to $LIB_BASE_DIR"
-	echo "Data Files: $HDFS_BASE_DIR - If these existed before, they were not touched"
-	echo "Configuration File: $HADOOP_CONF_DIR with symlinks to:"
+	echo "Binaries: ${LIB_BASE_DIR}/${HDP_VER} with symlinks back to ${LIB_BASE_DIR}"
+	echo "Data Files: ${HDFS_BASE_DIR} - If these existed before, they were not touched"
+	echo "Configuration File: ${HADOOP_CONF_DIR} with symlinks to:"
 	echo "	/etc/hadoop/conf"
 	echo "	/etc/hbase/conf"
 	echo "	/etc/hive/conf"

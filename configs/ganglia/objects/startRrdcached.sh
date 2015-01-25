@@ -31,6 +31,7 @@ rrdcachedRunningPid=`getRrdcachedRunningPid`;
 # Only attempt to start rrdcached if there's not already one running.
 if [ -z "${rrdcachedRunningPid}" ]
 then
+RRDCACHED_BASE_DIR="/var/lib/ganglia/rrds"
     #changed because problem puppet had with nobody user
     #sudo -u ${GMETAD_USER} ${RRDCACHED_BIN} -p ${RRDCACHED_PID_FILE} \
     #         -m 664 -l unix:${RRDCACHED_ALL_ACCESS_UNIX_SOCKET} \

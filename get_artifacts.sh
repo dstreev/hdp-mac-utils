@@ -35,7 +35,7 @@ else
 
 	if [ ! -f $1/$COMPANION_FILE ] ; then
     	pushd $1
-    	wget "$TOOLS_BASE$COMPANION_FILE_BASE.tar.gz"
+    	wget "${TOOLS_BASE}${COMPANION_FILE_BASE}.tar.gz"
     	popd
 	fi 
 	
@@ -51,12 +51,12 @@ else
 			echo "Getting $T_LINK"
 			T_FILE=$T_FILE.tar.gz
 			if [ ! -f $T_FILE ]; then
-				wget "$HTTP_BASE$T_FILE"
+				wget "${HTTP_BASE}${T_FILE}"
 			else
-				echo "File exists, skipping: $T_FILE"
+				echo "File exists, skipping: ${T_FILE}"
 			fi
 		else
-			echo "Skipping $T_LINK, not a requested element"
+			echo "Skipping ${T_LINK}, not a requested element"
 		fi
 	done
 
@@ -64,7 +64,7 @@ else
 
 	# Get the MySQL Jar for Oozie and Hive.
 	if [ ! -f $MYSQL_ARCHIVE.tar.gz ]; then
-		wget -O $MYSQL_ARCHIVE.tar.gz "http://dev.mysql.com/get/Downloads/Connector-J/$MYSQL_ARCHIVE.tar.gz/from/http://cdn.mysql.com/"
+		wget -O $MYSQL_ARCHIVE.tar.gz "http://dev.mysql.com/get/Downloads/Connector-J/${MYSQL_ARCHIVE}.tar.gz/from/http://cdn.mysql.com/"
 	fi
 	
 	# TODO - For OOZIE
