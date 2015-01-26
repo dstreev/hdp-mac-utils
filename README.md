@@ -35,12 +35,13 @@ Everything will be install AND run from you local user account.
 ## Where to Start
 The 'do.sh' script will kickoff the installation process.
 
-## Post Installation - House Keeping
+## Configurations
+The install will create a default configuration located in '/var/hadoop/local/$HDP_VER'.  If you would like to interact with another cluster, download the client configurations for HDFS, MapReduce and YARN.  Extract the contents of all 3 configuration extracts to '/var/hadoop/local/$HDP_VER/<config_name>'.
 
-### Environment Variables
-> Set the following environment variables:
-<pre><code>export HADOOP_HOME=/usr/hdp/current/Hadoop
-export HIVE_LOG_DIR=/var/log/hive</code></pre>
+Use the script 'set_hdp_conf.sh' to change the default config.
+<code>./set_hdp_conf.sh <config_name></code>
+
+## Post Installation - House Keeping
 
 ### Namenode
 > If this is the first-time you've installed HDP, you will need to initialize the Hadoop filesystem with:

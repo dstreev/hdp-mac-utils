@@ -170,6 +170,84 @@ else
     sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-metastore /usr/bin/sqoop-metastore
     sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-version /usr/bin/sqoop-version
 
+	# Add SymLink to resolve Default Hadoop Configuration
+    sudo ln -s /etc/hadoop/conf $LIB_BASE_DIR/current/hadoop/conf
+    sudo ln -s /etc/accumulo/conf $LIB_BASE_DIR/current/accumulo/conf
+    sudo ln -s /etc/hive/conf $LIB_BASE_DIR/current/hive/conf
+    sudo ln -s /etc/oozie/conf $LIB_BASE_DIR/current/oozie/conf
+    sudo ln -s /etc/pig/conf $LIB_BASE_DIR/current/pig/conf
+    sudo ln -s /etc/sqoop/conf $LIB_BASE_DIR/current/sqoop/conf
+    sudo ln -s /etc/tez/conf $LIB_BASE_DIR/current/tez/conf
+    sudo ln -s /etc/zookeeper/conf $LIB_BASE_DIR/current/zookeeper/conf
+
+	# Backup existing
+	if [ -d $HADOOP_CONF_DIR/default ]; then
+		sudo mv $HADOOP_CONF_DIR/default $HADOOP_CONF_DIR/default.`date +%Y%m%d%H%M%S`
+	fi
+
+	# Setup the default configurations
+	sudo mkdir -p $HADOOP_CONF_DIR/default
+
+	sudo cp -R $APP_DIR/configs/accumulo $HADOOP_CONF_DIR/default
+	sudo mkdir -p $HADOOP_CONF_DIR/default/hadoop
+	sudo cp -R $APP_DIR/configs/core_hadoop/* $HADOOP_CONF_DIR/default/hadoop
+
+	sudo cp -R $APP_DIR/configs/hbase $HADOOP_CONF_DIR/default
+	sudo cp -R $APP_DIR/configs/hive $HADOOP_CONF_DIR/default
+	sudo cp -R $APP_DIR/configs/oozie $HADOOP_CONF_DIR/default
+	sudo cp -R $APP_DIR/configs/pig $HADOOP_CONF_DIR/default
+	sudo cp -R $APP_DIR/configs/sqoop $HADOOP_CONF_DIR/default
+	sudo cp -R $APP_DIR/configs/tez $HADOOP_CONF_DIR/default
+	sudo cp -R $APP_DIR/configs/zookeeper $HADOOP_CONF_DIR/default
+
+	# Reset the links in /etc
+	if [ -d /etc/hadoop ]; then
+		sudo rm -rf /etc/hadoop
+	fi
+	if [ -d /etc/accumulo ]; then
+	  	sudo rm -rf /etc/accumulo
+	fi
+	if [ -d /etc/hbase ]; then
+	  	sudo rm -rf /etc/hbase
+	fi
+	if [ -d /etc/hive ]; then
+	  	sudo rm -rf /etc/hive
+	fi
+	if [ -d /etc/oozie ]; then
+		sudo rm -rf /etc/oozie
+	fi
+	if [ -d /etc/pig ]; then
+		sudo rm -rf /etc/pig
+	fi
+	if [ -d /etc/sqoop ]; then
+		sudo rm -rf /etc/sqoop
+	fi
+	if [ -d /etc/tez ]; then
+		sudo rm -rf /etc/tez
+	fi
+	if [ -d /etc/zookeeper ]; then
+		sudo rm -rf /etc/zookeeper
+	fi
+
+	sudo mkdir /etc/accumulo
+	sudo ln -s $HADOOP_CONF_DIR/default/accumulo /etc/accumulo/conf
+	sudo mkdir /etc/hadoop
+	sudo ln -s $HADOOP_CONF_DIR/default/hadoop /etc/hadoop/conf
+
+	sudo mkdir /etc/hbase
+	sudo ln -s $HADOOP_CONF_DIR/default/hbase /etc/hbase/conf
+	sudo mkdir /etc/hive
+	sudo ln -s $HADOOP_CONF_DIR/default/hive /etc/hive/conf
+	sudo mkdir /etc/oozie
+	sudo ln -s $HADOOP_CONF_DIR/default/oozie /etc/oozie/conf
+	sudo mkdir /etc/pig
+	sudo ln -s $HADOOP_CONF_DIR/default/pig /etc/pig/conf
+	sudo mkdir /etc/sqoop
+	sudo ln -s $HADOOP_CONF_DIR/default/sqoop /etc/sqoop/conf
+	sudo mkdir /etc/tez
+	sudo ln -s $HADOOP_CONF_DIR/default/tez /etc/tez/conf
+	sudo mkdir /etc/zoopkeeper
+	sudo ln -s $HADOOP_CONF_DIR/default/zookeeper /etc/zookeeper/conf
 
 	# Link JDBC drivers
 	if [[ "$ELEMENTS" =~ oozie|hive ]]; then
@@ -194,106 +272,5 @@ else
 		echo "Creating: $DEFAULT_DIR"
 		sudo mkdir -p $DEFAULT_DIR	
 	fi	
-	
 
-	# Expand the Templates and Link
-	# DON'T OVERWRITE IF THEY ARE THERE ALREADY
-	if [ -d $HADOOP_CONF_DIR/core_hadoop ]; then
-		echo "Configs are already present, they have NOT been overwritten"
-	else
-# 		cd $SOURCE_DIR
-# 		if [ -f $COMPANION_FILE_BASE.tar.gz ]; then
-# 			echo "Expanding companion files"
-# 			tar xzf $COMPANION_FILE_BASE.tar.gz -C /tmp
-# 			mv /tmp/$COMPANION_FILE_BASE/configuration_files/* $HADOOP_CONF_DIR
-# 		fi	
-		
-		cd $APP_DIR/configs	
-		cp -R * $HADOOP_CONF_DIR
-		
-		#echo $HOSTNAME > $HADOOP_CONF_DIR/core_hadoop/masters
-		#echo $HOSTNAME > $HADOOP_CONF_DIR/core_hadoop/slaves
-
-		#echo "NOTICE: You MUST now edit all the appropriate configs in the $HADOOP_CONF_DIR directory for your environment."
-		#echo "	You need to change settings in:"
-		#echo "		core_hadoop, hive, oozie, pig, sqoop, webhcat, zookeeper"
-		#echo ""
-		#echo "  Review the configs in these directories and configure for -localhost-"
-		
-		#echo ""
-		echo ""
-		echo "Setting up config links"
-		
-		# Adjust the configs that were just copied for this environment.
-		#cd $CUR_DIR
-		#. $APP_DIR/fix_cfgs.sh
-		
-		# Link configs to standard location know by scripts
-		if [ ! -d /etc/hadoop ]; then
-			sudo mkdir /etc/hadoop
-		fi
-		if [ ! -d /etc/hbase ]; then
-			sudo mkdir /etc/hbase
-		fi
-		if [ ! -d /etc/hive ]; then
-			sudo mkdir /etc/hive
-		fi
-		if [ ! -d /etc/oozie ]; then
-			sudo mkdir /etc/oozie
-		fi
-		if [ ! -d /etc/pig ]; then
-			sudo mkdir /etc/pig
-		fi
-		if [ ! -d /etc/sqoop ]; then
-			sudo mkdir /etc/sqoop
-		fi
-		if [ ! -d /etc/webhcat ]; then
-			sudo mkdir /etc/webhcat
-		fi
-		if [ ! -d /etc/zookeeper ]; then
-			sudo mkdir /etc/zookeeper
-		fi
-		#TODO: NEED VALIDATION ON FLUME CONFIGURATION
-		if [ ! -d /etc/flume ]; then
-			sudo mkdir /etc/flume
-		fi
-	fi
-
-	# Remove old symlinks
-	if [ -d /etc/hadoop/conf ]; then
-		sudo rm -rf /etc/hadoop/conf
-	fi
-	if [ -d /etc/hbase/conf ]; then
-		sudo rm -rf /etc/hbase/conf
-	fi
-	if [ -d /etc/hive/conf ]; then
-		sudo rm -rf /etc/hive/conf
-	fi
-	if [ -d /etc/oozie/conf ]; then
-		sudo rm -rf /etc/oozie/conf
-	fi
-	if [ -d /etc/pig/conf ]; then
-		sudo rm -rf /etc/pig/conf
-	fi
-	if [ -d /etc/sqoop/conf ]; then
-		sudo rm -rf /etc/sqoop/conf
-	fi
-	if [ -d /etc/webhcat/conf ]; then
-		sudo rm -rf /etc/webhcat/conf
-	fi
-	if [ -d /etc/zookeeper/conf ]; then
-		sudo rm -rf /etc/zookeeper/conf
-	fi
-
-	# Set/Reset symlinks
-	sudo ln -s $HADOOP_CONF_DIR/core_hadoop /etc/hadoop/conf
-	sudo ln -s $HADOOP_CONF_DIR/hbase /etc/hbase/conf
-	sudo ln -s $HADOOP_CONF_DIR/hive /etc/hive/conf
-	sudo ln -s $HADOOP_CONF_DIR/oozie /etc/oozie/conf
-	sudo ln -s $HADOOP_CONF_DIR/pig /etc/pig/conf
-	sudo ln -s $HADOOP_CONF_DIR/sqoop /etc/sqoop/conf
-	sudo ln -s $HADOOP_CONF_DIR/webhcat /etc/webhcat/conf
-	sudo ln -s $HADOOP_CONF_DIR/zookeeper /etc/zookeeper/conf
-
-	echo "  === DONE: Don't forget to adjust your configs for 'localhost'"
 fi
