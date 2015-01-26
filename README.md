@@ -33,7 +33,8 @@ You will also need to install "MySQL" via brew (ie: <code>brew install mysql</co
 Everything will be install AND run from you local user account. 
 
 ## Where to Start
-The 'do.sh' script will kickoff the installation process.
+The <code>do.sh</code> script will kickoff the installation process.  It requires a single parameter that identifies a storage location for the artifacts it retrieves from the HDP Repo.  If you are going to rerun the installation, use the same directory and the script will use previously retrieved artifacts.
+<code>./do.sh $HOME/temp</code>
 
 ## Configurations
 The install will create a default configuration located in '/var/hadoop/local/$HDP_VER'.  If you would like to interact with another cluster, download the client configurations for HDFS, MapReduce and YARN.  Extract the contents of all 3 configuration extracts to '/var/hadoop/local/$HDP_VER/<config_name>'.
