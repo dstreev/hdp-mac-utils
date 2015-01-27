@@ -17,8 +17,8 @@
 # */
 
 export HADOOP_YARN_HOME=/usr/hdp/current/hadoop
-export YARN_LOG_DIR=$HOME/var/log/hadoop/$HOME
-export YARN_PID_DIR=/var/run/hadoop/$HOME
+export YARN_LOG_DIR=$HOME/var/log/hadoop
+export YARN_PID_DIR=$HOME/var/run/hadoop
 export HADOOP_LIBEXEC_DIR=/usr/hdp/current/hadoop/libexec
 export JAVA_HOME=`/usr/libexec/java_home`
 
@@ -99,7 +99,7 @@ IFS=
 
 # default log directory and file
 if [ "$YARN_LOG_DIR" = "" ]; then
-  YARN_LOG_DIR="$HADOOP_YARN_HOME/logs"
+  YARN_LOG_DIR="$HOME/var/log/hadoop/yarn"
 fi
 if [ "$YARN_LOGFILE" = "" ]; then
   YARN_LOGFILE='yarn.log'

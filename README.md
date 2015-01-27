@@ -99,12 +99,10 @@ Use the script 'set_hdp_conf.sh' to change the default config.
 ## Status of Components install here
 
 ### Working
-> Starting over with 2.2.  In-progress.
-
-### Todo's
 > * HDFS
 > * YARN
-> * MAPRED
+
+### Todo's
 > * Hive
 > * Pig
 > * HBase
@@ -131,5 +129,11 @@ Use the script 'set_hdp_conf.sh' to change the default config.
 ### hdp_artifacts.txt
 > A list of HDP artifacts and links to use for each.
 
-### reset.sh [temp_dir]
-> Use this to remove the installed HDP libraries and configuration files. I used to over and over again to test the installation
+### set_hdp_conf.sh
+> Use this to change the configurations used by Hadoop.  All configurations rooted under /var/hadoop/local/$HDP_VERSION
+>   'default' is set on installation.
+>
+> To create another configuration, pull the configs from the target cluster and expand them into a new directory under /var/hadoop/local/$HDP_VERSION
+
+### init-hdfs.sh
+> For the local hdfs installation, this will build out the base directories and load the appropriate libs onto HDFS.

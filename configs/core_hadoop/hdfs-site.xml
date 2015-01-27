@@ -7,7 +7,7 @@
 	<!-- For short circuit read configuration -->
     <property>
     <name>dfs.client.read.shortcircuit</name>
-    <value>true</value>
+    <value>false</value>
   </property> 
 
   <property>
@@ -224,12 +224,12 @@
 
     <property>
     <name>dfs.replication</name>
-    <value>3</value>
+    <value>1</value>
   </property> 
 
     <property>
     <name>dfs.replication.max</name>
-    <value>50</value>
+    <value>1</value>
   </property> 
 
     <property>
