@@ -8,7 +8,7 @@ CUR_DIR=`pwd`
 
 cd $APP_DIR
 APP_DIR=`pwd`
-. ./mac_env.sh
+. ../mac_env.sh
 
 CONFIG=$1
 
