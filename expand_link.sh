@@ -171,14 +171,13 @@ else
     sudo ln -s $LIB_BASE_DIR/current/sqoop/bin/sqoop-version /usr/bin/sqoop-version
 
 	# Add SymLink to resolve Default Hadoop Configuration
-    sudo ln -s /etc/hadoop/conf $LIB_BASE_DIR/current/hadoop/conf
-    sudo ln -s /etc/accumulo/conf $LIB_BASE_DIR/current/accumulo/conf
-    sudo ln -s /etc/hive/conf $LIB_BASE_DIR/current/hive/conf
-    sudo ln -s /etc/oozie/conf $LIB_BASE_DIR/current/oozie/conf
-    sudo ln -s /etc/pig/conf $LIB_BASE_DIR/current/pig/conf
-    sudo ln -s /etc/sqoop/conf $LIB_BASE_DIR/current/sqoop/conf
-    sudo ln -s /etc/tez/conf $LIB_BASE_DIR/current/tez/conf
-    sudo ln -s /etc/zookeeper/conf $LIB_BASE_DIR/current/zookeeper/conf
+	for i in hadoop accumulo hive hbase oozie pig sqoop tez zookeeper; do
+		if [ -d $LIB_BASE_DIR/current/$i/conf ]; then
+			sudo rm -rf $LIB_BASE_DIR/current/$i/conf
+		fi
+		sudo ln -s /etc/$i/conf $LIB_BASE_DIR/current/$i/conf
+
+	done
 
 	# Backup existing
 	if [ -d $HADOOP_CONF_DIR/default ]; then
@@ -246,7 +245,7 @@ else
 	sudo ln -s $HADOOP_CONF_DIR/default/sqoop /etc/sqoop/conf
 	sudo mkdir /etc/tez
 	sudo ln -s $HADOOP_CONF_DIR/default/tez /etc/tez/conf
-	sudo mkdir /etc/zoopkeeper
+	sudo mkdir /etc/zookeeper
 	sudo ln -s $HADOOP_CONF_DIR/default/zookeeper /etc/zookeeper/conf
 
 	# Link JDBC drivers

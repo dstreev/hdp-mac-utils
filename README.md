@@ -42,48 +42,51 @@ The install will create a default configuration located in '/var/hadoop/local/$H
 Use the script 'set_hdp_conf.sh' to change the default config.
 <code>./set_hdp_conf.sh <config_name></code>
 
-## Post Installation - House Keeping
+## Helper Startup Script
+Use this script to start basic HDP services.  If this is a first time installation, read the items below to ensure everything is initialized.
+
+'start-hdp.sh'
+
+## Post Installation
 
 ### Namenode
 > If this is the first-time you've installed HDP, you will need to initialize the Hadoop filesystem with:
 	<pre><code>hadoop namenode -format</code></pre>
 > If your upgrade to a new HDP version, you may need to update the namenode before starting HDFS.
 
+### Component Libraries
+After the initialization of the Namenode (above), you need to create some basic directories in HDFS and install some required libraries for HDFS, MapReduce, Hive, Tez and Oozie.  Run the 'init-hdfs.sh' script to do this.
+
 ### Hive
-  
+Create a 'hive' user in your MySql instance running locally.  The password should be set to 'hive' as well.
+
+Create a 'hive' database and ensure this user has access to it.  Goto the /usr/hdp/current/hive/scripts/metastore/upgrade/mysql directory and run the latest revision of 'hive-schema-0.xxx.sql' to initialize your hive metastore.
+
+When launching HS2, it will run with an embedded Metastore, so it is not necessary to launch a separate metastore unless you'll be using the HiveCLI.  Check the logs during start to ensure it's connecting to your MySql instance correctly.  The 'hive.log' will be in '/tmp/<user>/hive.log'.
+
 ### Oozie
 > TODO: Get the extjs-2.2 jar and add it to the libs for oozie web.
 
-## Starting Hadoop, etc.. Short-version
-### HDFS and MAPRED
-<pre><code>/usr/hdp/current/hadoop/sbin/start-all.sh</code></pre>
-
-### Hive Metastore
-<pre><code>start-hive-metastore.sh</code></pre>
-> See below for instructions to smoke test hive.
-
-## Starting Hadoop, etc.. Long-version
+## Starting Hadoop
 ### HDFS and MAPRED:
 <pre><code>cd /usr/hdp/current/hadoop/sbin
 ./start-dfs.sh
 ./start-yarn.sh</code></pre>
 
 ### Hive and Hiveserver2
-1. Start Hive Metastore service.
->	<pre><code>nohup hive --service metastore&gt;$HIVE_LOG_DIR/hive.out 2&gt;$HIVE_LOG_DIR/hive.log & </code></pre>
-2. Smoke Test Hive.
-	1. Open Hive command line shell. <pre><code>hive</code></pre>
-	2. Run sample commands.
-		<pre><code>show databases;
-		create table test(col1 int, col2 string);
-		show tables;</code></pre> 
-3. Start HiveServer2.
-	<pre><code>nohup /usr/hdp/current/hive/bin/hiveserver2>$HIVE_LOG_DIR/hiveserver2.out 2>$HIVE_LOG_DIR/hiveserver2.log &</code></pre>
-4. Smoke Test HiveServer2.
+NOTE: The current configuration assumes that you've created a local hive metastore in MySql with user/pass of hive:hive and Database name of 'hive'.
+
+1. Start Zookeeper
+>   <pre><code>cd /usr/hdp/current/zookeeper/bin
+./zkServer.sh start</code></pre>
+2. Start Hive Server 2
+>	<pre><code>cd /usr/hdp/current/hive/bin
+nohup ./hiveserver2 &</code></pre>
+3. Smoke Test HiveServer2.
 	1. Open Beeline command line shell to interact with HiveServer2.
 	   <pre><code>beeline</code></pre>
 	2. Establish connection to server.
-		<pre><code>!connect jdbc:hive2://localhost:10000 $USER password org.apache.hive.jdbc.HiveDriver</code></pre>
+		<pre><code>!connect jdbc:hive2://localhost:10000</code></pre>
     3. Run sample commands.
 		<pre><code>show databases;
 		create table test2(a int, b string);
@@ -101,9 +104,10 @@ Use the script 'set_hdp_conf.sh' to change the default config.
 ### Working
 > * HDFS
 > * YARN
+> * Hive
+> * Tez
 
 ### Todo's
-> * Hive
 > * Pig
 > * HBase
 > * Flume
