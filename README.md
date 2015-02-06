@@ -104,10 +104,10 @@ nohup ./hiveserver2 &</code></pre>
 ### Working
 > * HDFS
 > * YARN
-> * Hive
-> * Tez
 
 ### Todo's
+> * Hive (In-Progress)
+> * Tez (In-Progress)
 > * Pig
 > * HBase
 > * Flume

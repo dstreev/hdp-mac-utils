@@ -6,7 +6,7 @@
 
     <property>
       <name>hadoop.registry.zk.quorum</name>
-      <value>TODO-ZOOKEEPER1-HOST:2181,TODO-ZOOKEEPER2-HOST:2181,TODO-ZOOKEEPER3-HOST:2181</value>
+      <value>localhost:2181</value>
     </property>
 
     <property>
@@ -324,7 +324,7 @@
     	-->
     <property>
       <name>yarn.resourcemanager.zk-address</name>
-      <value>TODO-ZOOKEEPER1-HOST:2181,TODO-ZOOKEEPER2-HOST:2181,TODO-ZOOKEEPER3-HOST:2181</value>
+      <value>localhost:2181</value>
     </property>
     
     <property>
@@ -354,12 +354,12 @@
 		-->
     <property>
       <name>yarn.scheduler.maximum-allocation-mb</name>
-      <value>2048</value> <!-- Example: "2048" -->
+      <value>10240</value> <!-- Example: "2048" -->
     </property> 
 
     <property>
       <name>yarn.scheduler.minimum-allocation-mb</name>
-      <value>682</value> <!-- Example: "682" -->
+      <value>2560</value> <!-- Example: "682" -->
     </property> 
     
     <property>
@@ -369,7 +369,7 @@
     
     <property>
       <name>yarn.nodemanager.resource.memory-mb</name>
-      <value>2048</value> <!-- Example: "2048" -->
+      <value>10240</value> <!-- Example: "2048" -->
     </property> 
 
 		<property>

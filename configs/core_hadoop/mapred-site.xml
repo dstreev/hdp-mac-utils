@@ -18,7 +18,7 @@
       <name>mapreduce.am.max-attempts</name>
       <value>2</value>
     </property>
-    
+
     <property>
       <name>mapreduce.application.classpath</name>
       <value>$PWD/mr-framework/hadoop/share/hadoop/mapreduce/*:$PWD/mr-framework/hadoop/share/hadoop/mapreduce/lib/*:$PWD/mr-framework/hadoop/share/hadoop/common/*:$PWD/mr-framework/hadoop/share/hadoop/common/lib/*:$PWD/mr-framework/hadoop/share/hadoop/yarn/*:$PWD/mr-framework/hadoop/share/hadoop/yarn/lib/*:$PWD/mr-framework/hadoop/share/hadoop/hdfs/*:$PWD/mr-framework/hadoop/share/hadoop/hdfs/lib/*:/usr/hdp/${hdp.version}/hadoop/lib/hadoop-lzo-0.6.0.${hdp.version}.jar:/etc/hadoop/conf/secure</value>
@@ -199,39 +199,43 @@
 
     <property>
       <name>mapreduce.map.java.opts</name>
-      <value>TODO-CALCULATE-MEMORY-SETTINGS</value> <!-- Example: "-Xmx546m" -->
+      <value>-Xmx2048m</value> <!-- Example: "-Xmx546m" -->
     </property> 
 
     <property>
       <name>mapreduce.map.memory.mb</name>
-      <value>TODO-CALCULATE-MEMORY-SETTINGS</value> <!-- Example: "682" -->
+      <value>2560</value> <!-- Example: "682" -->
     </property> 
 
     <property>
       <name>mapreduce.reduce.java.opts</name>
-      <value>TODO-CALCULATE-MEMORY-SETTINGS</value> <!-- Example: "-Xmx546m" -->
+      <value>-Xmx2048m</value> <!-- Example: "-Xmx546m" -->
     </property> 
 
     <property>
       <name>mapreduce.reduce.memory.mb</name>
-      <value>TODO-CALCULATE-MEMORY-SETTINGS</value> <!-- Example: "682" -->
+      <value>2560</value> <!-- Example: "682" -->
     </property> 
 
     <property>
       <name>mapreduce.task.io.sort.factor</name>
-      <value>TODO-CALCULATE-MEMORY-SETTINGS</value> <!-- Example: "100" -->
+      <value>100</value> <!-- Example: "100" -->
     </property> 
 
     <property>
       <name>mapreduce.task.io.sort.mb</name>
-      <value>TODO-CALCULATE-MEMORY-SETTINGS</value> <!-- Example: "273" -->
+      <value>1024</value> <!-- Example: "273" -->
     </property> 
 
     <property>
       <name>yarn.app.mapreduce.am.resource.mb</name>
-      <value>TODO-CALCULATE-MEMORY-SETTINGS</value> <!-- Example: "682" -->
+      <value>2560</value> <!-- Example: "682" -->
     </property> 
-    
+
+    <property>
+        <name>yarn.app.mapreduce.am.command-opts</name>
+        <value>-Xmx2048m</value>
+    </property>
     <!-- Memory settings end -->
     
 <!-- 
