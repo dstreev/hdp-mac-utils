@@ -1,18 +1,19 @@
-accumulo-1.6.1.2.2.0.0-2041-bin accumulo
-apache-flume-1.5.2.2.2.0.0-2041-bin flume
-apache-hive-0.14.0.2.2.0.0-2041-bin hive
-apache-storm-0.9.3.2.2.0.0-2041 storm
-calcite-0.9.1.2.2.0.0-2041.source 
-datafu-1.2.0.2.2.0.0-2041 datafu
-falcon-0.6.0.2.2.0.0-2041-bin falcon
-falcon-distributed-0.6.0.2.2.0.0-2041-server falcon 
-hadoop-2.6.0.2.2.0.0-2041 hadoop
-hbase-0.98.4.2.2.0.0-2041-hadoop2 hbase
-mahout-distribution-0.9.0.2.2.0.0-2041 mahout
-oozie-4.1.0.2.2.0.0-2041-distro oozie
-phoenix-4.2.0.2.2.0.0-2041 phoenix
-pig-0.14.0.2.2.0.0-2041 pig
-slider-0.60.0.2.2.0.0-2041-all slider
-sqoop-1.4.5.2.2.0.0-2041.bin__hadoop-2.6.0.2.2.0.0-2041 sqoop
-tez-0.5.2.2.2.0.0-2041 tez
-zookeeper-3.4.6.2.2.0.0-2041 zookeeper
+accumulo-1.6.1.2.2.4.2-2-bin accumulo
+apache-flume-1.5.2.2.4.2-2-bin flume
+apache-hive-0.14.0.2.2.4.2-2-bin hive
+apache-storm-0.9.3.2.2.4.2-2 storm
+calcite-0.9.1.2.2.4.2-2.source 
+datafu-1.2.0.2.2.4.2-2 datafu
+falcon-0.6.0.2.2.4.2-2-bin falcon
+falcon-distributed-0.6.0.2.2.4.2-2-server falcon 
+hadoop-2.6.0.2.2.4.2-2 hadoop
+hbase-0.98.4.2.2.4.2-2-hadoop2 hbase
+mahout-distribution-0.9.0.2.2.4.2-2 mahout
+knox-0.5.0.2.2.4.2-2 knox
+oozie-4.1.0.2.2.4.2-2-distro oozie
+phoenix-4.2.0.2.2.4.2-2 phoenix
+pig-0.14.0.2.2.4.2-2 pig
+slider-0.61.0.2.2.4.2-2-all slider
+sqoop-1.4.5.2.2.4.2-2.bin__hadoop-2.6.0.2.2.4.2-2 sqoop
+tez-0.5.2.2.2.4.2-2 tez
+zookeeper-3.4.6.2.2.4.2-2 zookeeper

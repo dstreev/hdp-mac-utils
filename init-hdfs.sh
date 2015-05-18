@@ -5,7 +5,7 @@
 # Script should be run as HDFS superuser
 
 
-HDP_VERSION=2.2.0.0-2041
+HDP_VERSION=2.2.4.2-2
 HDFS_HDP_BASE_DIR=/hdp/apps/$HDP_VERSION
 DT=`date +%Y%m%d-%H%M`
 

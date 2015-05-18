@@ -19,8 +19,8 @@ ALL_ELEMENTS="accumulo,datafu,falcon,flume,hadoop,hbase,hive,kafka,knox,mahout,o
 
 #hadoop,hbase,hive,pig,oozie,zookeeper,accumulo,storm,falcon,falcon-server,knox,phoenix,tez,tez-full,flume,sqoop,mahout"
 
-HDP_VER=2.2.0.0-2041
-HTTP_BASE="http://public-repo-1.hortonworks.com/HDP/centos6/2.x/GA/2.2.0.0/tars/"
+HDP_VER=2.2.4.2-2
+HTTP_BASE="http://public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.2.4.2/tars/"
 
 TOOLS_BASE="http://public-repo-1.hortonworks.com/HDP/tools/2.2.0.0/"
 COMPANION_FILE_BASE="hdp_manual_install_rpm_helper_files-2.2.0.0.2041"

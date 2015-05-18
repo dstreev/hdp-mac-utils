@@ -1,0 +1,3 @@
+#HIVE_USER=$USER
+#HS2_PASSWORD=NONE
+#URL=jdbc:hive2://localhost:10000
